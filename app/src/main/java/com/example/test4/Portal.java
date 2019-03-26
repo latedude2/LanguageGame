@@ -1,6 +1,6 @@
 package com.example.test4;
 
-class Portal extends Interactable {
+class Portal extends Scene {
     private int newXDisplacement;
     private int newYDisplacement;
 
@@ -8,5 +8,14 @@ class Portal extends Interactable {
         this.newXDisplacement = newXDisplacement;
         this.newYDisplacement = newYDisplacement;
     }
+
+    public int getNewXDisplacement() {
+        return newXDisplacement;
+    }
+
+    public int getNewYDisplacement() {
+        return newYDisplacement;
+    }
+    public void OpenScene(Scene sceneToOpen, int xDisp, int yDisp){}
 
 }
