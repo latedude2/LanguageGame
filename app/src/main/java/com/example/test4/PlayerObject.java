@@ -17,7 +17,7 @@ public class PlayerObject extends GameObject {
     }
 
     public WorldElement CheckLeftTile(){
-        //return
+        return null;
     }
     
     public void MoveRight() {
@@ -25,7 +25,7 @@ public class PlayerObject extends GameObject {
     }
 
     public WorldElement CheckRightTile() {
-        // return
+        return null;
     }
 
     public void MoveUp() {
@@ -33,7 +33,7 @@ public class PlayerObject extends GameObject {
     }
 
     public WorldElement CheckUpTile() {
-        // return
+        return null;
     }
 
     public void MoveDown() {
@@ -41,6 +41,6 @@ public class PlayerObject extends GameObject {
     }
 
     public WorldElement CheckDownTile() {
-        // return
+        return null;
     }
 }
