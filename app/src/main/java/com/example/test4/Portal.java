@@ -16,6 +16,13 @@ class Portal extends WorldElement {
     public int getNewYDisplacement() {
         return newYDisplacement;
     }
-    public void OpenScene(Scene sceneToOpen, int xDisp, int yDisp){}
+
+    public void MoveMap (){
+        
+    }
+
+   public void MovePlayer (){
+
+   }
 
 }

@@ -5,6 +5,8 @@ import android.media.Image;
 class GameObject extends Instance {
     private int x;
     private int y;
+    private int xGrid;
+    private int yGrid;
     private Image[] image = new Image[10];
 
     GameObject(){}
@@ -20,6 +22,14 @@ class GameObject extends Instance {
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     void changeImage(Image newImage){
