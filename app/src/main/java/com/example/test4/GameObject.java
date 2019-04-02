@@ -32,6 +32,14 @@ class GameObject extends Instance {
         this.y = y;
     }
 
+    public void setxGrid(int xGrid) {
+        this.xGrid = xGrid;
+    }
+
+    public void setyGrid(int yGrid) {
+        this.yGrid = yGrid;
+    }
+
     void changeImage(Image newImage){
 
     }
