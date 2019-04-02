@@ -9,6 +9,11 @@ class Exchange extends Instance{
     private int correctAnswers;
     private UIElement hintImages;
 
-    void checkAnswer(){}
-    void showHint(){}
+    void checkAnswer(){
+
+    }
+
+    void showHint(){
+
+    }
 }

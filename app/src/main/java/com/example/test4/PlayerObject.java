@@ -16,7 +16,7 @@ public class PlayerObject extends GameObject {
 
     }
 
-    public WorldElement CheckLeftTile(){
+    private WorldElement CheckLeftTile(){
         return null;
     }
     
@@ -24,7 +24,7 @@ public class PlayerObject extends GameObject {
 
     }
 
-    public WorldElement CheckRightTile() {
+    private WorldElement CheckRightTile() {
         return null;
     }
 
@@ -32,7 +32,7 @@ public class PlayerObject extends GameObject {
 
     }
 
-    public WorldElement CheckUpTile() {
+    private WorldElement CheckUpTile() {
         return null;
     }
 
@@ -40,7 +40,7 @@ public class PlayerObject extends GameObject {
 
     }
 
-    public WorldElement CheckDownTile() {
+    private WorldElement CheckDownTile() {
         return null;
     }
 }
