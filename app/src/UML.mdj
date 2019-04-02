@@ -8674,7 +8674,7 @@
 											"top": 255,
 											"width": 362.3623046875,
 											"height": 13,
-											"text": "MethodReference"
+											"text": "MainActivity"
 										},
 										{
 											"_type": "LabelView",
@@ -9371,100 +9371,6 @@
 							},
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAFpuYDCRThQqSs="
-							}
-						},
-						{
-							"_type": "UMLDependencyView",
-							"_id": "AAAAAAFpuYFOxDqqPfc=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"model": {
-								"$ref": "AAAAAAFpuYFOxDqoU4E="
-							},
-							"subViews": [
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAFpuYFOxDqrcUk=",
-									"_parent": {
-										"$ref": "AAAAAAFpuYFOxDqqPfc="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuYFOxDqoU4E="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 1157,
-									"top": 416,
-									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
-									"hostEdge": {
-										"$ref": "AAAAAAFpuYFOxDqqPfc="
-									},
-									"edgePosition": 1
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAFpuYFOxDqs2tw=",
-									"_parent": {
-										"$ref": "AAAAAAFpuYFOxDqqPfc="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuYFOxDqoU4E="
-									},
-									"visible": null,
-									"font": "Arial;13;0",
-									"left": 1142,
-									"top": 416,
-									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
-									"hostEdge": {
-										"$ref": "AAAAAAFpuYFOxDqqPfc="
-									},
-									"edgePosition": 1
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAFpuYFOxDqtICY=",
-									"_parent": {
-										"$ref": "AAAAAAFpuYFOxDqqPfc="
-									},
-									"model": {
-										"$ref": "AAAAAAFpuYFOxDqoU4E="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 1186,
-									"top": 415,
-									"height": 13,
-									"alpha": -1.5707963267948966,
-									"distance": 15,
-									"hostEdge": {
-										"$ref": "AAAAAAFpuYFOxDqqPfc="
-									},
-									"edgePosition": 1
-								}
-							],
-							"font": "Arial;13;0",
-							"head": {
-								"$ref": "AAAAAAFpXeRZpKPKAoc="
-							},
-							"tail": {
-								"$ref": "AAAAAAFpXQPhA+s13Pw="
-							},
-							"lineStyle": 1,
-							"points": "1174:463;1171:381",
-							"showVisibility": true,
-							"nameLabel": {
-								"$ref": "AAAAAAFpuYFOxDqrcUk="
-							},
-							"stereotypeLabel": {
-								"$ref": "AAAAAAFpuYFOxDqs2tw="
-							},
-							"propertyLabel": {
-								"$ref": "AAAAAAFpuYFOxDqtICY="
 							}
 						},
 						{
@@ -12219,7 +12125,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "MethodReference",
+					"name": "MainActivity",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
