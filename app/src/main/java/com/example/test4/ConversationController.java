@@ -1,6 +1,6 @@
 package com.example.test4;
 
-public class ConversationController {
+public class ConversationController extends Instance{
     private Exchange exchanges;
 
 }
