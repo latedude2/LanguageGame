@@ -1,6 +1,6 @@
 package com.example.test4;
 
-class Portal extends Scene {
+class Portal extends WorldElement {
     private int newXDisplacement;
     private int newYDisplacement;
 

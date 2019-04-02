@@ -2,7 +2,7 @@ package com.example.test4;
 
 import android.media.Image;
 
-class Charachter extends Interactable {
+class Charachter extends WorldElement {
     private String name;
     private int charachterId;
     private Image portrait;

@@ -1,6 +1,6 @@
 package com.example.test4;
 
-class Sign extends Interactable {
+class Sign extends WorldElement {
 
     private TextField text;
     private Button hintButton;
