@@ -6,7 +6,7 @@ class Portal extends WorldElement {
     private int newXGrid;
     private int newYGrid;
 
-    private Portal (int newXDisplacement, int newYDisplacement, int newXGrid, int newYGrid){
+    public Portal (int newXDisplacement, int newYDisplacement, int newXGrid, int newYGrid){
         this.newXDisplacement = newXDisplacement;
         this.newYDisplacement = newYDisplacement;
         this.newXGrid = newXGrid;
