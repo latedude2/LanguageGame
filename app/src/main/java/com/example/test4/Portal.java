@@ -1,12 +1,16 @@
 package com.example.test4;
 
-class Portal extends Scene {
+class Portal extends WorldElement {
     private int newXDisplacement;
     private int newYDisplacement;
+    private int newXGrid;
+    private int newYGrid;
 
-    private Portal (int newXDisplacement, int newYDisplacement){
+    public Portal (int newXDisplacement, int newYDisplacement, int newXGrid, int newYGrid){
         this.newXDisplacement = newXDisplacement;
         this.newYDisplacement = newYDisplacement;
+        this.newXGrid = newXGrid;
+        this.newYGrid = newYGrid;
     }
 
     public int getNewXDisplacement() {
@@ -16,6 +20,23 @@ class Portal extends Scene {
     public int getNewYDisplacement() {
         return newYDisplacement;
     }
-    public void OpenScene(Scene sceneToOpen, int xDisp, int yDisp){}
+
+    public int getNewXGrid() {
+        return newXGrid;
+    }
+
+    public int getNewYGrid() {
+        return newYGrid;
+    }
+
+    public void MoveMap (PlayerObject player){
+        player.setX(newXDisplacement);
+        player.setY(newYDisplacement);
+    }
+
+   public void MovePlayer (PlayerObject player){
+        player.setxGrid(newXGrid);
+        player.setyGrid(newYGrid);
+   }
 
 }

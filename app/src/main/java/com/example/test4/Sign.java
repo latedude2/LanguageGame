@@ -1,11 +1,17 @@
 package com.example.test4;
 
-class Sign extends Interactable {
+import android.widget.TextView;
 
-    private TextField text;
+class Sign extends WorldElement {
+
+    private TextView text;
     private Button hintButton;
     private UIElement signBackground;
     private UIElement hintImages;
+
+    public Sign (TextView text){
+        this.text = text;
+    }
 
     void showSign(){
 
