@@ -39,7 +39,7 @@ class Exchange extends Instance{
             }
     }
 
-    void 
+    void
 
     void showHint(int x){
         hintImages[x] =
