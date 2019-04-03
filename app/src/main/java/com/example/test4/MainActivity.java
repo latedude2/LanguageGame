@@ -16,10 +16,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         img = findViewById(R.id.imageTest);
-        System.out.print(img.toString());
         img.setImageResource(R.mipmap.tower);
 
         Button btn = findViewById(R.id.button);
+
+        
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
