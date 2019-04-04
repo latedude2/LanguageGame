@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Dansk adventure</string>
-    <string name="button">Button</string>
+    <string name="answer_button">Answer Button</string>
+    <string name="hint_button">Hint Button</string>
+    <string name="fill_answer">Fill Button</string>
+    <string name="submit_button">Submit Button</string>
+    <string name="voice_button">Voice Button</string>
+    <string name="exit_button">Exit Button</string>
+    <string name="dialogue_text">Dialogue TextView</string>
+    <string name="answer_text">Answer TextView</string>
+    <string name="content_description_character">Character ImageView</string>
+    <string name="content_description_hint">hint ImageView</string>
 </resources>
