@@ -367,43 +367,10 @@
         app:srcCompat="@mipmap/tower" />
 
     <ImageView
-        android:id="@+id/hint_img_1"
-        android:layout_width="77dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginRight="82dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
-
-    <ImageView
-        android:id="@+id/hint_img_2"
-        android:layout_width="77dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
-
-    <ImageView
         android:id="@+id/hint_img_3"
         android:layout_width="77dp"
         android:layout_height="72dp"
         android:layout_marginTop="140dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
-
-    <ImageView
-        android:id="@+id/hint_img_4"
-        android:layout_width="77dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="84dp"
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         app:layout_constraintEnd_toEndOf="parent"

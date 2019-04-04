@@ -16,7 +16,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*img = findViewById(R.id.imageTest);
+
+
+        /*img = findViewById(R.id.hint_img);
         img.setImageResource(R.mipmap.tower);
 
         Button btn = findViewById(R.id.button);
