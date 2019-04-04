@@ -13,7 +13,7 @@ public class ConversationController extends Instance{
     }
 
     public void exitConversation(){
-        
+
     }
 
 
