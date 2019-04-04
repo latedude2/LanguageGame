@@ -1,6 +1,7 @@
 package com.example.test4;
 
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 class Exchange extends Instance {
@@ -9,9 +10,9 @@ class Exchange extends Instance {
     private Button[] hintButtons; //buttons for showing the hint images
     private int[] selectAnswers = new int[6]; //selected answers during the game play
     private int[] correctAnswers = new int[6]; //answers that are possible to be correct
-    private UIElement[] hintImages; //images shown after pressing the hintButton
+    private GameObject[] UIObjects; //images shown after pressing the hintButton
 
-    public Exchange(TextView[] text, String[] answerText, Button[] hintButtons, UIElement[] hintImages, int[] correctAnswers) {
+    public Exchange(TextView[] text, String[] answerText, Button[] hintButtons, GameObject[] UIObjects, int[] correctAnswers) {
         for (int i = 0; i < text.length; i++) {
             this.text[i] = text[i];
         }
@@ -20,7 +21,7 @@ class Exchange extends Instance {
         }
         for (int i = 0; i < hintButtons.length; i++) {
             this.hintButtons[i] = hintButtons[i];
-            this.hintImages[i] = hintImages[i];
+            this.UIObjects[i] = UIObjects[i];
         }
         for (int i = 0; i < correctAnswers.length; i++) {
             this.correctAnswers[i] = correctAnswers[i];
@@ -39,9 +40,14 @@ class Exchange extends Instance {
         }
     }
 
-    //void
+    /*public int checkHint(){
+        int x; //the index of an image
+
+        return x;
+    }*/
+
 
     void showHint(int x) {
-        //hintImages[x] =
+        UIObjects[x] = 
     }
 }
