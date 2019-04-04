@@ -7,16 +7,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 class Exchange extends Instance {
-    private Button[] answerPos;
-    private Button[] answerButtons; //IDs of possible answers
-    private Button[] hintButtons; //buttons for showing the hint images
+    private OurButton[] answerPos;
+    private OurButton[] answerButtons = new OurButton[2]; //IDs of possible answers
+    private OurButton[] hintButtons; //buttons for showing the hint images
     private String sentence = "Okay, " + answerButtons[0].getText() + "kan " + answerButtons[1].getText() + "finde dem?";
     private TextView[] text = new TextView[5];
     private int[] selectAnswers = new int[6]; //selected answers during the game play
     private int[] correctAnswers = new int[6]; //answers that are possible to be correct
     private GameObject[] UIObjects; //images shown after pressing the hintButton
 
-    public Exchange(TextView[] text, String[] answerText, Button[] hintButtons, GameObject[] UIObjects, int[] correctAnswers) {
+    public Exchange(TextView[] text, String[] answerText, OurButton[] hintButtons, GameObject[] UIObjects, int[] correctAnswers) {
         for (int i = 0; i < text.length; i++) {
             this.text[i] = text[i];
         }
@@ -38,7 +38,7 @@ class Exchange extends Instance {
         setContentView(R.layout.activity_main);
     }
 
-    public void clickAnswer(Button answer){
+    public void clickAnswer(OurButton answer){
         for (int i = 0; i < answerPos.length; i++)
             if (answerPos[i].getText() != null) {
                 answerPos[i].setText(answer.getText());
@@ -46,7 +46,7 @@ class Exchange extends Instance {
             }
     }
 
-    void checkAnswer(Button[] answerPos) {
+    void checkAnswer(OurButton[] answerPos) {
         for (int i = 0; i < correctAnswers.length; i++) {
             if (correctAnswers[i] == answerPos[i].getIndex()) {
                 // excepting the answer and saying that you're a good boy

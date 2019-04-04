@@ -5,5 +5,14 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.Button;
 
-public class OurButton extends Button {
+public class OurButton extends android.support.v7.widget.AppCompatButton {
+    int index = 0;
+
+    public OurButton(Context context) {
+        super(context);
+    }
+
+    public int getIndex() {
+        return index;
+    }
 }
