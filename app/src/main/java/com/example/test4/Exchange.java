@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 class Exchange extends Instance {
     private Button[] answerPos;
-    private Button[] answerButtons = new Button[6]; //IDs of possible answers
+    private Button[] answerButtons; //IDs of possible answers
     private Button[] hintButtons; //buttons for showing the hint images
     private String sentence = "Okay, " + answerButtons[0].getText() + "kan " + answerButtons[1].getText() + "finde dem?";
     private TextView[] text = new TextView[5];
@@ -32,23 +32,23 @@ class Exchange extends Instance {
         }
     }
 
-    /*@Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppCompatActivity.onCreate(savedInstanceState);
-        AppCompatActivity.setContentView(R.layout.activity_main);
-    }*/
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
 
-    /*public void clickAnswer(CharSequence btn){
-        for (int i = 0; i < answerPos.length; i++) {
-            if (answerPos[i].getAccessibilityClassName() != null){
-                answerPos[i].getAccessibilityClassName() = btn;
+    public void clickAnswer(Button answer){
+        for (int i = 0; i < answerPos.length; i++)
+            if (answerPos[i].getText() != null) {
+                answerPos[i].setText(answer.getText());
+                break;
             }
-        }
-    }*/
+    }
 
-    /*void checkAnswer(Button[] answerPos) {
+    void checkAnswer(Button[] answerPos) {
         for (int i = 0; i < correctAnswers.length; i++) {
-            if (correctAnswers[i] == answerPos[i]) {
+            if (correctAnswers[i] == answerPos[i].getIndex()) {
                 // excepting the answer and saying that you're a good boy
                 System.out.println("good boy");
             } else {
@@ -56,7 +56,7 @@ class Exchange extends Instance {
                 System.out.println("you fucked up");
             }
         }
-    }*/
+    }
 
     /*public int checkHint(){
         int x; //the index of an image
