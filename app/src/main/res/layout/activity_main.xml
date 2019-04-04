@@ -368,7 +368,7 @@
         app:srcCompat="@mipmap/tower" />
 
     <ImageView
-        android:id="@+id/hint_img_3"
+        android:id="@+id/hint_img"
         android:layout_width="77dp"
         android:layout_height="72dp"
         android:layout_marginTop="140dp"
