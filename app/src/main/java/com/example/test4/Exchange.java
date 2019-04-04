@@ -5,27 +5,11 @@ import android.widget.TextView;
 
 class Exchange extends Instance {
     private TextView[] text = new TextView[10];
-    private Button[] answerButtons = new Button[6];
-    /**
-     * IDs of possible answers
-     **/
-    private Button[] hintButtons;
-    /**
-     * buttons for showing the hint images
-     **/
-    private int[] selectAnswers = new int[6];
-    /**
-     * selected answers during the game play
-     **/
-    private int[] correctAnswers = new int[6];
-    /**
-     * answers that are possible to be correct
-     **/
-    private UIElement[] hintImages;
-
-    /**
-     * images shown after pressing the hintButton
-     **/
+    private Button[] answerButtons = new Button[6]; //IDs of possible answers
+    private Button[] hintButtons; //buttons for showing the hint images
+    private int[] selectAnswers = new int[6]; //selected answers during the game play
+    private int[] correctAnswers = new int[6]; //answers that are possible to be correct
+    private UIElement[] hintImages; //images shown after pressing the hintButton
 
     public Exchange(TextView[] text, String[] answerText, Button[] hintButtons, UIElement[] hintImages, int[] correctAnswers) {
         for (int i = 0; i < text.length; i++) {

@@ -8,14 +8,15 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public ImageView img;
+    //public ImageView img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        img = findViewById(R.id.imageTest);
+        /*img = findViewById(R.id.imageTest);
         img.setImageResource(R.mipmap.tower);
 
         Button btn = findViewById(R.id.button);
@@ -27,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 testMethod(v);
             }
-        });
+        });*/
     }
-    public void testMethod(View v)
+    /*public void testMethod(View v)
     {
         if(img.getVisibility() == View.GONE)
             img.setVisibility(View.VISIBLE);
         else if(img.getVisibility() == View.VISIBLE)
             img.setVisibility(View.GONE);
-    }
+    }*/
 }
