@@ -17,7 +17,7 @@ public class Instance extends AppCompatActivity {
         this.isActive = isActive;
     }
 
-    public void readData() {
+    /*public void readData() {
         String expectedData = "Hello World from fileTest.txt!!!";
 
         Class clazz = FileOperationsTest.class;
@@ -25,7 +25,7 @@ public class Instance extends AppCompatActivity {
         String data = readFromInputStream(inputStream);
 
         Assert.assertThat(data, containsString(expectedData));
-    }
+    }*/
 
     void Update(){
 
