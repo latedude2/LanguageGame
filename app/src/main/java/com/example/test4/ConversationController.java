@@ -4,9 +4,9 @@ public class ConversationController extends Instance{
 
     private Exchange exchanges;
     private GameObject background;
-    private Button backButton;
+    private OurButton backButton;
     private int currentExchangeID;
-    private Button continueButton;
+    private OurButton continueButton;
 
     public void showExchange(){
 

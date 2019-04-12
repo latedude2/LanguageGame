@@ -6,6 +6,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 class Exchange extends Instance {
     private OurButton[] answerPos;
     private OurButton[] answerButtons = new OurButton[2]; //IDs of possible answers
@@ -56,6 +60,8 @@ class Exchange extends Instance {
                 System.out.println("you fucked up");
             }
         }
+
+
     }
 
     /*public int checkHint(){
