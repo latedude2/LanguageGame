@@ -1,6 +1,6 @@
 package com.example.test4;
 
-class TextField extends UIElement{
+class TextField {
     private String text;
     TextField(String text){
         this.text = text;
