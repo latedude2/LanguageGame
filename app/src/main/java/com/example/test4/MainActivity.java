@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         /*public static final String TAG = MainActivity.class.getSimpleName();
 
           public static final String mPath = "data.xml";
