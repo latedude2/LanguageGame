@@ -1,22 +1,20 @@
 package com.example.test4;
 
 import android.animation.ObjectAnimator;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 class DPad {
 
-    int moveDist = 50;
+    private int moveDist = 50;
 
-    ImageView background;
+    private ImageView background;
 
     DPad (ImageView background){
         this.background = background;
     }
 
-    float moveX =  background.getX();
-    float moveY =  background.getY();
+    private float moveX =  background.getX();
+    private float moveY =  background.getY();
 
 
 
