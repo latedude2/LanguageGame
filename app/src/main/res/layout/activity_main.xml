@@ -456,7 +456,7 @@
         app:srcCompat="@mipmap/tower" />
 
     <ImageView
-        android:id="@+id/word_view"
+        android:id="@+id/world_view"
         android:layout_width="410dp"
         android:layout_height="302dp"
         android:contentDescription="@string/content_description_world_image"
