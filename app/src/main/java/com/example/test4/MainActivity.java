@@ -21,6 +21,8 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
     //public ImageView img;
+    public ImageView background;
+    public DPad dPad;
 
 
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        background = (ImageView) findViewById(R.id.world_view);
+        dPad = new DPad(background);
+
 
 
         /*public static final String TAG = MainActivity.class.getSimpleName();
@@ -78,4 +84,20 @@ public class MainActivity extends AppCompatActivity {
         else if(img.getVisibility() == View.VISIBLE)
             img.setVisibility(View.GONE);
     }*/
+
+    public void move_characterUp (View v){
+        dPad.moveUp();
+    }
+
+    public void move_characterDown (View v){
+        dPad.moveDown();
+    }
+
+    public void move_characterLeft (View v){
+        dPad.moveLeft();
+    }
+
+    public void move_characterRight (View v){
+        dPad.moveRight();
+    }
 }
