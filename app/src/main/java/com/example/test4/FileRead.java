@@ -19,7 +19,7 @@ public class FileRead {
         XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
         XmlPullParser myParser = xmlFactoryObject.newPullParser();
 
-        myParser.setInput("data.xml", null);
+        myParser.setInput("", null);
 
         int event = myParser.getEventType();
         while (event != XmlPullParser.END_DOCUMENT) {

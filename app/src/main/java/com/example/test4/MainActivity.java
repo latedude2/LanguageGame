@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
         /*public static final String TAG = MainActivity.class.getSimpleName();
 
-          public static final String mPath = "data.xml";
+          public static final String mPath = "";
           private FileRead mQuoteBank;
           private List<String> mLines;*/
         /*mQuoteBank = new FileRead(this);
