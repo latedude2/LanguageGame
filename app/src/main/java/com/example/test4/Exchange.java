@@ -34,12 +34,6 @@ class Exchange extends Instance {
         }
     }
 
-   @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-
     public void clickAnswer(OurButton answer){
         for (int i = 0; i < answerPos.length; i++)
             if (answerPos[i].getText() != null) {

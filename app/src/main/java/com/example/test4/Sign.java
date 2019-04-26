@@ -5,9 +5,9 @@ import android.widget.TextView;
 class Sign extends WorldElement {
 
     private TextView text;
-    private Button hintButton;
-    private UIElement signBackground;
-    private UIElement hintImages;
+    private OurButton hintButton;
+    //private UIElement signBackground;
+    //private UIElement hintImages;
 
     public Sign (TextView text){
         this.text = text;

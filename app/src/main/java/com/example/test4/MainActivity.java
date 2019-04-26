@@ -1,5 +1,6 @@
 package com.example.test4;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,14 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     //public ImageView img;
-    public ImageView background;
-    public DPad dPad;
-
-
-
+    private ImageView background;
+    private DPad dPad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
