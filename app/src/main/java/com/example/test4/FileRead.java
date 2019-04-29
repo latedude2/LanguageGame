@@ -16,6 +16,10 @@ public class FileRead {
     private String[] hintText;
     private String[] possibleAnswers;
 
+    private int i = 0;
+
+    public FileRead
+
     public void read() {
         StringBuffer stringBuffer = new StringBuffer();
         InputStream inputStream = this.getResources().openRawResource(R.raw.textfile);
@@ -23,17 +27,15 @@ public class FileRead {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         try {
-            while ((text = bufferedReader.readLine()) != null) {
+            while ((questionText[i] = bufferedReader.readLine()) != null) {
                 stringBuffer.append(text);
             }
             textView.setText(stringBuffer);
             inputStream.close();
-        } catch (
-                FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (
-                IOException ioe) {
-            ioe.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
