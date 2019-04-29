@@ -18,7 +18,9 @@ public class FileRead {
 
     private int i = 0;
 
-    public FileRead
+    public FileRead (int index){
+
+    }
 
     public void read() {
         StringBuffer stringBuffer = new StringBuffer();
@@ -28,9 +30,8 @@ public class FileRead {
 
         try {
             while ((questionText[i] = bufferedReader.readLine()) != null) {
-                stringBuffer.append(text);
+                stringBuffer.append(questionText[i]);
             }
-            textView.setText(stringBuffer);
             inputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
