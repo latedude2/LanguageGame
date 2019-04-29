@@ -14,7 +14,7 @@ class Exchange extends Instance {
     private OurButton[] hintButtons; //buttons for showing the hint images
 
     //Strings for normal text (without hint texts) in the questions)
-    private String[][] questionText = {
+    private String[][] question = {
         {"Godmorgen Alex, can du come here for a second?"},//1
         {" was making ",  "but we are out of", " og ", ", can ",  "go get some?"},//2
         {"Here is ", " for ", " shopping, ", " won’t have ", " until ", " get back."},//3
@@ -35,7 +35,7 @@ class Exchange extends Instance {
     };
 
     //Strings for text with hint in the question
-    private String[][] hintText = {
+    private String[][] hint = {
             {""},//1
             {"Jeg", "morgenmad", "mælk", "brød", "du"},//2
             {"halvtreds kroner", "din", "jeg", "morgenmad", "du"},//3
@@ -56,7 +56,7 @@ class Exchange extends Instance {
     };
 
     //already written text in the answer's sentence
-    private String[][] answerText = {
+    private String[][] answer = {
             {"Ja, jeg", " nu"},//1
             {"Tak, "},//2
             {""},//3 no answers needed for that one
@@ -97,13 +97,12 @@ class Exchange extends Instance {
             {"", "", "", "", "", ""}//17
     };
 
-    //Strings for the answers to be put in (empty at the beginning)
-    private String[][] answerGapText = new String[answerText.length][6];
-
-    private TextView[] questionTextView = new TextView[questionText.length];
+    private TextView[] questionTextView = new TextView[question.length];
     private int[] selectAnswers = new int[6]; //all of the possible answers
     private int[] correctAnswers = new int[6]; //answers that are possible to be correct
     private GameObject[] UIObjects; //images shown after pressing the hintButton
+
+    private FileRead file = new FileRead();
 
     public Exchange(TextView[] questionTextView, String[] answerText, OurButton[] hintButtons, GameObject[] UIObjects, int[] correctAnswers) {
         for (int i = 0; i < questionTextView.length; i++) {
