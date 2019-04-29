@@ -1,0 +1,11 @@
+Question with hints (#)
+Answer with gaps (&)
+Opt0
+Opt1
+Opt2
+Opt3
+Opt4
+Opt5
+
+Hi there, I will need #tyve# #æbler# for my #tærte#
+Ok, &3 kan &5 finde dem?
