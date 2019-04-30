@@ -23,6 +23,7 @@ public class FileRead {
     }
 
     public void read() {
+        /*
         StringBuffer stringBuffer = new StringBuffer();
         InputStream inputStream = this.getResources().openRawResource(R.raw.textfile);
 
@@ -38,5 +39,7 @@ public class FileRead {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
+
 }

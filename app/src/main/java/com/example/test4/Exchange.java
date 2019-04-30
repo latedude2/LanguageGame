@@ -102,7 +102,7 @@ class Exchange extends Instance {
     private int[] correctAnswers = new int[6]; //answers that are possible to be correct
     private GameObject[] UIObjects; //images shown after pressing the hintButton
 
-    private FileRead file = new FileRead();
+    //private FileRead file = new FileRead();
 
     public Exchange(TextView[] questionTextView, String[] answerText, OurButton[] hintButtons, GameObject[] UIObjects, int[] correctAnswers) {
         for (int i = 0; i < questionTextView.length; i++) {
