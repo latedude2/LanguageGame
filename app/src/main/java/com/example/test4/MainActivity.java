@@ -39,8 +39,8 @@ public class MainActivity extends Activity {
         String id = "R.raw.exchange" + index;
         int textFileID = Integer.valueOf(id);
         InputStream inputStream = this.getResources().openRawResource(textFileID);
-        FileRead file = new FileRead(i, inputStream);
-        Exchange exchange = new Exchange(file, file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getPossibleAnswers(), file.getGapText(), file.getCorrectAnswers());
+        //FileRead file = new FileRead(i, inputStream);
+        //Exchange exchange = new Exchange(file, file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getPossibleAnswers(), file.getGapText(), file.getCorrectAnswers());
     }
 
 
