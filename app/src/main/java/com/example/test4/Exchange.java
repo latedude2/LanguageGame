@@ -35,7 +35,8 @@ class Exchange extends Instance {
             this.correctAnswers = correctAnswers;
     }
 
-    public void clickAnswer(TextView answer) //  teh method requires the textView which was clicked
+    //activated in the OnClickListener or so
+    public void clickAnswer(TextView answer) //  the method requires the textView which was clicked
     {
         for (int i=0; i<gapText.length; i++){
             if (gapText[i] != null){
