@@ -34,54 +34,15 @@ public class MainActivity extends Activity {
         background = (ImageView) findViewById(R.id.world_view);
         dPad = new DPad(background);
 
-
-
-        /*public static final String TAG = MainActivity.class.getSimpleName();
-
-          public static final String mPath = "";
-          private FileRead mQuoteBank;
-          private List<String> mLines;*/
-        /*mQuoteBank = new FileRead(this);
-        mLines = mQuoteBank.readLine(mPath);
-        for (String string : mLines)
-            Log.d(TAG, string);*/
-
-
-
-        /*BufferedReader reader;
-
-        try{
-            reader = new BufferedReader(new FileReader("src/main/res/data.txt"));
-            String line = reader.readLine();
-            while(line != null){
-                System.out.println(line);
-                line = reader.readLine();
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }*/
-
-        /*img = findViewById(R.id.hint_img);
-        img.setImageResource(R.mipmap.tower);
-
-        Button btn = findViewById(R.id.button);
-
-        
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                testMethod(v);
-            }
-        });*/
+        int i = 0;
+        String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
+        String id = "R.raw.exchange" + index;
+        int textFileID = Integer.valueOf(id);
+        InputStream inputStream = this.getResources().openRawResource(textFileID);
+        FileRead file = new FileRead(i, inputStream);
+        Exchange exchange = new Exchange(file, file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getPossibleAnswers(), file.getGapText(), file.getCorrectAnswers());
     }
-    /*public void testMethod(View v)
-    {
-        if(img.getVisibility() == View.GONE)
-            img.setVisibility(View.VISIBLE);
-        else if(img.getVisibility() == View.VISIBLE)
-            img.setVisibility(View.GONE);
-    }*/
+
 
     public void move_characterUp (View v){
         dPad.moveUp();
