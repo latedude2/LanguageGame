@@ -10,15 +10,17 @@ import java.nio.charset.StandardCharsets;
 
 class Exchange extends Instance {
 
-    private int[] selectAnswers = new int[6]; //all of the possible answers
-    private int[] correctAnswers = new int[6]; //answers that are possible to be correct
+
     private GameObject[] UIObjects; //images shown after pressing the hintButton
 
-    String[] questionText;
-    String[] answerText;
-    String[] hintText;
-    String[] answers;
-    String[] gapText;
+    private String[] questionText; //array for normal text of other character
+    private String[] hintText; //array for text with image hints
+    private String[] answerText; //array for already written text of answer
+    private String[] gapText; // array for gaps in the answer text
+    private String[] answers; //array of all 6 possible answers
+
+    private int[] selectAnswers = new int[6]; //all of the possible answers
+    private int[] correctAnswers = new int[6]; //answers that are possible to be correct
 
     int n = 0;
 
@@ -33,22 +35,17 @@ class Exchange extends Instance {
             this.correctAnswers = correctAnswers;
     }
 
-    public void clickAnswer()
+    public void clickAnswer(TextView answer) //  teh method requires the textView which was clicked
     {
-
-    }
-
-    void checkAnswer(OurButton[] answerPos) {
-        for (int i = 0; i < correctAnswers.length; i++) {
-            if (correctAnswers[i] == answerPos[i].getIndex()) {
-                // excepting the answer and saying that you're a good boy
-                System.out.println("good boy");
-            } else {
-                // saying that you fucked up
-                System.out.println("you fucked up");
+        for (int i=0; i<gapText.length; i++){
+            if (gapText[i] != null){
+                gapText[i] = answer.getText().toString();
             }
         }
+    }
 
+    public void checkAnswer()
+    {
 
     }
 
@@ -60,6 +57,6 @@ class Exchange extends Instance {
 
 
     /*void showHint(int x) {
-        UIObjects[x] =
+
     }*/
 }

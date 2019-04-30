@@ -11,13 +11,13 @@ import java.io.InputStreamReader;
 
 public class FileRead {
 
-    private String[] allText;
-    private String[] questionText;
-    private String[] answerText;
-    private String[] gapText;
-    private String[] hintText;
-    private String[] possibleAnswers;
-    private int[] correctAnswers;
+    private String[] allText; //all the text in the file
+    private String[] questionText; //array for normal text of other character
+    private String[] hintText; //array for text with image hints
+    private String[] answerText; //array for already written text of answer
+    private String[] gapText; //array for gaps in the answer text
+    private String[] allAnswers; //array of all 6 possible answers
+    private int[] correctAnswers; //all of the possible answers
 
     private int i = 0;
 
@@ -34,10 +34,11 @@ public class FileRead {
 
     public void read() {
         allText = readAll();
-        questionText = readQuest(allText);
+        //questionText = readQuest(allText);
 
     }
 
+    //reads all of the file and puts every line in the array of Strings to be put in specific arrays of Strings in other methods
     public String[] readAll()
     {
         String[] text = new String[8];
@@ -57,10 +58,21 @@ public class FileRead {
         return text;
     }
 
-    public String[] readQuest(String[] text)
+    /*public String[] readQuest(String[] text)
     {
-        return questionText;
-    }
+        //to be updated
+        return question;
+    }*/
+    /*public String[] readAnswer(String[] text)
+    {
+        //to be updated
+        return answer;
+    }*/
+    /*public String[] readAllAnswers(String[] text)
+    {
+        //to be updated
+        return answers;
+    }*/
 
     public String[] getAnswerText() {
         return answerText;
@@ -74,8 +86,8 @@ public class FileRead {
         return hintText;
     }
 
-    public String[] getPossibleAnswers() {
-        return possibleAnswers;
+    public String[] getAllAnswers() {
+        return allAnswers;
     }
 
     public String[] getQuestionText() {
