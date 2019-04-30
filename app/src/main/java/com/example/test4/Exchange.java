@@ -42,9 +42,9 @@ class Exchange extends Instance {
     }
 
 
-   /* public void clickAnswer(OurButton answer){
+    /*public void clickAnswer(OurButton answer) {
         for (int i = 0; i < answerPos.length; i++)
-            if (answerPos[i].getText() != null) {
+            if (answers[i].getText() != null) {
                 answerPos[i].setText(answer.getText());
                 break;
             }

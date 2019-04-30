@@ -32,17 +32,26 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         background = (ImageView) findViewById(R.id.world_view);
-        dPad = new DPad(background);
+        //dPad = new DPad(background);
 
         int i = 0;
         String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
-        String id = "R.raw.exchange" + index;
-        int textFileID = Integer.valueOf(id);
-        InputStream inputStream = this.getResources().openRawResource(textFileID);
-        //FileRead file = new FileRead(i, inputStream);
-        //Exchange exchange = new Exchange(file, file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getPossibleAnswers(), file.getGapText(), file.getCorrectAnswers());
+        String id = "exchange" + index;
+        int idOfFile = getResourceId(id,"raw", getPackageName());
+        InputStream inputStream = this.getResources().openRawResource(idOfFile);
+        FileRead file = new FileRead(i, inputStream);
+        Exchange exchange = new Exchange(file, file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getPossibleAnswers(), file.getGapText(), file.getCorrectAnswers());
     }
 
+    public int getResourceId(String pVariableName, String pResourcename, String pPackageName)
+    {
+        try {
+            return getResources().getIdentifier(pVariableName, pResourcename, pPackageName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
     public void move_characterUp (View v){
         dPad.moveUp();
