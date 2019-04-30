@@ -458,7 +458,7 @@
         android:contentDescription="@string/content_description_char_world_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
+        app:srcCompat="@drawable/main_character" />
 
     <ImageView
         android:id="@+id/world_view"
@@ -468,7 +468,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
+        app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/hint_img"
@@ -482,6 +482,6 @@
         app:layout_constraintStart_toEndOf="@+id/npc_dialogue_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
+        app:srcCompat="@drawable/morgenmad" />
 
 </android.support.constraint.ConstraintLayout>

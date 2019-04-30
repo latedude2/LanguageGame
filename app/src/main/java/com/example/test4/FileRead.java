@@ -40,13 +40,11 @@ public class FileRead {
 
     public String[] readAll()
     {
-        String[] text;
+        String[] text = new String[8];
         int line = 0;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
         try {
             while ((bufferedReader.readLine()) != null) {
-                text = new String[line];
                 stringBuffer.append(text[line]);
                 line++;
             }
@@ -56,13 +54,11 @@ public class FileRead {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return text;
     }
 
     public String[] readQuest(String[] text)
     {
-
         return questionText;
     }
 
