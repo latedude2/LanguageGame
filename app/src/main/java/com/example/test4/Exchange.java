@@ -9,10 +9,6 @@ import android.widget.TextView;
 import java.nio.charset.StandardCharsets;
 
 class Exchange extends Instance {
-    private OurButton[] answerPos; //gaps for the answers
-    private OurButton[] answerButtons = new OurButton[2]; //IDs of possible answers
-    private OurButton[] hintButtons; //buttons for showing the hint images
-
 
     private int[] selectAnswers = new int[6]; //all of the possible answers
     private int[] correctAnswers = new int[6]; //answers that are possible to be correct
@@ -24,31 +20,23 @@ class Exchange extends Instance {
     String[] answers;
     String[] gapText;
 
-    FileRead file;
     int n = 0;
 
     //private TextView[] questionTextView = new TextView[questionText.length];
 
-    public Exchange(FileRead file, String[] answerText, String[] questionText, String[] hintText, String[] answers, String[] gapText, int[] correctAnswers) {
-        this.file = file;
-        if (this.file != null) {
+    public Exchange(String[] answerText, String[] questionText, String[] hintText, String[] answers, String[] gapText, int[] correctAnswers) {
             this.questionText = questionText;
             this.answerText = answerText;
             this.hintText = hintText;
             this.answers = answers;
             this.gapText = gapText;
             this.correctAnswers = correctAnswers;
-        }
     }
 
+    public void clickAnswer()
+    {
 
-    /*public void clickAnswer(OurButton answer) {
-        for (int i = 0; i < answerPos.length; i++)
-            if (answers[i].getText() != null) {
-                answerPos[i].setText(answer.getText());
-                break;
-            }
-    }*/
+    }
 
     void checkAnswer(OurButton[] answerPos) {
         for (int i = 0; i < correctAnswers.length; i++) {
