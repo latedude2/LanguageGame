@@ -8,13 +8,15 @@ class DPad {
     private int moveDist = 50;
 
     private ImageView background;
+    private float moveX;
+    private float moveY;
+
 
     DPad (ImageView background){
+        moveX =  background.getX();
+        moveY =  background.getY();
         this.background = background;
     }
-
-    private float moveX =  background.getX();
-    private float moveY =  background.getY();
 
 
 
