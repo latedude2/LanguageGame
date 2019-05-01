@@ -1,8 +1,8 @@
-Hej, hvad skulle det være?
-&1 skal bruge et &5, tak
-du
-jeg
-ægteskab
-død
-vores
-franskbrod
+Et styks #franskbrod, ellers andet?
+&2 &5
+alt
+aldrig
+nej
+er
+værsgo
+tak

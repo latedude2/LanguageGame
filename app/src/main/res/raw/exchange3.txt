@@ -1,8 +1,8 @@
-Det er een rigtig smuk dag i dag, og vejret er super dejligt; ikke?
-&3, jeg &1 ikke så godt &4 
+Godmorgen, utroligt så smukt #vejret er i dag; ikke?
+Ja, det &1 næsten som &3
 bror
-forstår
-nu
-undskyld
-dansk
+føles
+regner
+sommer
+efterår
 lærer
