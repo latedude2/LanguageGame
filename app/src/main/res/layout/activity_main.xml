@@ -155,6 +155,7 @@
         android:text="@string/answer_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.995"
         app:layout_constraintStart_toEndOf="@+id/answer_button_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_4"
@@ -457,7 +458,7 @@
         android:contentDescription="@string/content_description_char_world_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
+        app:srcCompat="@drawable/main_character" />
 
     <ImageView
         android:id="@+id/world_view"
@@ -467,7 +468,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
+        app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/hint_img"
@@ -481,6 +482,6 @@
         app:layout_constraintStart_toEndOf="@+id/npc_dialogue_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
+        app:srcCompat="@drawable/morgenmad" />
 
 </android.support.constraint.ConstraintLayout>

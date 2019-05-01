@@ -25,6 +25,8 @@ public class MainActivity extends Activity {
     private ImageView background;
     private DPad dPad;
 
+    int i = 0; //index which counts which exchange it is currently
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,54 +36,16 @@ public class MainActivity extends Activity {
         background = (ImageView) findViewById(R.id.world_view);
         dPad = new DPad(background);
 
+        //TO BE PUT INTO OnClickListener()
+        String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
+        String id = "exchange" + index; //creates a String name of the file to use in the following line
+        int idOfFile = getResources().getIdentifier(id,"raw", getPackageName());
+        InputStream inputStream = this.getResources().openRawResource(idOfFile);
+        FileRead file = new FileRead(i, inputStream); //creates the file object for all the Strings to be created there
 
-
-        /*public static final String TAG = MainActivity.class.getSimpleName();
-
-          public static final String mPath = "";
-          private FileRead mQuoteBank;
-          private List<String> mLines;*/
-        /*mQuoteBank = new FileRead(this);
-        mLines = mQuoteBank.readLine(mPath);
-        for (String string : mLines)
-            Log.d(TAG, string);*/
-
-
-
-        /*BufferedReader reader;
-
-        try{
-            reader = new BufferedReader(new FileReader("src/main/res/data.txt"));
-            String line = reader.readLine();
-            while(line != null){
-                System.out.println(line);
-                line = reader.readLine();
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }*/
-
-        /*img = findViewById(R.id.hint_img);
-        img.setImageResource(R.mipmap.tower);
-
-        Button btn = findViewById(R.id.button);
-
-        
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                testMethod(v);
-            }
-        });*/
+        //creates exchange object which consists of all the Strings to be put in that one created exchange
+        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers());
     }
-    /*public void testMethod(View v)
-    {
-        if(img.getVisibility() == View.GONE)
-            img.setVisibility(View.VISIBLE);
-        else if(img.getVisibility() == View.VISIBLE)
-            img.setVisibility(View.GONE);
-    }*/
 
     public void move_characterUp (View v){
         dPad.moveUp();
