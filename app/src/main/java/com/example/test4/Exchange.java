@@ -62,7 +62,7 @@ class Exchange extends Instance {
         }
     }
 
-    public SpannableString clickHint(){
+    public SpannableString checkHint(){
         StringBuffer stringBuffer = questionText;
         final Matcher matcher = Pattern.compile("#\\s*(\\w+)").matcher(stringBuffer);
         while (matcher.find()){
@@ -100,14 +100,8 @@ class Exchange extends Instance {
 
     public void checkAnswer()
     {
-
+        fileRead.getAllAnswers();
     }
-
-    /*public int checkHint(){
-        int x; //the index of an image
-
-        return x;
-    }*/
 
 
     /*void showHint(int x) {

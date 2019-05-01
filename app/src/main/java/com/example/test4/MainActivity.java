@@ -1,26 +1,13 @@
 package com.example.test4;
 
 import android.app.Activity;
-import android.content.Context;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class MainActivity extends Activity {
 
@@ -33,7 +20,6 @@ public class MainActivity extends Activity {
     private TextView dialoguetext;
     private ImageView hintImage;
 
-    private String question;
     int i = 1; //index which counts which exchange it is currently
     int idOfImage;
 
@@ -43,9 +29,27 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dialoguetext = (TextView) findViewById(R.id.dialogue_text);
-        hintImage = (ImageView) findViewById(R.id.hint_img);
+        loadImage();
+        loadExchange();
+    }
 
+    public void loadImage(){
+        //dPad = new DPad();
+
+        backgroundMap = (ImageView) findViewById(R.id.world_view);
+
+        dPad = new DPad(backgroundMap);
+
+        conversationBack = (ImageView) findViewById(R.id.conversation_view);
+
+        idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
+        dPad.showImage(backgroundMap, idOfImage);
+
+        idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
+        dPad.showImage(conversationBack, idOfImage);
+
+    }
+    public void loadExchange(){
         //TO BE PUT INTO OnClickListener()
         String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
         String id = "exchange" + index; //creates a String name of the file to use in the following line
@@ -55,27 +59,9 @@ public class MainActivity extends Activity {
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
         Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers());
-
-        dialoguetext.setText(exchange.clickHint());
+        dialoguetext = (TextView) findViewById(R.id.dialogue_text);
+        dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
-
-        loadImage();
-
-
-    }
-
-    public void loadImage(){
-        dPad = new DPad();
-
-        backgroundMap = (ImageView) findViewById(R.id.world_view);
-        conversationBack = (ImageView) findViewById(R.id.conversation_view);
-
-        idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
-        dPad.showImage(backgroundMap, idOfImage);
-
-        idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
-        dPad.showImage(conversationBack, idOfImage);
-
     }
 
     public void move_characterUp (View v){
@@ -94,8 +80,8 @@ public class MainActivity extends Activity {
         dPad.moveRight();
     }
 
-    public ImageView getHintImage() {
-        //hintImage.setImageResource(R.drawable.background);
+    public ImageView getHintImage(){
+        hintImage = (ImageView) findViewById(R.id.hint_img);
         return hintImage;
     }
 }

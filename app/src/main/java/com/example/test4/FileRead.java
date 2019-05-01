@@ -48,7 +48,7 @@ public class FileRead {
 
     public void read() {
         allText = readAll();
-        questionText = readQuest(allText);
+        questionText = readQuest(this.allText);
 
     }
 
@@ -73,6 +73,7 @@ public class FileRead {
         return lines;
     }
 
+
     public StringBuffer readQuest(StringBuffer[] text)
     {
         StringBuffer question = text[0];
@@ -84,8 +85,10 @@ public class FileRead {
         return answer;
     }*/
     /*public String[] readAllAnswers(String[] text)
-    {
-        //to be updated
+    {   this.answers = new String[6];
+        for (int i = 0; i < answers.length; i++){
+            answers[i] = text [i + 2];
+        }
         return answers;
     }*/
 
