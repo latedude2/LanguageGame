@@ -269,13 +269,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
         app:layout_constraintTop_toTopOf="parent" />
-=======
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.323"
         android:src="@drawable/map"/>
->>>>>>> d22f16a09b3967b4567e708905094f1cfa513b9a
 
     <ImageView
         android:id="@+id/char_world_view"
@@ -298,13 +295,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
         app:layout_constraintTop_toTopOf="parent" />
-=======
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         android:src="@drawable/background"/>
->>>>>>> d22f16a09b3967b4567e708905094f1cfa513b9a
 
     <ImageView
         android:id="@+id/hint_img"

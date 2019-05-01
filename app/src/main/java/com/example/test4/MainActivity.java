@@ -34,9 +34,12 @@ public class MainActivity extends Activity {
     }
 
     public void loadImage(){
-        dPad = new DPad();
+        //dPad = new DPad();
 
         backgroundMap = (ImageView) findViewById(R.id.world_view);
+
+        dPad = new DPad(backgroundMap);
+
         conversationBack = (ImageView) findViewById(R.id.conversation_view);
 
         idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
