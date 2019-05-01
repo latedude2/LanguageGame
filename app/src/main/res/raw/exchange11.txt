@@ -1,8 +1,8 @@
-Okay, that will be #femten# kroner
-&4 tak, du må &1 en god &2
-betale
-have
-dag
-aldrig
-mange
-ikke
+Perfekt, tak. Hvordan er #vejret i dag?
+Vejret er &0 godt lige nu, &4 der kommer nok &1 senere
+rigtig
+regn
+ifølge
+netop
+men
+eller

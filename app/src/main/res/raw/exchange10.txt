@@ -1,8 +1,8 @@
-Sure, a #franskbrød# coming up, anything else?
-&1 &4
-en
-nej
-hest
-godt
-tak
-jo
+Okay, så bliver det #femten kroner
+&2 tak, &0 god dag
+fortsat
+mere
+mange
+meget
+ingen
+mad
