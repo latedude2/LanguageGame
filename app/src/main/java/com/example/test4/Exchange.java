@@ -82,13 +82,13 @@ class Exchange extends Instance {
             ClickableSpan clickableSpan = new ClickableSpan() {
                 @Override
                 public void onClick(@NonNull View widget) {
-                    mainActivity.getHintImage();
+                    //  mainActivity.getHintImage();
                     new CountDownTimer(10000, 1000){
                         public void onTick(long milliUntilFinished){
                             //addfunction
                         }
                         public void onFinish(){
-                            mainActivity.getHintImage().setImageResource(0);
+                            //mainActivity.getHintImage().setImageResource(0);
                         }
                     }.start();
                 }

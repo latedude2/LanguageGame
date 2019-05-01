@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-Godmorgen Alex, can #du come here for a second?
-=======
-Godmorgen Alex, kan du komme her et øjeblik?
->>>>>>> bf805aff9e1bb057c15f4ed3237b4f8c462d0fb1
+﻿Godmorgen Alex, kan du komme her et øjeblik?
 Ja, jeg &1 nu
 piger
 kommer
