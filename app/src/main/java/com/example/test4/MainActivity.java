@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
     private ImageView hintImage;
 
     int i = 1; //index which counts which exchange it is currently
+    int idOfImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,17 @@ public class MainActivity extends Activity {
     }
 
     public void loadImage(){
+        dPad = new DPad();
+
         backgroundMap = (ImageView) findViewById(R.id.world_view);
-        dPad = new DPad(backgroundMap);
         conversationBack = (ImageView) findViewById(R.id.conversation_view);
-        conversationBackground = new DPad(conversationBack);
-        int idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
+
+        idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
         dPad.showImage(backgroundMap, idOfImage);
-        conversationBack.setImageResource(R.drawable.background);
+
+        idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
+        dPad.showImage(conversationBack, idOfImage);
+
     }
     public void loadExchange(){
         //TO BE PUT INTO OnClickListener()
