@@ -23,7 +23,9 @@ public class MainActivity extends Activity {
 
     //public ImageView img;
     private ImageView backgroundMap;
+    private ImageView conversationBack;
     private DPad dPad;
+    private DPad conversationBackground;
 
     int i = 0; //index which counts which exchange it is currently
 
@@ -33,8 +35,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        backgroundMap = (ImageView) findViewById(R.id.world_view);
-        dPad = new DPad(backgroundMap);
 
 
 
@@ -48,10 +48,19 @@ public class MainActivity extends Activity {
         //creates exchange object which consists of all the Strings to be put in that one created exchange
         Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers());
 
-        GameObject map = new GameObject();
-        //map.showMap(background);
-        backgroundMap.setImageResource(R.drawable.map);
+        loadImage();
 
+
+    }
+
+    public void loadImage(){
+        backgroundMap = (ImageView) findViewById(R.id.world_view);
+        dPad = new DPad(backgroundMap);
+        conversationBack = (ImageView) findViewById(R.id.conversation_view);
+        conversationBackground = new DPad(conversationBack);
+        int idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
+        dPad.showImage(backgroundMap, idOfImage);
+        conversationBack.setImageResource(R.drawable.background);
     }
 
     public void move_characterUp (View v){

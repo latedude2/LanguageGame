@@ -18,6 +18,11 @@ class DPad {
         this.background = background;
     }
 
+    public void showImage(ImageView imageView, int id)
+    {
+        imageView.setImageResource(id);
+    }
+
     public void moveUp (){
         moveY += moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);

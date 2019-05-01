@@ -16,10 +16,7 @@ class GameObject extends Instance {
         this.y = y;
     }
 
-    public void showMap(ImageView imageView)
-    {
-        imageView.setImageResource(R.drawable.background);
-    }
+
 
     public int getX() {
         return x;
