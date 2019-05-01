@@ -11,7 +11,7 @@ class DPad {
     private float moveX;
     private float moveY;
 
-
+    DPad(){}
     DPad (ImageView background){
         moveX =  background.getX();
         moveY =  background.getY();
