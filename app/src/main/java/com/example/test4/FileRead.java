@@ -1,6 +1,12 @@
 package com.example.test4;
 
+import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ClickableSpan;
+import android.view.View;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -8,18 +14,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileRead {
 
-    private String[] allText; //all the text in the file
-    private String[] questionText; //array for normal text of other character
+    private StringBuffer[] allText; //all the text in the file
+    private StringBuffer questionText; //array for normal text of other character
     private String[] hintText; //array for text with image hints
     private String[] answerText; //array for already written text of answer
     private String[] gapText; //array for gaps in the answer text
     private String[] allAnswers; //array of all 6 possible answers
     private int[] correctAnswers; //all of the possible answers
+    private ArrayList<Integer> wordIndexList = new ArrayList<>();
+    private ArrayList<String> wordList = new ArrayList<>();
 
-    private int i = 0;
+    private int index = 0;
+    private String text;
 
     private InputStream inputStream;
     private StringBuffer stringBuffer = new StringBuffer();
@@ -28,26 +40,29 @@ public class FileRead {
     private TextUtils.SimpleStringSplitter gapSplitter = new TextUtils.SimpleStringSplitter('&');
 
     public FileRead (int index, InputStream inputStream){
-        this.i = index;
+        this.index = index;
         this.inputStream = inputStream;
     }
 
+    public FileRead(){}
+
     public void read() {
         allText = readAll();
-        //questionText = readQuest(allText);
+        questionText = readQuest(allText);
 
     }
 
     //reads all of the file and puts every line in the array of Strings to be put in specific arrays of Strings in other methods
-    public String[] readAll()
+    public StringBuffer[] readAll()
     {
-        String[] text = new String[8];
-        int line = 0;
+        StringBuffer[] lines = new StringBuffer[8];
+        int lineIndex = 0;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         try {
-            while ((bufferedReader.readLine()) != null) {
-                stringBuffer.append(text[line]);
-                line++;
+            while ((text = bufferedReader.readLine()) != null) {
+                lines[lineIndex] = new StringBuffer();
+                lines[lineIndex].append(text);
+                lineIndex++;
             }
             inputStream.close();
         } catch (FileNotFoundException e) {
@@ -55,14 +70,14 @@ public class FileRead {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return text;
+        return lines;
     }
 
-    /*public String[] readQuest(String[] text)
+    public StringBuffer readQuest(StringBuffer[] text)
     {
-        //to be updated
+        StringBuffer question = text[0];
         return question;
-    }*/
+    }
     /*public String[] readAnswer(String[] text)
     {
         //to be updated
@@ -90,7 +105,7 @@ public class FileRead {
         return allAnswers;
     }
 
-    public String[] getQuestionText() {
+    public StringBuffer getQuestionText() {
         return questionText;
     }
 
