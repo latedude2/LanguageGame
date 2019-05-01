@@ -68,46 +68,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialogue_text_1"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="308dp"
-        android:text="@string/dialogue_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dialogue_text_2"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="308dp"
-        android:text="@string/dialogue_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dialogue_text_3"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="184dp"
-        android:layout_marginTop="308dp"
-        android:text="@string/dialogue_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dialogue_text_4"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="308dp"
-        android:text="@string/dialogue_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/answer_text_0"
         android:layout_width="58dp"
         android:layout_height="50dp"
@@ -306,12 +266,10 @@
         android:layout_width="1000dp"
         android:layout_height="1000dp"
         android:contentDescription="@string/content_description_world_image"
-        app:layout_constraintBottom_toTopOf="@+id/dialogue_text_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/char_world_view"
@@ -331,12 +289,10 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/dialogue_text_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/hint_img"
