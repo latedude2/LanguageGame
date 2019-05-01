@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     private ImageView hintImage;
 
     private String question;
-    int i = 0; //index which counts which exchange it is currently
+    int i = 1; //index which counts which exchange it is currently
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
     }
 
     public ImageView getHintImage() {
-        hintImage.setImageResource(R.drawable.background);
+        //hintImage.setImageResource(R.drawable.background);
         return hintImage;
     }
 }
