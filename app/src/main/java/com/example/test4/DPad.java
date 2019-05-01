@@ -18,8 +18,6 @@ class DPad {
         this.background = background;
     }
 
-
-
     public void moveUp (){
         moveY += moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);

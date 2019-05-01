@@ -1,19 +1,24 @@
 package com.example.test4;
 
 import android.media.Image;
+import android.widget.ImageView;
 
 class GameObject extends Instance {
     private int x;
     private int y;
     private int xGrid;
     private int yGrid;
-    private Image[] image = new Image[10];
+
 
     GameObject(){}
-    GameObject(int x, int y, Image[] image){
+    GameObject(int x, int y){
         this.x = x;
         this.y = y;
-        this.image = image;
+    }
+
+    public void showMap(ImageView imageView)
+    {
+        imageView.setImageResource(R.drawable.background);
     }
 
     public int getX() {
