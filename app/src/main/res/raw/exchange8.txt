@@ -1,8 +1,8 @@
-#Du# get #en og fyrre# #kroner# back, would #du# like a #kvittering#?
-&0 tak, du må &3 en god &1
-mange
-dag
-aldrig
-have
-ikke
-betale
+Godmorgen, hvad skulle det være?
+&4 &3, &2
+en
+nogen
+tak
+franskbrød
+et
+vel

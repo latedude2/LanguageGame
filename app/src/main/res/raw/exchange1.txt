@@ -1,8 +1,8 @@
-#Jeg# was making #morgenmad#, but we are out of #mælk# and #franskbrød#, can #du# go get some?
+Jeg skulle til at lave #morgenmad, men vi mangler både #mælk og #franskbrød. Går du ned til #købmanden og henter noget?
 Ja, &3
-nej
+utroligt
 værsågod
 hvorfor
 selvfølgelig
 klar
-mig
+ej
