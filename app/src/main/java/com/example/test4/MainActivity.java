@@ -49,10 +49,10 @@ public class MainActivity extends Activity {
         Button downButton = findViewById(R.id.down_button);
         Button leftButton = findViewById(R.id.left_button);
         Button rightButton = findViewById(R.id.right_button);
-        upButton.setVisibility(View.GONE);
+        /*upButton.setVisibility(View.GONE);
         downButton.setVisibility(View.GONE);
         leftButton.setVisibility(View.GONE);
-        rightButton.setVisibility(View.GONE);
+        rightButton.setVisibility(View.GONE);*/
     }
 
     public void loadLayoutImage(){
@@ -70,6 +70,7 @@ public class MainActivity extends Activity {
         idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
         dPad.showImage(conversationBack, idOfImage);
 
+        Button submit_button = findViewById(R.id.submit_button);
     }
     public void loadExchange(){
         //TO BE PUT INTO OnClickListener()
