@@ -4,7 +4,7 @@
     <string name="hint_button">Hint Button</string>
     <string name="fill_answer_button">Fill Button</string>
     <string name="submit_button">Submit Button</string>
-    <string name="voice_button">Voice Button</string>
+    <string name="speaker_button">Speaker Button</string>
     <string name="exit_menu_button">Exit/Menu Button</string>
     <string name="up_button">Exit Button</string>
     <string name="down_button">Exit Button</string>
