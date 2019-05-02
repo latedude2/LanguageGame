@@ -153,7 +153,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.682"
+        app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -188,11 +188,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/content_description_world_image"
-        android:src="@drawable/background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/background" />
 
     <Button
         android:id="@+id/answer_button_4"
@@ -219,7 +215,7 @@
         android:layout_height="45dp"
         android:text="@string/answer_button"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
-        app:layout_constraintTop_toBottomOf="@+id/answer_button_0" />
+        app:layout_constraintTop_toBottomOf="@id/answer_button_0" />
 
     <Button
         android:id="@+id/answer_button_2"
@@ -290,8 +286,8 @@
 
     <ImageView
         android:id="@+id/speaker_button"
-        android:layout_width="61dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/speaker_button"
         android:src="@drawable/speaker"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
@@ -307,8 +303,7 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/submit_button"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_answer_buttons_top"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/up_button"
         app:layout_constraintStart_toEndOf="@+id/answer_text_0" />
 
 </android.support.constraint.ConstraintLayout>
