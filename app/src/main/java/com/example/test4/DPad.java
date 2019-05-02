@@ -5,7 +5,7 @@ import android.widget.ImageView;
 
 class DPad {
 
-    private int moveDist = 50;
+    private int moveDist = 100;
 
     private ImageView background;
     private float moveX;
