@@ -16,8 +16,6 @@ class GameObject extends Instance {
         this.y = y;
     }
 
-
-
     public int getX() {
         return x;
     }
