@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,11 +30,32 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadImage();
+        Button exitButton = findViewById(R.id.exit_menu_button);
+        exitButton.setVisibility(View.INVISIBLE);
+
+        ImageView shit = findViewById(R.id.hint_img);
+        shit.setImageResource(R.drawable.maelk);
+
+        makeMoveButtonGone();
+
+        loadLayoutImage();
         loadExchange();
+
+        loadConverstationCharacterImage();
     }
 
-    public void loadImage(){
+    public void makeMoveButtonGone(){
+        Button upButton = findViewById(R.id.up_button);
+        Button downButton = findViewById(R.id.down_button);
+        Button leftButton = findViewById(R.id.left_button);
+        Button rightButton = findViewById(R.id.right_button);
+        upButton.setVisibility(View.GONE);
+        downButton.setVisibility(View.GONE);
+        leftButton.setVisibility(View.GONE);
+        rightButton.setVisibility(View.GONE);
+    }
+
+    public void loadLayoutImage(){
         //dPad = new DPad();
 
         backgroundMap = (ImageView) findViewById(R.id.world_view);
@@ -62,6 +84,11 @@ public class MainActivity extends Activity {
         dialoguetext = (TextView) findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public void loadConverstationCharacterImage(){
+        ImageView imageView = findViewById(R.id.npc_dialogue_view);
+        imageView.setImageResource(R.drawable.big_baker);
     }
 
     public void move_characterUp (View v){
