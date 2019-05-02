@@ -35,8 +35,10 @@ public class MainActivity extends Activity {
 
         makeMoveButtonGone();
 
-        loadImage();
+        loadLayoutImage();
         loadExchange();
+
+        loadConverstationCharacterImage();
     }
 
     public void makeMoveButtonGone(){
@@ -50,7 +52,7 @@ public class MainActivity extends Activity {
         rightButton.setVisibility(View.GONE);
     }
 
-    public void loadImage(){
+    public void loadLayoutImage(){
         //dPad = new DPad();
 
         backgroundMap = (ImageView) findViewById(R.id.world_view);
@@ -79,6 +81,11 @@ public class MainActivity extends Activity {
         dialoguetext = (TextView) findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public void loadConverstationCharacterImage(){
+        ImageView imageView = findViewById(R.id.npc_dialogue_view);
+        imageView.setImageResource(R.drawable.big_baker);
     }
 
     public void move_characterUp (View v){
