@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,8 +30,24 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button exitButton = findViewById(R.id.exit_menu_button);
+        exitButton.setVisibility(View.INVISIBLE);
+
+        makeMoveButtonGone();
+
         loadImage();
         loadExchange();
+    }
+
+    public void makeMoveButtonGone(){
+        Button upButton = findViewById(R.id.up_button);
+        Button downButton = findViewById(R.id.down_button);
+        Button leftButton = findViewById(R.id.left_button);
+        Button rightButton = findViewById(R.id.right_button);
+        upButton.setVisibility(View.GONE);
+        downButton.setVisibility(View.GONE);
+        leftButton.setVisibility(View.GONE);
+        rightButton.setVisibility(View.GONE);
     }
 
     public void loadImage(){

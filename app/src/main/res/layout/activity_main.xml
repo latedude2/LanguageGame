@@ -118,8 +118,10 @@
         android:layout_width="1000dp"
         android:layout_height="1000dp"
         android:contentDescription="@string/content_description_world_image"
+        android:scaleType="fitXY"
         android:src="@drawable/map"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -127,13 +129,15 @@
         android:id="@+id/char_world_view"
         android:layout_width="89dp"
         android:layout_height="78dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginBottom="500dp"
         android:contentDescription="@string/content_description_char_world_image"
-        app:layout_constraintEnd_toEndOf="@+id/world_view"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintStart_toStartOf="@+id/world_view"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/main_character" />
+        android:src="@drawable/main_character"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/world_view"
+        app:layout_constraintVertical_bias="0.959" />
 
     <ImageView
         android:id="@+id/conversation_view"
@@ -278,8 +282,8 @@
         android:id="@+id/dialogue_text"
         android:layout_width="267dp"
         android:layout_height="53dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="348dp"
         android:text="@string/dialogue_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
