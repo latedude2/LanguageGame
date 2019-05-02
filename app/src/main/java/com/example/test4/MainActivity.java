@@ -70,14 +70,12 @@ public class MainActivity extends Activity {
         idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
         dPad.showImage(conversationBack, idOfImage);
 
-<<<<<<< HEAD
+
         ImageView submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.submit_button);
 
         ImageView speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);
-=======
->>>>>>> parent of 821ee83... layout made constrained properly and images for voice and submit button added
     }
     public void loadExchange(){
         //TO BE PUT INTO OnClickListener()
