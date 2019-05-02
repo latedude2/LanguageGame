@@ -289,10 +289,10 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_answer_text_view" />
 
     <ImageView
-        android:id="@+id/voice_button"
+        android:id="@+id/speaker_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/voice_button"
+        android:contentDescription="@string/speaker_button"
         android:src="@drawable/speaker"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toEndOf="@+id/dialogue_text"

@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         ImageView submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.submit_button);
 
-        ImageView speaker_button = findViewById(R.id.voice_button);
+        ImageView speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);
     }
     public void loadExchange(){
