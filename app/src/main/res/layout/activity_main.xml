@@ -130,15 +130,15 @@
 
     <ImageView
         android:id="@+id/npc_dialogue_view"
-        android:layout_width="wrap_content"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="108dp"
         android:contentDescription="@string/content_description_npc"
         android:src="@drawable/big_baker"
         app:layout_constraintBottom_toTopOf="@+id/dialogue_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.73" />
 
     <ImageView
         android:id="@+id/conversation_view"
@@ -150,7 +150,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="-39dp" />
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/answer_button_4"
@@ -291,13 +291,12 @@
 
     <ImageView
         android:id="@+id/hint_img"
-        android:layout_width="77dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="241dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="80dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/content_description_hint"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toEndOf="@+id/npc_dialogue_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
