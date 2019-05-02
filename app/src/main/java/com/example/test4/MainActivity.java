@@ -70,7 +70,11 @@ public class MainActivity extends Activity {
         idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
         dPad.showImage(conversationBack, idOfImage);
 
-        Button submit_button = findViewById(R.id.submit_button);
+        ImageView submit_button = findViewById(R.id.submit_button);
+        submit_button.setImageResource(R.drawable.submit_button);
+
+        ImageView speaker_button = findViewById(R.id.voice_button);
+        speaker_button.setImageResource(R.drawable.speaker);
     }
     public void loadExchange(){
         //TO BE PUT INTO OnClickListener()

@@ -299,7 +299,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_dialogue_text_view" />
 
     <ImageView
-        android:id="@+id/submit_area"
+        android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
