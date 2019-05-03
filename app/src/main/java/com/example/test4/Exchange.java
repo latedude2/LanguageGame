@@ -69,21 +69,8 @@ class Exchange extends Instance {
         }
         //removing hashtags(button markers)
         for (int i = 0; i < wordIndexList.size(); i++){
-            //StringBuilder stringBuilder = new StringBuilder(stringBuffer);
             stringBuffer.deleteCharAt(wordIndexList.get(i) - i);
-
-            //String resultString = stringBuilder.toString();
-            //questionText = resultString;
         }
-        /*
-        for (int i = 0; i < wordIndexList.size(); i++)
-        {
-            for (int j = i; j < wordIndexList.size(); j++)
-            {
-                wordIndexList.set(j, wordIndexList.get(j) - 1);
-            }
-        }
-        */
         SpannableString spannableString = new SpannableString(stringBuffer);
         for (int i = 0; i < wordIndexList.size(); i++){
             wordCount = i;
@@ -114,7 +101,6 @@ class Exchange extends Instance {
 
                     int resId = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "drawable", mainActivity.getPackageName());
                     mainActivity.getHintImage().setImageResource(resId);        //Setting the image
-                    //  mainActivity.getHintImage();
                     /* Commented out since it removes image after 10 secs regardless if any  new hints were shown since then
                     new CountDownTimer(10000, 1000){
                         public void onTick(long milliUntilFinished){
@@ -157,9 +143,4 @@ class Exchange extends Instance {
         return word;
     }
     //-----------------
-
-
-    /*void showHint(int x) {
-
-    }*/
 }
