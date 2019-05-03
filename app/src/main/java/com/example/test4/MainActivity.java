@@ -31,8 +31,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button exitButton = findViewById(R.id.exit_menu_button);
-        exitButton.setVisibility(View.INVISIBLE);
+        //ImageView exitButton = findViewById(R.id.exit_menu_button);
+
 
         ImageView shit = findViewById(R.id.hint_img);
         shit.setImageResource(R.drawable.maelk);
