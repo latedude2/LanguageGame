@@ -88,14 +88,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.10218978" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_middle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="206dp" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_end"
@@ -213,6 +213,7 @@
         android:id="@+id/world_view"
         android:layout_width="1500dp"
         android:layout_height="1500dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="fitXY"
         android:src="@drawable/map"
@@ -340,7 +341,6 @@
         android:contentDescription="@string/answer_button"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_0" />
 
@@ -352,7 +352,6 @@
         android:contentDescription="@string/answer_button"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_1" />
 
@@ -375,7 +374,6 @@
         android:contentDescription="@string/answer_button"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_3" />
 
@@ -387,7 +385,6 @@
         android:contentDescription="@string/answer_button"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_4" />
 
