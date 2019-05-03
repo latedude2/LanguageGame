@@ -1,5 +1,6 @@
 package com.example.test4;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -35,6 +36,11 @@ public class MainActivity extends Activity {
 
         ImageView shit = findViewById(R.id.hint_img);
         shit.setImageResource(R.drawable.maelk);
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
 
         makeMoveButtonGone();
 
