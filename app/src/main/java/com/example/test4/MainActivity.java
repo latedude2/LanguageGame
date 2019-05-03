@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
         FileRead file = new FileRead(i, inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers());
+        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers(), this);
         dialoguetext = (TextView) findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -117,4 +117,5 @@ public class MainActivity extends Activity {
         hintImage = (ImageView) findViewById(R.id.hint_img);
         return hintImage;
     }
+
 }
