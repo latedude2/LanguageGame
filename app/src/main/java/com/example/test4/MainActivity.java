@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
     private TextView dialoguetext;
     private ImageView hintImage;
 
+    private Button[] answerButtons;
+
     int i = 1; //index which counts which exchange it is currently
     int idOfImage;
 
@@ -86,7 +88,7 @@ public class MainActivity extends Activity {
         FileRead file = new FileRead(i, inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getHintText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers(), this);
+        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers(), this);
         dialoguetext = (TextView) findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -116,6 +118,17 @@ public class MainActivity extends Activity {
     public ImageView getHintImage(){
         hintImage = (ImageView) findViewById(R.id.hint_img);
         return hintImage;
+    }
+
+    public Button[] getButtons(){
+        answerButtons = new Button[6];
+        answerButtons[0].findViewById(R.id.answer_button_0);
+        answerButtons[1].findViewById(R.id.answer_button_1);
+        answerButtons[2].findViewById(R.id.answer_button_2);
+        answerButtons[3].findViewById(R.id.answer_button_3);
+        answerButtons[4].findViewById(R.id.answer_button_4);
+        answerButtons[5].findViewById(R.id.answer_button_5);
+        return answerButtons;
     }
 
 }

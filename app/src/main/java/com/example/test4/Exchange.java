@@ -38,10 +38,9 @@ class Exchange extends Instance {
 
     //private TextView[] questionTextView = new TextView[questionText.length];
 
-    public Exchange(String[] answerText, StringBuffer questionText, String[] hintText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
+    public Exchange(String[] answerText, StringBuffer questionText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
             this.questionText = questionText;
             this.answerText = answerText;
-            this.hintText = hintText;
             this.answers = answers;
             this.gapText = gapText;
             this.correctAnswers = correctAnswers;
@@ -120,7 +119,10 @@ class Exchange extends Instance {
 
     public void checkAnswer()
     {
-        fileRead.getAllAnswers();
+        this.answers = fileRead.getAllAnswers();
+        for (int i = 0; i < answers.length; i++) {
+            mainActivity.getButtons()[i].setText(answers[i]);
+        }
     }
     //-----------------
     //Simonas code
