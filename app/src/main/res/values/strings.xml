@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Dansk adventure</string>
     <string name="answer_button">Answer Button</string>
+    <string name="answer_button_text">Answer Button Text</string>
     <string name="hint_button">Hint Button</string>
     <string name="fill_answer_button">Fill Button</string>
     <string name="submit_button">Submit Button</string>

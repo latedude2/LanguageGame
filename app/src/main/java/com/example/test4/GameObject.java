@@ -1,7 +1,6 @@
 package com.example.test4;
 
 import android.media.Image;
-import android.widget.ImageView;
 
 class GameObject extends Instance {
     private int x;

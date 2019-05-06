@@ -1,5 +1,6 @@
 package com.example.test4;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -18,12 +19,18 @@ public class MainActivity extends Activity {
     private DPad dPad;
     private DPad conversationBackground;
 
+    private TextView answerText;
+
     private TextView dialoguetext;
     private ImageView hintImage;
+
 
     private Button[] answerButtons;
 
     int i = 1; //index which counts which exchange it is currently
+
+    int i = 6; //index which counts which exchange it is currently
+
     int idOfImage;
 
     @Override
@@ -32,11 +39,16 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button exitButton = findViewById(R.id.exit_menu_button);
-        exitButton.setVisibility(View.INVISIBLE);
+        //ImageView exitButton = findViewById(R.id.exit_menu_button);
+
 
         ImageView shit = findViewById(R.id.hint_img);
         shit.setImageResource(R.drawable.maelk);
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
 
         makeMoveButtonGone();
 
@@ -92,6 +104,9 @@ public class MainActivity extends Activity {
         dialoguetext = (TextView) findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
+
+        answerText = (TextView) findViewById(R.id.answer_text);
+        answerText.setText(exchange.checkGap());
     }
 
     public void loadConverstationCharacterImage(){

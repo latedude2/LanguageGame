@@ -19,8 +19,7 @@ class Exchange extends Instance {
 
 
     private StringBuffer questionText; //array for normal text of other character
-    private String[] hintText; //array for text with image hints
-    private String[] answerText; //array for already written text of answer
+    private StringBuffer answerText; //array for already written text of answer
     private String[] gapText; // array for gaps in the answer text
     private String[] answers; //array of all 6 possible answers
 
@@ -32,19 +31,53 @@ class Exchange extends Instance {
     private int wordCount = 0;
 
     private int[] selectAnswers = new int[6]; //all of the possible answers
-    private int[] correctAnswers = new int[6]; //answers that are possible to be correct
+    private int[] correctAnswers; //answers that are possible to be correct
+
+    private ArrayList<Integer> ansWordIndexList = new ArrayList<>();
+    private ArrayList<String> ansWordList = new ArrayList<>();
+    int index = 0;
 
     int n = 0;
 
     //private TextView[] questionTextView = new TextView[questionText.length];
 
+
     public Exchange(String[] answerText, StringBuffer questionText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
+
+        public Exchange(StringBuffer answerText, StringBuffer questionText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
+
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
             this.gapText = gapText;
             this.correctAnswers = correctAnswers;
             this.mainActivity = mainActivity;
+    }
+
+    public SpannableString checkGap(){
+        StringBuffer stringBuffer = answerText;
+        final Matcher matcher = Pattern.compile("&\\s*(\\w+)").matcher(stringBuffer);
+        while (matcher.find()){
+            final String word = matcher.group(1);
+            int wordIndex = stringBuffer.indexOf(word) - 1;
+            ansWordIndexList.add(wordIndex);
+            ansWordList.add(word);
+        }
+        correctAnswers = new int[ansWordIndexList.size()];
+        //removing hashtags(button markers)
+        for (int i = 0; i < ansWordIndexList.size(); i++){
+            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
+            char number = stringBuffer.charAt(ansWordIndexList.get(i) - i);
+            String numberAns = String.valueOf(number);
+            correctAnswers[index] = Integer.parseInt(numberAns);
+            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
+            stringBuffer.insert(ansWordIndexList.get(i) - i, "_");
+            index++;
+        }
+
+        SpannableString spannableString = new SpannableString(stringBuffer);
+        index = 0;
+        return spannableString;
     }
 
     //activated in the OnClickListener or so
@@ -96,22 +129,12 @@ class Exchange extends Instance {
                             break;
                         }
                     }
-                    //-------------------------------------
-
                     int resId = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "drawable", mainActivity.getPackageName());
-                    mainActivity.getHintImage().setImageResource(resId);        //Setting the image
-                    /* Commented out since it removes image after 10 secs regardless if any  new hints were shown since then
-                    new CountDownTimer(10000, 1000){
-                        public void onTick(long milliUntilFinished){
-                            //addfunction
-                        }
-                        public void onFinish(){
-                            mainActivity.getHintImage().setImageResource(0);
-                        }
-                    }.start();
-                    */
+                    mainActivity.getHintImage().setImageResource(resId);
                 }
             };
+
+
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannableString;
@@ -134,6 +157,7 @@ class Exchange extends Instance {
     {
         return wordCount;
     }
+
     public String englishifize(String word)
     {
         word = word.replaceAll("æ", "ae");
