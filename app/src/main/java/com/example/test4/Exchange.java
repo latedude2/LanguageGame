@@ -63,15 +63,16 @@ class Exchange extends Instance {
         //removing hashtags(button markers)
         for (int i = 0; i < ansWordIndexList.size(); i++){
             stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
-            char shitty = stringBuffer.charAt(ansWordIndexList.get(i) - i);
-            String shit = String.valueOf(shitty);
-            correctAnswers[index] = Integer.parseInt(shit);
+            char number = stringBuffer.charAt(ansWordIndexList.get(i) - i);
+            String numberAns = String.valueOf(number);
+            correctAnswers[index] = Integer.parseInt(numberAns);
             stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
-            stringBuffer.insert(ansWordIndexList.get(i) - i,"_____ ");
+            stringBuffer.insert(ansWordIndexList.get(i) - i, "_");
             index++;
         }
 
         SpannableString spannableString = new SpannableString(stringBuffer);
+        index = 0;
         return spannableString;
     }
 

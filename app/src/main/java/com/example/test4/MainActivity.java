@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
     private TextView dialoguetext;
     private ImageView hintImage;
 
-    int i = 1; //index which counts which exchange it is currently
+    int i = 6; //index which counts which exchange it is currently
     int idOfImage;
 
     @Override
