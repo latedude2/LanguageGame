@@ -42,9 +42,8 @@ class Exchange extends Instance {
     //private TextView[] questionTextView = new TextView[questionText.length];
 
 
-    public Exchange(String[] answerText, StringBuffer questionText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
+    public Exchange(StringBuffer answerText, StringBuffer questionText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
 
-        public Exchange(StringBuffer answerText, StringBuffer questionText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
 
             this.questionText = questionText;
             this.answerText = answerText;
