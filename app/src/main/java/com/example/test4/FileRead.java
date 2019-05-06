@@ -23,7 +23,7 @@ public class FileRead {
     private StringBuffer[] allText; //all the text in the file
     private StringBuffer questionText; //array for normal text of other character
     private String[] hintText; //array for text with image hints
-    private String[] answerText; //array for already written text of answer
+    private StringBuffer answerText; //array for already written text of answer
     private String[] gapText; //array for gaps in the answer text
     private String[] allAnswers; //array of all 6 possible answers
     private int[] correctAnswers; //all of the possible answers
@@ -36,8 +36,8 @@ public class FileRead {
     private InputStream inputStream;
     private StringBuffer stringBuffer = new StringBuffer();
 
-    private TextUtils.SimpleStringSplitter hintSplitter = new TextUtils.SimpleStringSplitter('#');
-    private TextUtils.SimpleStringSplitter gapSplitter = new TextUtils.SimpleStringSplitter('&');
+    //private TextUtils.SimpleStringSplitter hintSplitter = new TextUtils.SimpleStringSplitter('#');
+    //private TextUtils.SimpleStringSplitter gapSplitter = new TextUtils.SimpleStringSplitter('&');
 
     public FileRead (int index, InputStream inputStream){
         this.index = index;
@@ -49,7 +49,7 @@ public class FileRead {
     public void read() {
         allText = readAll();
         questionText = readQuest(this.allText);
-
+        answerText = readAnswer(this.allText);
     }
 
     //reads all of the file and puts every line in the array of Strings to be put in specific arrays of Strings in other methods
@@ -73,6 +73,12 @@ public class FileRead {
         return lines;
     }
 
+    public StringBuffer readAnswer(StringBuffer[] text)
+    {
+        StringBuffer answer = text[1];
+        return answer;
+    }
+
 
     public StringBuffer readQuest(StringBuffer[] text)
     {
@@ -92,16 +98,12 @@ public class FileRead {
         return answers;
     }*/
 
-    public String[] getAnswerText() {
+    public StringBuffer getAnswerText() {
         return answerText;
     }
 
     public String[] getGapText() {
         return gapText;
-    }
-
-    public String[] getHintText() {
-        return hintText;
     }
 
     public String[] getAllAnswers() {
