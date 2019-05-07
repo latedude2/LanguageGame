@@ -20,11 +20,14 @@ public class MainActivity extends Activity {
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialogueText;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
+
     private ImageView exiteButton;
 
-    private TextView[] answerButtonsTextView;
 
-    Exchange exchange;
+    private Exchange exchange;
+    private TextView[] answerButtonsTextView = new TextView[6];
+
+
 
     int i = 3; //index which counts which exchange it is currently
 
