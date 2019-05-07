@@ -1,15 +1,12 @@
 package com.example.test4;
 
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 class DPad {
-
     private int moveDist = 100;
-
     private ImageView background;
     private float moveX;
     private float moveY;

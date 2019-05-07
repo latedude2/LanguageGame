@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
         String id = "exchange" + index; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(id,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
-        FileRead file = new FileRead(i, inputStream); //creates the file object for all the Strings to be created there
+        FileRead file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
         Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
