@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
+    private ImageView exiteButton;
 
     private TextView[] answerButtonsTextView = new TextView[6];
 
@@ -29,7 +30,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         setContentView(R.layout.activity_main);
 
         View decorView = getWindow().getDecorView();
@@ -79,7 +80,7 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-        exchange.takeAnswers(this.i);
+        //exchange.takeAnswers(this.i);
         for (i = 0; i < answerButtonsTextView.length; i++){
             String number = Integer.toString(i);
             String viewText = "answer_button_text_" + number;
@@ -119,16 +120,8 @@ public class MainActivity extends Activity {
         return hintImage;
     }
 
-    /*public TextView[] getAnswerButtonsText(){
-        answerButtonsTextView = new TextView[6];
-
-        for (i = 0; i < answerButtonsTextView.length; i++){
-            String number = Integer.toString(i);
-            String viewText = "answer_button_text_" + number;
-            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
-            answerButtonsTextView[i] = findViewById(textViewId);
-        }
-        return answerButtonsTextView;
-    }*/
-
+    public ImageView getExiteButton() {
+        exiteButton = findViewById(R.id.exit_menu_button);
+        return exiteButton;
+    }
 }
