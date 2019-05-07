@@ -1,6 +1,7 @@
 package com.example.test4;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -20,13 +21,17 @@ public class MainActivity extends Activity {
     private ImageView hintImage;            //Image view to show the hint of a word
     private Button[] answerButtons;         //Buttons to select answers to put in the answertext
 
-    int i = 6;      //index which counts which exchange it is currently
-    int idOfImage;      //ID to use when setting image view images
+
+
+    private TextView[] answerButtonsTextView = new TextView[6];
+
+    int i = 2; //index which counts which exchange it is currently
+
+    int idOfImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         ImageView hintImage = findViewById(R.id.hint_img);
         hintImage.setImageResource(R.drawable.maelk);
@@ -77,11 +82,23 @@ public class MainActivity extends Activity {
 
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
+
+        for (i = 0; i < answerButtonsTextView.length; i++){
+            String number = Integer.toString(i);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
+            answerButtonsTextView[i] = findViewById(textViewId);
+            answerButtonsTextView[i].setText(exchange.takeAnswers(i));
+        }
     }
 
     public void loadConverstationCharacterImage(){
         ImageView imageView = findViewById(R.id.npc_dialogue_view);
         imageView.setImageResource(R.drawable.big_baker);
+    }
+
+    public void onSubmitClick(){
+
     }
 
     public void move_characterUp (View v){
@@ -105,17 +122,16 @@ public class MainActivity extends Activity {
         return hintImage;
     }
 
-    public Button[] getButtons()
-    //Returns an array of the answer buttons
-    {
-        answerButtons = new Button[6];
-        answerButtons[0].findViewById(R.id.answer_button_0);
-        answerButtons[1].findViewById(R.id.answer_button_1);
-        answerButtons[2].findViewById(R.id.answer_button_2);
-        answerButtons[3].findViewById(R.id.answer_button_3);
-        answerButtons[4].findViewById(R.id.answer_button_4);
-        answerButtons[5].findViewById(R.id.answer_button_5);
-        return answerButtons;
-    }
+    /*public TextView[] getAnswerButtonsText(){
+        answerButtonsTextView = new TextView[6];
+
+        for (i = 0; i < answerButtonsTextView.length; i++){
+            String number = Integer.toString(i);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
+            answerButtonsTextView[i] = findViewById(textViewId);
+        }
+        return answerButtonsTextView;
+    }*/
 
 }
