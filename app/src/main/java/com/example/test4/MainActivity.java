@@ -23,9 +23,14 @@ public class MainActivity extends Activity {
 
     private TextView[] answerButtonsTextView = new TextView[6];
 
+    Exchange exchange;
+
     int i = 3; //index which counts which exchange it is currently
 
     int idOfImage;
+
+    int[] answerNum;
+    int timesAnswerChosen = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +79,7 @@ public class MainActivity extends Activity {
         FileRead file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
+        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
         dialoguetext = findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -130,7 +135,19 @@ public class MainActivity extends Activity {
         String fullAnswer = answerField.getText().toString();
         answerField.setText(fullAnswer.replaceFirst("____", answerTextToPut));
 
-        int answerNum = java.lang.Character.getNumericValue(takeNum);
+        answerNum[timesAnswerChosen] = java.lang.Character.getNumericValue(takeNum);
+        timesAnswerChosen++;
+    }
+
+    public void onSubmitClick(View view){
+        int[] correctAnswers = exchange.getCorrectAnswers();
+        TextView answerField = findViewById(R.id.answer_text);
+        if (answerNum == correctAnswers){
+
+            answerField.setText("You're a good boy");
+        } else {
+            answerField.setText("You're a bad boy");
+        }
     }
 
     /*public TextView[] getAnswerButtonsText(){
