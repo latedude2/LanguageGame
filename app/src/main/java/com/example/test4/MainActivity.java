@@ -2,6 +2,7 @@ package com.example.test4;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -27,7 +28,7 @@ public class MainActivity extends Activity {
 
     private Button[] answerButtons;
 
-    int i = 6; //index which counts which exchange it is currently
+    int i = 2; //index which counts which exchange it is currently
 
     int idOfImage;
 
@@ -112,6 +113,10 @@ public class MainActivity extends Activity {
     public void loadConverstationCharacterImage(){
         ImageView imageView = findViewById(R.id.npc_dialogue_view);
         imageView.setImageResource(R.drawable.big_baker);
+    }
+
+    public void onSubmitClick(){
+
     }
 
     public void move_characterUp (View v){

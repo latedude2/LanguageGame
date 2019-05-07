@@ -86,11 +86,7 @@ public class FileRead {
         StringBuffer question = text[0];
         return question;
     }
-    /*public String[] readAnswer(String[] text)
-    {
-        //to be updated
-        return answer;
-    }*/
+
     public String[] readAllAnswers(StringBuffer[] text)
     {   String[] answers = new String[6];
         for (int i = 2; i < text.length; i++){

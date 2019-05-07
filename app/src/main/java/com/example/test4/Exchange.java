@@ -63,14 +63,16 @@ class Exchange extends Instance {
             ansWordList.add(word);
         }
         correctAnswers = new int[ansWordIndexList.size()];
-        //removing hashtags(button markers)
+
+        String gap = "____";
+        //removing & (button markers) and taking numbers of correct answers
         for (int i = 0; i < ansWordIndexList.size(); i++){
-            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
-            char number = stringBuffer.charAt(ansWordIndexList.get(i) - i);
+            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i + (gap.length() - 1) * i);
+            char number = stringBuffer.charAt(ansWordIndexList.get(i) - i + (gap.length() - 1) * i);
             String numberAns = String.valueOf(number);
             correctAnswers[index] = Integer.parseInt(numberAns);
-            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
-            stringBuffer.insert(ansWordIndexList.get(i) - i, "_");
+            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i + (gap.length() - 1) * i);
+            stringBuffer.insert(ansWordIndexList.get(i) - i + (gap.length() - 1) * i, gap);
             index++;
         }
 
@@ -139,7 +141,7 @@ class Exchange extends Instance {
         return spannableString;
     }
 
-    public void checkAnswer()
+   public void checkAnswer()
     {
         this.answers = fileRead.getAllAnswers();
         for (int i = 0; i < answers.length; i++) {
