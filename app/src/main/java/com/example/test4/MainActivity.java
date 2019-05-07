@@ -95,10 +95,6 @@ public class MainActivity extends Activity {
         imageView.setImageResource(R.drawable.big_baker);
     }
 
-    public void onSubmitClick(){
-
-    }
-
     public void move_characterUp (View v){
         dPad.moveUp();
     }
@@ -123,8 +119,15 @@ public class MainActivity extends Activity {
     public void answerClick(View view){
         ImageView answer = (ImageView) view;
         int id = answer.getId();
-        String answerText = answer.getResources().getResourceName(id);
-
+        String answerTextName = answer.getResources().getResourceName(id);
+        char takeNum = answerTextName.charAt(answerTextName.length()-1);
+        String textViewName = "answer_button_text_" + takeNum;
+        int idOfTextView = getResources().getIdentifier(textViewName, "id", getPackageName());
+        TextView answerTextView = findViewById(idOfTextView);
+        String answerTextToPut = answerTextView.getText().toString();
+        TextView answerField = findViewById(R.id.answer_text);
+        String fullAnswer = answerField.getText().toString();
+        answerField.setText(fullAnswer.replaceAll("____", answerTextToPut));
     }
 
     /*public TextView[] getAnswerButtonsText(){
