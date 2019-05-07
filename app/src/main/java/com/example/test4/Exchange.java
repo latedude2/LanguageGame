@@ -12,11 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Exchange extends Instance {
-
-
-
     private GameObject[] UIObjects; //images shown after pressing the hintButton
-
 
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
@@ -33,11 +29,6 @@ class Exchange extends Instance {
     private ArrayList<Integer> ansWordIndexList = new ArrayList<>();
     private ArrayList<String> ansWordList = new ArrayList<>();
     int index = 0;
-
-    int n = 0;
-
-    //private TextView[] questionTextView = new TextView[questionText.length];
-
 
     public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int[] correctAnswers, MainActivity mainActivity) {
 

@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ImageView hintImage = findViewById(R.id.hint_img);
+        hintImage = findViewById(R.id.hint_img);
         hintImage.setImageResource(R.drawable.maelk);
 
         View decorView = getWindow().getDecorView();
@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
 
 
     public void loadLayoutImage(){
+
         backgroundMap = findViewById(R.id.world_view);
         dPad = new DPad(backgroundMap, this);
 
@@ -65,6 +66,7 @@ public class MainActivity extends Activity {
 
         ImageView speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);
+
     }
     public void loadExchange(){
         //TO BE PUT INTO OnClickListener()
