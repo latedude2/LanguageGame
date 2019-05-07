@@ -105,6 +105,8 @@ public class MainActivity extends Activity {
 
         answerText = (TextView) findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
+
+        exchange.checkAnswer();
     }
 
     public void loadConverstationCharacterImage(){
