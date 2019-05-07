@@ -15,7 +15,6 @@ class Exchange extends Instance {
 
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
-    private String[] gapText; // array for gaps in the answer text
     private StringBuffer[] answers; //array of all 6 possible answers
 
     MainActivity mainActivity = new MainActivity();
@@ -37,8 +36,6 @@ class Exchange extends Instance {
 
 
     public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int[] correctAnswers, MainActivity mainActivity) {
-
-
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
@@ -72,7 +69,7 @@ class Exchange extends Instance {
         index = 0;
         return spannableString;
     }
-
+    /*
     //activated in the OnClickListener or so
     public void clickAnswer(TextView answer) //  the method requires the textView which was clicked
     {
@@ -82,7 +79,7 @@ class Exchange extends Instance {
             }
         }
     }
-
+    */
     public SpannableString checkHint(){
         StringBuffer stringBuffer = questionText;
         final Matcher matcher = Pattern.compile("#\\s*(\\w+)").matcher(stringBuffer);
@@ -126,8 +123,6 @@ class Exchange extends Instance {
                     mainActivity.getHintImage().setImageResource(resId);
                 }
             };
-
-
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannableString;
