@@ -1,6 +1,5 @@
 package com.example.test4;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -13,75 +12,48 @@ import java.io.InputStream;
 
 public class MainActivity extends Activity {
 
-    //public ImageView img;
-    private ImageView backgroundMap;
-    private ImageView conversationBack;
-    private DPad dPad;
-    private DPad conversationBackground;
+    private ImageView backgroundMap;        //Image view to show the map
+    private ImageView conversationBack;     //Image view to show the background of a conversation
+    private DPad dPad;                      //Controls for walking
+    private TextView answerText;            //Text view to hold the text of the user
+    private TextView dialoguetext;          //Text view to hold the text of the NPC
+    private ImageView hintImage;            //Image view to show the hint of a word
+    private Button[] answerButtons;         //Buttons to select answers to put in the answertext
 
-    private TextView answerText;
-
-    private TextView dialoguetext;
-    private ImageView hintImage;
-
-
-    private Button[] answerButtons;
-
-    int i = 6; //index which counts which exchange it is currently
-
-    int idOfImage;
+    int i = 6;      //index which counts which exchange it is currently
+    int idOfImage;      //ID to use when setting image view images
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ImageView exitButton = findViewById(R.id.exit_menu_button);
-
-
-        ImageView shit = findViewById(R.id.hint_img);
-        shit.setImageResource(R.drawable.maelk);
+        ImageView hintImage = findViewById(R.id.hint_img);
+        hintImage.setImageResource(R.drawable.maelk);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-
-        makeMoveButtonGone();
-
         loadLayoutImage();
+        dPad.hideButtons();
         loadExchange();
-
         loadConverstationCharacterImage();
     }
 
-    public void makeMoveButtonGone(){
-        Button upButton = findViewById(R.id.up_button);
-        Button downButton = findViewById(R.id.down_button);
-        Button leftButton = findViewById(R.id.left_button);
-        Button rightButton = findViewById(R.id.right_button);
-        upButton.setVisibility(View.GONE);
-        downButton.setVisibility(View.GONE);
-        leftButton.setVisibility(View.GONE);
-        rightButton.setVisibility(View.GONE);
-    }
+
 
     public void loadLayoutImage(){
-        //dPad = new DPad();
+        backgroundMap = findViewById(R.id.world_view);
+        dPad = new DPad(backgroundMap, this);
 
-        backgroundMap = (ImageView) findViewById(R.id.world_view);
-
-        dPad = new DPad(backgroundMap);
-
-        conversationBack = (ImageView) findViewById(R.id.conversation_view);
+        conversationBack = findViewById(R.id.conversation_view);
 
         idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
-        dPad.showImage(backgroundMap, idOfImage);
+        backgroundMap.setImageResource(idOfImage);
 
         idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
-        dPad.showImage(conversationBack, idOfImage);
-
+        conversationBack.setImageResource(idOfImage);
 
         ImageView submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.proceed_button);
@@ -99,11 +71,11 @@ public class MainActivity extends Activity {
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
         Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers(), this);
-        dialoguetext = (TextView) findViewById(R.id.dialogue_text);
+        dialoguetext = findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
 
-        answerText = (TextView) findViewById(R.id.answer_text);
+        answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
     }
 
@@ -129,11 +101,13 @@ public class MainActivity extends Activity {
     }
 
     public ImageView getHintImage(){
-        hintImage = (ImageView) findViewById(R.id.hint_img);
+        hintImage = findViewById(R.id.hint_img);
         return hintImage;
     }
 
-    public Button[] getButtons(){
+    public Button[] getButtons()
+    //Returns an array of the answer buttons
+    {
         answerButtons = new Button[6];
         answerButtons[0].findViewById(R.id.answer_button_0);
         answerButtons[1].findViewById(R.id.answer_button_1);
