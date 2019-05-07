@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
         speaker_button.setImageResource(R.drawable.speaker);
     }
     public void loadExchange(){
-        //TO BE PUT INTO OnClickListener()
+
         String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
         String id = "exchange" + index; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(id,"raw", getPackageName());
@@ -116,6 +116,13 @@ public class MainActivity extends Activity {
     public ImageView getHintImage(){
         hintImage = findViewById(R.id.hint_img);
         return hintImage;
+    }
+
+    public void answerClick(View view){
+        ImageView answer = (ImageView) view;
+        int id = answer.getId();
+        String answerText = answer.getResources().getResourceName(id);
+
     }
 
     /*public TextView[] getAnswerButtonsText(){
