@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
     private ImageView hintImage;
 
 
-    private Button[] answerButtons;
+    private TextView[] answerButtonsTextView = new TextView[6];
 
     int i = 2; //index which counts which exchange it is currently
 
@@ -99,13 +99,21 @@ public class MainActivity extends Activity {
         FileRead file = new FileRead(i, inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getGapText(), file.getCorrectAnswers(), this);
+        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
         dialoguetext = (TextView) findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
 
         answerText = (TextView) findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
+
+        for (i = 0; i < answerButtonsTextView.length; i++){
+            String number = Integer.toString(i);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
+            answerButtonsTextView[i] = findViewById(textViewId);
+            answerButtonsTextView[i].setText(exchange.takeAnswers(i));
+        }
     }
 
     public void loadConverstationCharacterImage(){
@@ -138,15 +146,16 @@ public class MainActivity extends Activity {
         return hintImage;
     }
 
-    public Button[] getButtons(){
-        answerButtons = new Button[6];
-        answerButtons[0].findViewById(R.id.answer_button_0);
-        answerButtons[1].findViewById(R.id.answer_button_1);
-        answerButtons[2].findViewById(R.id.answer_button_2);
-        answerButtons[3].findViewById(R.id.answer_button_3);
-        answerButtons[4].findViewById(R.id.answer_button_4);
-        answerButtons[5].findViewById(R.id.answer_button_5);
-        return answerButtons;
-    }
+    /*public TextView[] getAnswerButtonsText(){
+        answerButtonsTextView = new TextView[6];
+
+        for (i = 0; i < answerButtonsTextView.length; i++){
+            String number = Integer.toString(i);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
+            answerButtonsTextView[i] = findViewById(textViewId);
+        }
+        return answerButtonsTextView;
+    }*/
 
 }
