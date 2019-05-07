@@ -18,7 +18,8 @@ class Exchange extends Instance {
     private StringBuffer answerText; //array for already written text of answer
     private StringBuffer[] answers; //array of all 6 possible answers
 
-    MainActivity mainActivity;
+    MainActivity mainActivity = new MainActivity();
+
     private ArrayList<Integer> wordIndexList = new ArrayList<>();
     private ArrayList<String> wordList = new ArrayList<>();
     private int wordCount = 0;
@@ -31,8 +32,6 @@ class Exchange extends Instance {
     int index = 0;
 
     public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int[] correctAnswers, MainActivity mainActivity) {
-
-
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
@@ -120,8 +119,6 @@ class Exchange extends Instance {
                     mainActivity.getHintImage().setImageResource(resId);
                 }
             };
-
-
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannableString;

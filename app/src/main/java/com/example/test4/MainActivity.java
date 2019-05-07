@@ -19,9 +19,6 @@ public class MainActivity extends Activity {
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
-    private Button[] answerButtons;         //Buttons to select answers to put in the answertext
-
-
 
     private TextView[] answerButtonsTextView = new TextView[6];
 
@@ -33,8 +30,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        hintImage = findViewById(R.id.hint_img);
-        hintImage.setImageResource(R.drawable.maelk);
+        setContentView(R.layout.activity_main);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
