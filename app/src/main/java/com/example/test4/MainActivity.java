@@ -3,6 +3,7 @@ package com.example.test4;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class MainActivity extends Activity {
 
     private TextView[] answerButtonsTextView = new TextView[6];
 
-    int i = 1; //index which counts which exchange it is currently
+    int i = 3; //index which counts which exchange it is currently
 
     int idOfImage;
 
@@ -127,7 +128,9 @@ public class MainActivity extends Activity {
         String answerTextToPut = answerTextView.getText().toString();
         TextView answerField = findViewById(R.id.answer_text);
         String fullAnswer = answerField.getText().toString();
-        answerField.setText(fullAnswer.replaceAll("____", answerTextToPut));
+        answerField.setText(fullAnswer.replaceFirst("____", answerTextToPut));
+
+        int answerNum = java.lang.Character.getNumericValue(takeNum);
     }
 
     /*public TextView[] getAnswerButtonsText(){
