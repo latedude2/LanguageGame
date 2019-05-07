@@ -23,10 +23,8 @@ public class FileRead {
     private StringBuffer[] allText; //all the text in the file
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
-    private String[] hintText; //array for text with image hints
-    private String[] gapText; //array for gaps in the answer text
-    private String[] allAnswers; //array of all 6 possible answers
-    private int[] correctAnswers; //all of the possible answers
+    private StringBuffer[] allAnswers; //array of all 6 possible answers
+    private int[] correctAnswers = new int[6];
     private ArrayList<Integer> wordIndexList = new ArrayList<>();
     private ArrayList<String> wordList = new ArrayList<>();
 
@@ -49,8 +47,8 @@ public class FileRead {
     public void read() {
         allText = readAll();
         questionText = readQuest(this.allText);
-        allAnswers = readAllAnswers(this.allText);
         answerText = readAnswer(this.allText);
+        allAnswers = readAllAnswers(this.allText);
     }
 
     //reads all of the file and puts every line in the array of Strings to be put in specific arrays of Strings in other methods
@@ -86,15 +84,12 @@ public class FileRead {
         StringBuffer question = text[0];
         return question;
     }
-    /*public String[] readAnswer(String[] text)
+
+    public StringBuffer[] readAllAnswers(StringBuffer[] text)
     {
-        //to be updated
-        return answer;
-    }*/
-    public String[] readAllAnswers(StringBuffer[] text)
-    {   String[] answers = new String[6];
+        StringBuffer[] answers = new StringBuffer[6];
         for (int i = 2; i < text.length; i++){
-            answers[i-2] = text [i + 2].toString();
+            answers[i-2] = text[i];
         }
         return answers;
     }
@@ -103,11 +98,8 @@ public class FileRead {
         return answerText;
     }
 
-    public String[] getGapText() {
-        return gapText;
-    }
 
-    public String[] getAllAnswers() {
+    public StringBuffer[] getAllAnswers() {
         return allAnswers;
     }
 

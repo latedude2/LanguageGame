@@ -20,12 +20,9 @@ class Exchange extends Instance {
 
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
-    private String[] gapText; // array for gaps in the answer text
-    private String[] answers; //array of all 6 possible answers
+    private StringBuffer[] answers; //array of all 6 possible answers
 
-    MainActivity mainActivity = new MainActivity();
-    FileRead fileRead = new FileRead();
-
+    MainActivity mainActivity;
     private ArrayList<Integer> wordIndexList = new ArrayList<>();
     private ArrayList<String> wordList = new ArrayList<>();
     private int wordCount = 0;
@@ -42,13 +39,12 @@ class Exchange extends Instance {
     //private TextView[] questionTextView = new TextView[questionText.length];
 
 
-    public Exchange(StringBuffer answerText, StringBuffer questionText, String[] answers, String[] gapText, int[] correctAnswers, MainActivity mainActivity) {
+    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int[] correctAnswers, MainActivity mainActivity) {
 
 
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
-            this.gapText = gapText;
             this.correctAnswers = correctAnswers;
             this.mainActivity = mainActivity;
     }
@@ -63,14 +59,15 @@ class Exchange extends Instance {
             ansWordList.add(word);
         }
         correctAnswers = new int[ansWordIndexList.size()];
-        //removing hashtags(button markers)
+
+        String gap = "____";
+        //removing & (button markers) and taking numbers of correct answers
         for (int i = 0; i < ansWordIndexList.size(); i++){
-            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
-            char number = stringBuffer.charAt(ansWordIndexList.get(i) - i);
-            String numberAns = String.valueOf(number);
-            correctAnswers[index] = Integer.parseInt(numberAns);
-            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i);
-            stringBuffer.insert(ansWordIndexList.get(i) - i, "_");
+            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i + (gap.length() - 1) * i);
+            char number = stringBuffer.charAt(ansWordIndexList.get(i) - i + (gap.length() - 1) * i);
+            correctAnswers[index] = java.lang.Character.getNumericValue(number);
+            stringBuffer.deleteCharAt(ansWordIndexList.get(i) - i + (gap.length() - 1) * i);
+            stringBuffer.insert(ansWordIndexList.get(i) - i + (gap.length() - 1) * i, gap);
             index++;
         }
 
@@ -78,7 +75,7 @@ class Exchange extends Instance {
         index = 0;
         return spannableString;
     }
-
+    /*
     //activated in the OnClickListener or so
     public void clickAnswer(TextView answer) //  the method requires the textView which was clicked
     {
@@ -88,7 +85,7 @@ class Exchange extends Instance {
             }
         }
     }
-
+    */
     public SpannableString checkHint(){
         StringBuffer stringBuffer = questionText;
         final Matcher matcher = Pattern.compile("#\\s*(\\w+)").matcher(stringBuffer);
@@ -139,12 +136,11 @@ class Exchange extends Instance {
         return spannableString;
     }
 
-    public void checkAnswer()
+   public SpannableString takeAnswers(int answerIndex)
     {
-        this.answers = fileRead.getAllAnswers();
-        for (int i = 0; i < answers.length; i++) {
-            mainActivity.getButtons()[i].setText(answers[i]);
-        }
+        StringBuffer stringBuffer = answers[answerIndex];
+        SpannableString spannableString = new SpannableString(stringBuffer);
+        return spannableString;
     }
     //-----------------
     //Simonas code
