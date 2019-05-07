@@ -83,9 +83,7 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-<<<<<<< HEAD
-        exchange.checkAnswer();
-=======
+        exchange.takeAnswers(this.i);
         for (i = 0; i < answerButtonsTextView.length; i++){
             String number = Integer.toString(i);
             String viewText = "answer_button_text_" + number;
@@ -93,7 +91,6 @@ public class MainActivity extends Activity {
             answerButtonsTextView[i] = findViewById(textViewId);
             answerButtonsTextView[i].setText(exchange.takeAnswers(i));
         }
->>>>>>> c7f30011fd9fc166319be3bf1f6f6d3fdceba627
     }
 
     public void loadConverstationCharacterImage(){
