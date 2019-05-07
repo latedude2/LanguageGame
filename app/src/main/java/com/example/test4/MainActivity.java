@@ -30,8 +30,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ImageView hintImage = findViewById(R.id.hint_img);
-        hintImage.setImageResource(R.drawable.maelk);
+        setContentView(R.layout.activity_main);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;

@@ -13,18 +13,12 @@ import java.util.regex.Pattern;
 
 class Exchange extends Instance {
 
-
-
-    private GameObject[] UIObjects; //images shown after pressing the hintButton
-
-
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
     private String[] gapText; // array for gaps in the answer text
     private StringBuffer[] answers; //array of all 6 possible answers
 
     MainActivity mainActivity = new MainActivity();
-    FileRead fileRead = new FileRead();
 
     private ArrayList<Integer> wordIndexList = new ArrayList<>();
     private ArrayList<String> wordList = new ArrayList<>();
