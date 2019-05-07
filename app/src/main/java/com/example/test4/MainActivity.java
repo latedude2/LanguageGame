@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 
     private Button[] answerButtons;
 
-    int i = 6; //index which counts which exchange it is currently
+    int i = 2; //index which counts which exchange it is currently
 
     int idOfImage;
 
