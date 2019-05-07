@@ -331,6 +331,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/submit_button"
+        android:onClick="onSubmitClick"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/proceed_button"

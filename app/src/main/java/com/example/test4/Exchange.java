@@ -140,6 +140,10 @@ class Exchange extends Instance {
         return wordCount;
     }
 
+    public int[] getCorrectAnswers() {
+        return correctAnswers;
+    }
+
     public String englishifize(String word)
     {
         word = word.replaceAll("æ", "ae");
