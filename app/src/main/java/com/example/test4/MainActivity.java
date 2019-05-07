@@ -18,11 +18,11 @@ public class MainActivity extends Activity {
     private ImageView conversationBack;     //Image view to show the background of a conversation
     private DPad dPad;                      //Controls for walking
     private TextView answerText;            //Text view to hold the text of the user
-    private TextView dialoguetext;          //Text view to hold the text of the NPC
+    private TextView dialogueText;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
     private ImageView exiteButton;
 
-    private TextView[] answerButtonsTextView = new TextView[6];
+    private TextView[] answerButtonsTextView;
 
     Exchange exchange;
 
@@ -81,20 +81,22 @@ public class MainActivity extends Activity {
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
         exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
-        dialoguetext = findViewById(R.id.dialogue_text);
-        dialoguetext.setText(exchange.checkHint());
-        dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
+        dialogueText = findViewById(R.id.dialogue_text);
+        dialogueText.setText(exchange.checkHint());
+        dialogueText.setMovementMethod(LinkMovementMethod.getInstance());
 
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-        //exchange.takeAnswers(this.i);
-        for (i = 0; i < answerButtonsTextView.length; i++){
+        answerButtonsTextView = new TextView[6];
+
+        exchange.takeAnswers(this.i);
+        for (int j = 0; j < answerButtonsTextView.length; j++){
             String number = Integer.toString(i);
             String viewText = "answer_button_text_" + number;
             int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
-            answerButtonsTextView[i] = findViewById(textViewId);
-            answerButtonsTextView[i].setText(exchange.takeAnswers(i));
+            answerButtonsTextView[j] = findViewById(textViewId);
+            answerButtonsTextView[j].setText(exchange.takeAnswers(this.i));
         }
     }
 
@@ -119,11 +121,31 @@ public class MainActivity extends Activity {
         dPad.moveRight();
     }
 
+
     public ImageView getHintImage(){
         hintImage = findViewById(R.id.hint_img);
         return hintImage;
     }
 
+    /*public TextView[] getAnswerButtonsTextView() {
+        for (int j = 0; j < answerButtonsTextView.length; j++) {
+            String number = Integer.toString(j);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
+            answerButtonsTextView[j] = findViewById(textViewId);
+        }
+        return answerButtonsTextView;
+    }*/
+
+    public TextView getDialogueText() {
+        dialogueText = findViewById(R.id.dialogue_text);
+        return dialogueText;
+    }
+
+    public TextView getAnswerText() {
+        answerText = findViewById(R.id.answer_text);
+        return answerText;
+    }
 
     public ImageView getExiteButton() {
         exiteButton = findViewById(R.id.exit_menu_button);

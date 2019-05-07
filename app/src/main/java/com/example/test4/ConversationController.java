@@ -20,7 +20,13 @@ public class ConversationController extends Instance{
         mainActivity.getExiteButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mainActivity.
+                /*for (int i = 0; i < mainActivity.getAnswerButtonsTextView().length ; i++) {
+                    mainActivity.getAnswerButtonsTextView()[i].setVisibility(View.GONE);
+                }*/
+                mainActivity.getHintImage().setVisibility(View.GONE);
+                mainActivity.getAnswerText().setVisibility(View.GONE);
+                mainActivity.getDialogueText().setVisibility(View.GONE);
+
             }
         });
     }
