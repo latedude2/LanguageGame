@@ -22,8 +22,8 @@ public class FileRead {
 
     private StringBuffer[] allText; //all the text in the file
     private StringBuffer questionText; //array for normal text of other character
-    private String[] hintText; //array for text with image hints
     private StringBuffer answerText; //array for already written text of answer
+    private String[] hintText; //array for text with image hints
     private String[] gapText; //array for gaps in the answer text
     private String[] allAnswers; //array of all 6 possible answers
     private int[] correctAnswers; //all of the possible answers
@@ -49,6 +49,7 @@ public class FileRead {
     public void read() {
         allText = readAll();
         questionText = readQuest(this.allText);
+        allAnswers = readAllAnswers(this.allText);
         answerText = readAnswer(this.allText);
     }
 
@@ -90,13 +91,13 @@ public class FileRead {
         //to be updated
         return answer;
     }*/
-    /*public String[] readAllAnswers(String[] text)
-    {   this.answers = new String[6];
-        for (int i = 0; i < answers.length; i++){
-            answers[i] = text [i + 2];
+    public String[] readAllAnswers(StringBuffer[] text)
+    {   String[] answers = new String[6];
+        for (int i = 2; i < text.length; i++){
+            answers[i-2] = text [i + 2].toString();
         }
         return answers;
-    }*/
+    }
 
     public StringBuffer getAnswerText() {
         return answerText;

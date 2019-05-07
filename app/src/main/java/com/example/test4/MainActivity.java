@@ -25,7 +25,11 @@ public class MainActivity extends Activity {
     private TextView dialoguetext;
     private ImageView hintImage;
 
+
+    private Button[] answerButtons;
+
     int i = 6; //index which counts which exchange it is currently
+
     int idOfImage;
 
     @Override
@@ -132,6 +136,17 @@ public class MainActivity extends Activity {
     public ImageView getHintImage(){
         hintImage = (ImageView) findViewById(R.id.hint_img);
         return hintImage;
+    }
+
+    public Button[] getButtons(){
+        answerButtons = new Button[6];
+        answerButtons[0].findViewById(R.id.answer_button_0);
+        answerButtons[1].findViewById(R.id.answer_button_1);
+        answerButtons[2].findViewById(R.id.answer_button_2);
+        answerButtons[3].findViewById(R.id.answer_button_3);
+        answerButtons[4].findViewById(R.id.answer_button_4);
+        answerButtons[5].findViewById(R.id.answer_button_5);
+        return answerButtons;
     }
 
 }
