@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
-
+    private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
 
     int i = 3; //index which counts which exchange it is currently
@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
         FileRead file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
+        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
         dialoguetext = findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
