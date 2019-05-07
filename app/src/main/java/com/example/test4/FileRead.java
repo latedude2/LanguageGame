@@ -1,22 +1,10 @@
 package com.example.test4;
 
-import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextUtils;
-import android.text.style.ClickableSpan;
-import android.view.View;
-import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FileRead {
 
@@ -25,20 +13,12 @@ public class FileRead {
     private StringBuffer answerText; //array for already written text of answer
     private StringBuffer[] allAnswers; //array of all 6 possible answers
     private int[] correctAnswers = new int[6];
-    private ArrayList<Integer> wordIndexList = new ArrayList<>();
-    private ArrayList<String> wordList = new ArrayList<>();
 
-    private int index = 0;
     private String text;
 
     private InputStream inputStream;
-    private StringBuffer stringBuffer = new StringBuffer();
 
-    //private TextUtils.SimpleStringSplitter hintSplitter = new TextUtils.SimpleStringSplitter('#');
-    //private TextUtils.SimpleStringSplitter gapSplitter = new TextUtils.SimpleStringSplitter('&');
-
-    public FileRead (int index, InputStream inputStream){
-        this.index = index;
+    public FileRead (InputStream inputStream){
         this.inputStream = inputStream;
     }
 
