@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 
     private TextView[] answerButtonsTextView = new TextView[6];
 
-    int i = 2; //index which counts which exchange it is currently
+    int i = 1; //index which counts which exchange it is currently
 
     int idOfImage;
 
