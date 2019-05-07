@@ -331,6 +331,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/submit_button"
+        android:onClick="onSubmitClick"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/proceed_button"
@@ -343,6 +344,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/answer_button"
+        android:onClick="answerClick"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -354,11 +356,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_1"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_0"
         app:layout_constraintStart_toStartOf="@+id/answer_button_0"
-        app:layout_constraintTop_toTopOf="@+id/answer_button_0"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toTopOf="@+id/answer_button_0" />
 
     <ImageView
         android:id="@+id/answer_button_1"
@@ -366,6 +368,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/answer_button"
+        android:onClick="answerClick"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -377,11 +380,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_1"
         app:layout_constraintStart_toStartOf="@+id/answer_button_1"
-        app:layout_constraintTop_toTopOf="@+id/answer_button_1"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toTopOf="@+id/answer_button_1" />
 
     <ImageView
         android:id="@+id/answer_button_2"
@@ -389,6 +392,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/answer_button"
+        android:onClick="answerClick"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -400,11 +404,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_2"
         app:layout_constraintStart_toStartOf="@+id/answer_button_2"
-        app:layout_constraintTop_toTopOf="@+id/answer_button_2"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toTopOf="@+id/answer_button_2" />
 
     <ImageView
         android:id="@+id/answer_button_3"
@@ -412,6 +416,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/answer_button"
+        android:onClick="answerClick"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
@@ -423,11 +428,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_4"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_3"
         app:layout_constraintStart_toStartOf="@+id/answer_button_3"
-        app:layout_constraintTop_toTopOf="@+id/answer_button_3"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toTopOf="@+id/answer_button_3" />
 
     <ImageView
         android:id="@+id/answer_button_4"
@@ -438,7 +443,8 @@
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintTop_toBottomOf="@+id/answer_button_3" />
+        app:layout_constraintTop_toBottomOf="@+id/answer_button_3"
+        android:onClick="answerClick" />
 
     <TextView
         android:id="@+id/answer_button_text_4"
@@ -446,11 +452,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_4"
         app:layout_constraintStart_toStartOf="@+id/answer_button_4"
-        app:layout_constraintTop_toTopOf="@+id/answer_button_4"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toTopOf="@+id/answer_button_4" />
 
     <ImageView
         android:id="@+id/answer_button_5"
@@ -458,6 +464,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/answer_button"
+        android:onClick="answerClick"
         android:src="@drawable/answer_button"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
@@ -469,11 +476,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_5"
         app:layout_constraintStart_toStartOf="@+id/answer_button_5"
-        app:layout_constraintTop_toTopOf="@+id/answer_button_5"
-        android:textColor="#FFFFFF"/>
+        app:layout_constraintTop_toTopOf="@+id/answer_button_5" />
 
     <ImageView
         android:id="@+id/exit_menu_button"

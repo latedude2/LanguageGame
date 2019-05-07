@@ -124,8 +124,7 @@ class Exchange extends Instance {
         return spannableString;
     }
 
-   public SpannableString takeAnswers(int answerIndex)
-    {
+   public SpannableString takeAnswers(int answerIndex) {
         StringBuffer stringBuffer = answers[answerIndex];
         SpannableString spannableString = new SpannableString(stringBuffer);
         return spannableString;
@@ -139,6 +138,10 @@ class Exchange extends Instance {
     public int getWordCount()
     {
         return wordCount;
+    }
+
+    public int[] getCorrectAnswers() {
+        return correctAnswers;
     }
 
     public String englishifize(String word)

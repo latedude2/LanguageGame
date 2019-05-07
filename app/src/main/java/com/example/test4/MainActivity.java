@@ -3,6 +3,7 @@ package com.example.test4;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +20,17 @@ public class MainActivity extends Activity {
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
-
+    private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
 
-    int i = 1; //index which counts which exchange it is currently
+    Exchange exchange;
+
+    int i = 3; //index which counts which exchange it is currently
 
     int idOfImage;
+
+    int[] answerNum;
+    int timesAnswerChosen = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class MainActivity extends Activity {
 
     }
     public void loadExchange(){
-        //TO BE PUT INTO OnClickListener()
+
         String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
         String id = "exchange" + index; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(id,"raw", getPackageName());
@@ -73,7 +79,7 @@ public class MainActivity extends Activity {
         FileRead file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        Exchange exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
+        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
         dialoguetext = findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -95,10 +101,6 @@ public class MainActivity extends Activity {
         imageView.setImageResource(R.drawable.big_baker);
     }
 
-    public void onSubmitClick(){
-
-    }
-
     public void move_characterUp (View v){
         dPad.moveUp();
     }
@@ -118,6 +120,34 @@ public class MainActivity extends Activity {
     public ImageView getHintImage(){
         hintImage = findViewById(R.id.hint_img);
         return hintImage;
+    }
+
+    public void answerClick(View view){
+        ImageView answer = (ImageView) view;
+        int id = answer.getId();
+        String answerTextName = answer.getResources().getResourceName(id);
+        char takeNum = answerTextName.charAt(answerTextName.length()-1);
+        String textViewName = "answer_button_text_" + takeNum;
+        int idOfTextView = getResources().getIdentifier(textViewName, "id", getPackageName());
+        TextView answerTextView = findViewById(idOfTextView);
+        String answerTextToPut = answerTextView.getText().toString();
+        TextView answerField = findViewById(R.id.answer_text);
+        String fullAnswer = answerField.getText().toString();
+        answerField.setText(fullAnswer.replaceFirst("____", answerTextToPut));
+
+        answerNum[timesAnswerChosen] = java.lang.Character.getNumericValue(takeNum);
+        timesAnswerChosen++;
+    }
+
+    public void onSubmitClick(View view){
+        int[] correctAnswers = exchange.getCorrectAnswers();
+        TextView answerField = findViewById(R.id.answer_text);
+        if (answerNum == correctAnswers){
+
+            answerField.setText("You're a good boy");
+        } else {
+            answerField.setText("You're a bad boy");
+        }
     }
 
     /*public TextView[] getAnswerButtonsText(){
