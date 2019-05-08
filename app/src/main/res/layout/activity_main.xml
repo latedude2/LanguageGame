@@ -488,7 +488,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/exit_menu_button"
-        android:onClick="beGone"
+        android:onClick="exitConversation"
         android:src="@drawable/exit_button"
         app:layout_constraintBottom_toTopOf="@+id/guideline_exit_bottom"
         app:layout_constraintDimensionRatio="2:1"

@@ -43,10 +43,10 @@ class Exchange extends Instance {
 
 
     public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, MainActivity mainActivity) {
-            this.questionText = questionText;
-            this.answerText = answerText;
-            this.answers = answers;
-            this.mainActivity = mainActivity;
+        this.questionText = questionText;
+        this.answerText = answerText;
+        this.answers = answers;
+        this.mainActivity = mainActivity;
     }
 
     public SpannableString checkGap(){
@@ -139,9 +139,9 @@ class Exchange extends Instance {
                     //-------------------------------------
                     int idOfAudioFile = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "raw", mainActivity.getPackageName());
                     final MediaPlayer audio = MediaPlayer.create(mainActivity, idOfAudioFile);
-                            if (audio.isPlaying()) {
-                                audio.seekTo(0);
-                            } else audio.start();
+                    if (audio.isPlaying()) {
+                        audio.seekTo(0);
+                    } else audio.start();
                 }
             };
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -149,7 +149,7 @@ class Exchange extends Instance {
         return spannableString;
     }
 
-   public SpannableString takeAnswers(int answerIndex) {
+    public SpannableString takeAnswers(int answerIndex) {
         StringBuffer stringBuffer = answers[answerIndex];
         SpannableString spannableString = new SpannableString(stringBuffer);
         return spannableString;
@@ -183,13 +183,13 @@ class Exchange extends Instance {
         return word;
     }
     //-----------------
-   void resetSelectedAnswers()
-   {
-       for(int i = 0; i < 6; i++)
-       {
-           selectedAnswers[i] = new SelectedAnswer("____");
-       }
-   }
+    void resetSelectedAnswers()
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            selectedAnswers[i] = new SelectedAnswer("____");
+        }
+    }
     void submitAnswer(View view)
     {
         TextView answerField = mainActivity.findViewById(R.id.answer_text);
