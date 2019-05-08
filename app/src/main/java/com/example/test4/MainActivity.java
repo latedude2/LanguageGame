@@ -165,7 +165,6 @@ public class MainActivity extends Activity {
             fullAnswer = fullAnswer.replaceFirst("____", "#" + answerSlotCount);
             answerSlotCount++;
         }
-        //System.out.println(fullAnswer);
 
         if(answerField.getText().toString().contains("____"))   //If there is a slot to put the new word in
         {
@@ -281,7 +280,7 @@ public class MainActivity extends Activity {
         int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
         FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
-        char[][] structure = fileStructure.readStructureChars();
+        mapTiles = fileStructure.readStructureChars();
 
     }
 
