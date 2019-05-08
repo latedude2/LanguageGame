@@ -28,10 +28,12 @@ public class MainActivity extends Activity {
     private ImageView speaker_button;
     private ImageView submit_button;
 
+
+    private String fullAnswer;
+    private int answerSlotCount = 0;
     private SelectedAnswer[] selectedAnswers = new SelectedAnswer[6];
     //private String[] selectedAnswers = new String[6];
     //private int[] answerPositionIndexes = new int[6];
-    private int selectedAnswerCount = 0;
 
     int exchangeIndex = 6; //index which counts which exchange it is currently
 
@@ -106,8 +108,13 @@ public class MainActivity extends Activity {
             answerButtonsTextView[i] = findViewById(textViewId);
             answerButtonsTextView[i].setText(exchange.takeAnswers(i));
         }
-
         onSoundViewClick();
+
+        //Reseting selected answers
+        for(int i = 0; i < 6; i++)
+        {
+            selectedAnswers[i] = new SelectedAnswer("____");
+        }
     }
 
     public void loadConverstationCharacterImage(){
@@ -145,31 +152,38 @@ public class MainActivity extends Activity {
         TextView answerTextView = findViewById(idOfTextView);
         String answerTextToPut = answerTextView.getText().toString();
         TextView answerField = findViewById(R.id.answer_text);
-        answerField.setMovementMethod(LinkMovementMethod.getInstance());
-        String fullAnswer = exchange.getUsersAnswerUnchanged();
+        answerField.setMovementMethod(LinkMovementMethod.getInstance());        //Make the text view clickable. This enables us to add ClickableSpan to this Text View
 
-        /*
+
+
+        fullAnswer = exchange.getUsersAnswerUnchanged();
+        answerSlotCount = 0;
         String tempString = fullAnswer;
-        int answerPositionCount = 0;
         while((tempString).contains("____"))
         {
             tempString = tempString.substring(tempString.indexOf("____") + 4);
-            answerPositionCount++;
+            fullAnswer = fullAnswer.replaceFirst("____", "#" + answerSlotCount);
+            answerSlotCount++;
         }
-        */
-        selectedAnswers[selectedAnswerCount] = new SelectedAnswer();
+        //System.out.println(fullAnswer);
 
-        selectedAnswers[selectedAnswerCount].word = answerTextToPut;
-        if(answerField.getText().toString().contains("____")) {
-            selectedAnswers[selectedAnswerCount].answerPositionIndex = answerField.getText().toString().indexOf("____");
-            selectedAnswerCount++;
-
-            SpannableString spanString = addClickableWordsToString(selectedAnswers, fullAnswer, selectedAnswerCount);
-
+        if(answerField.getText().toString().contains("____"))   //If there is a slot to put the new word in
+        {
+            putWordInSlot(answerTextToPut);
+            SpannableString spanString = buildSpannableString(selectedAnswers, fullAnswer, answerSlotCount);
             answerField.setText(spanString);
         }
     }
-
+    void putWordInSlot(String ans)
+    {
+        for(int i = 0; i < answerSlotCount; i++)
+        {
+            if(selectedAnswers[i].word == "____") {
+                selectedAnswers[i].word = ans;
+                break;
+            }
+        }
+    }
     public void onSubmitClick(View view){
         int[] correctAnswers = exchange.getCorrectAnswers();
         TextView answerField = findViewById(R.id.answer_text);
@@ -239,60 +253,64 @@ public class MainActivity extends Activity {
         }
         return spannableString;
     }
-    private SelectedAnswer getAnswerWithSlotIndex(int index)
-    {
-        for(int i = 0; i < selectedAnswerCount; i++)
-        {
-            if(selectedAnswers[i].answerSlotIndex == index)
-            {
-                return selectedAnswers[i];
-            }
-        }
-        return null;
-    }
+
     private void resetWordInputField(String answerToReset)
     {
-        for(int i = 0; i < selectedAnswerCount; i++)
+        for(int i = 0; i < answerSlotCount; i++)
         {
             if(selectedAnswers[i].word.equals(answerToReset))
             {
-                selectedAnswers[i] = null;
-                for(int j = i; j < selectedAnswerCount - 1; j++)
-                {
-                    selectedAnswers[j] = selectedAnswers[j + 1];
-                }
-                selectedAnswerCount--;
+                selectedAnswers[i].word = "____";
             }
         }
     }
     private void showAnswerText()
     {
-        SpannableString spanString = buildSpannableString(selectedAnswers, exchange.getUsersAnswerUnchanged(), selectedAnswerCount);
+        fullAnswer = exchange.getUsersAnswerUnchanged();
+        answerSlotCount = 0;
+        String tempString = fullAnswer;
+        while((tempString).contains("____"))
+        {
+            tempString = tempString.substring(tempString.indexOf("____") + 4);
+            fullAnswer = fullAnswer.replaceFirst("____", "#" + answerSlotCount);
+            answerSlotCount++;
+        }
+        SpannableString spanString = buildSpannableString(selectedAnswers, fullAnswer, answerSlotCount);
         TextView answerField = findViewById(R.id.answer_text);
         answerField.setText(spanString);
     }
 
-    private SpannableString buildSpannableString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int selectedAnswerCount)
+    private SpannableString buildSpannableString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int answerCount)
     {
-        SpannableString spannableString = new SpannableString(stringToAddTo);
-        for(int i = 0; i < selectedAnswerCount; i++)
+        //Placing words in string
+        for(int i = 0; i < answerCount; i++)
         {
-            ClickableSpan clickableSpan = new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View widget) {
-                    //Getting text of clickable span
-                    //-------------------------------------
-                    TextView tv = (TextView) widget;
-                    Spanned s = (Spanned) tv.getText();
-                    int start = s.getSpanStart(this);
-                    int end = s.getSpanEnd(this);
-                    String clickableSpanString = s.subSequence(start, end).toString();
+            selectedAnswers[i].answerPositionIndex = stringToAddTo.indexOf("#" + i);        //We need to remember where the string is positioned to be able to set the clickable span
+            stringToAddTo = stringToAddTo.replace("#" + i, selectedAnswers[i].word);
+        }
+        SpannableString spannableString = new SpannableString(stringToAddTo);
+        for(int i = 0; i < answerCount; i++)
+        {
+            if(selectedAnswers[i].word != "____")
+            {
+                ClickableSpan clickableSpan = new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        //Getting text of clickable span
+                        //-------------------------------------
+                        TextView tv = (TextView) widget;
+                        Spanned s = (Spanned) tv.getText();
+                        int start = s.getSpanStart(this);
+                        int end = s.getSpanEnd(this);
+                        String clickableSpanString = s.subSequence(start, end).toString();
 
-                    resetWordInputField(clickableSpanString);
-                    makeButtonActiveAgain();
-                }
-            };
-            spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        resetWordInputField(clickableSpanString);
+                        showAnswerText();
+                        makeButtonActiveAgain();
+                    }
+                };
+                spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
         return spannableString;
     }
