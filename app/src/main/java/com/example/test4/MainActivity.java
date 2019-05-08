@@ -1,6 +1,7 @@
 package com.example.test4;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
@@ -173,6 +174,11 @@ public class MainActivity extends Activity {
         {
             answerField.setText("You're a bad boy");
         }
+    }
+
+    private void onSoundViewClick(View view){
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.test_sound_all_sentence);
+        mp.start();
     }
 
     private SpannableString addClickableWordsToString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int selectedAnswerCount)
