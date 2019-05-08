@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
 
 
     private Exchange exchange;
+    private  ConversationController conversationController;
     private TextView[] answerButtonsTextView = new TextView[6];
 
     private SelectedAnswer[] selectedAnswers = new SelectedAnswer[6];
@@ -54,6 +55,14 @@ public class MainActivity extends Activity {
         dPad.hideButtons();
         loadExchange();
         loadConverstationCharacterImage();
+    }
+
+    public void beGone(View view){
+        conversationController = new ConversationController();
+        conversationController.exitConversation();
+        //getHintImage().setVisibility(View.GONE);
+        //getAnswerText().setVisibility(View.GONE);
+        //getDialogueText().setVisibility(View.GONE);
     }
 
     public void loadLayoutImage(){
@@ -131,7 +140,7 @@ public class MainActivity extends Activity {
         hintImage = findViewById(R.id.hint_img);
         return hintImage;
     }
-    /*public TextView[] getAnswerButtonsTextView() {
+    public TextView[] getAnswerButtonsTextView() {
         for (int j = 0; j < answerButtonsTextView.length; j++) {
             String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
@@ -139,7 +148,7 @@ public class MainActivity extends Activity {
             answerButtonsTextView[j] = findViewById(textViewId);
         }
         return answerButtonsTextView;
-    }*/
+    }
 
     public TextView getDialogueText() {
         dialogueText = findViewById(R.id.dialogue_text);
