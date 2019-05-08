@@ -211,49 +211,6 @@ public class MainActivity extends Activity {
         });
     }
 
-    private SpannableString addClickableWordsToString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int selectedAnswerCount)
-    {
-        boolean newWordAdded = false;
-        for(int i = 0; i < selectedAnswerCount; i++)
-        {
-            if(getAnswerWithSlotIndex(i) != null) {
-                stringToAddTo = stringToAddTo.replaceFirst("____", getAnswerWithSlotIndex(i).word);
-            }
-            else if(!newWordAdded)
-            {
-                stringToAddTo = stringToAddTo.replaceFirst("____", selectedAnswers[selectedAnswerCount - 1].word);
-                newWordAdded = true;
-            }
-            else
-            {
-
-            }
-
-        }
-        SpannableString spannableString = new SpannableString(stringToAddTo);
-        for(int i = 0; i < selectedAnswerCount; i++)
-        {
-            ClickableSpan clickableSpan = new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View widget) {
-                    //Getting text of clickable span
-                    //-------------------------------------
-                    TextView tv = (TextView) widget;
-                    Spanned s = (Spanned) tv.getText();
-                    int start = s.getSpanStart(this);
-                    int end = s.getSpanEnd(this);
-                    String clickableSpanString = s.subSequence(start, end).toString();
-
-                    resetWordInputField(clickableSpanString);
-                    showAnswerText();
-                    makeButtonActiveAgain();
-                }
-            };
-            spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        return spannableString;
-    }
-
     private void resetWordInputField(String answerToReset)
     {
         for(int i = 0; i < answerSlotCount; i++)
