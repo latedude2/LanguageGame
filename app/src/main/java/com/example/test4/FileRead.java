@@ -12,11 +12,8 @@ public class FileRead {
     private StringBuffer questionText; //normal text of other character
     public StringBuffer answerText;
     private StringBuffer[] allAnswers; //array of all 6 possible answers
-    private int[] correctAnswers = new int[6];
 
-    private String text;
-
-    private InputStream inputStream;
+    private InputStream inputStream; //the text file which is taken
 
     public FileRead (InputStream inputStream){
         this.inputStream = inputStream;
@@ -29,16 +26,17 @@ public class FileRead {
         allAnswers = readAllAnswers(this.allText);
     }
 
-    //reads all of the file and puts every line in the array of Strings to be put in specific arrays of Strings in other methods
+    //reads all of the file and puts every line in the array of Strings
     public StringBuffer[] readAll()
     {
+        String newLine;
         StringBuffer[] lines = new StringBuffer[8];
         int lineIndex = 0;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         try {
-            while ((text = bufferedReader.readLine()) != null) {
+            while ((newLine = bufferedReader.readLine()) != null) {
                 lines[lineIndex] = new StringBuffer();
-                lines[lineIndex].append(text);
+                lines[lineIndex].append(newLine);
                 lineIndex++;
             }
             inputStream.close();
@@ -50,17 +48,16 @@ public class FileRead {
         return lines;
     }
 
-    public StringBuffer readAnswer(StringBuffer[] text)
-    {
-        StringBuffer answer = text[1];
-        return answer;
-    }
-
-
     public StringBuffer readQuest(StringBuffer[] text)
     {
         StringBuffer question = text[0];
         return question;
+    }
+
+    public StringBuffer readAnswer(StringBuffer[] text)
+    {
+        StringBuffer answer = text[1];
+        return answer;
     }
 
     public StringBuffer[] readAllAnswers(StringBuffer[] text)
@@ -85,36 +82,31 @@ public class FileRead {
         return questionText;
     }
 
-    public int[] getCorrectAnswers() {
-        return correctAnswers;
-    }
 
     public char[][] readStructureChars(){
-        String text;
-        StringBuffer line = new StringBuffer();
-        char[][] structure = new char[16][33];
-        int lineIndex = 0;
-
+        String newLine; //each new read line
+        StringBuffer oldLine = new StringBuffer(); //
+        char[][] mapTiles = new char[16][33]; //the 2 dimensional array to be returned to the activity
+        int lineIndex = 0; // lines starting from 0 to be read afterwards one by one
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            int xMap = bufferedReader.readLine().length();
-            while ((text = bufferedReader.readLine()) != null) {
+            while ((newLine = bufferedReader.readLine()) != null) { //while newLine which is new line taken from the txt file is not null
 
-                line.replace(0, line.length(), text);
-                for(int i=0; i<line.length(); i++){
-                    if (line.length() != 0) {
-                        structure[lineIndex][i] = line.charAt(i);
+                oldLine.replace(0, oldLine.length(), newLine); //replaces previous line with the new line
+                for(int i=0; i<oldLine.length(); i++){ //goes from the first char to the length of the String line
+                    if (oldLine.length() != 0) {
+                        mapTiles[lineIndex][i] = oldLine.charAt(i);
                     }else break;
                 }
 
-                lineIndex++;
+                lineIndex++; //takes next line
             }
-            inputStream.close();
+            inputStream.close(); //closing the file
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return structure;
+        return mapTiles;
     }
 }

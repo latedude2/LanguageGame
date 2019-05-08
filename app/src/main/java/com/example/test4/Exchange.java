@@ -6,6 +6,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ClickableSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,11 +35,10 @@ class Exchange extends Instance {
     private ArrayList<String> ansWordList = new ArrayList<>();
     int index = 0;
 
-    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int[] correctAnswers, MainActivity mainActivity) {
+    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, MainActivity mainActivity) {
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
-            this.correctAnswers = correctAnswers;
             this.mainActivity = mainActivity;
     }
 
@@ -69,17 +69,21 @@ class Exchange extends Instance {
         usersAnswerUnchanged = spannableString.toString();
         return spannableString;
     }
-    /*
-    //activated in the OnClickListener or so
-    public void clickAnswer(TextView answer) //  the method requires the textView which was clicked
-    {
-        for (int i=0; i<gapText.length; i++){
-            if (gapText[i] != null){
-                gapText[i] = answer.getText().toString();
+
+
+    //plays all sentence of question
+    public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
+        final MediaPlayer sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+        speaker_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sentenceAudio.isPlaying()) {
+                    sentenceAudio.seekTo(0); //continues playing the audio from the beginning
+                } else sentenceAudio.start();
             }
-        }
+        });
     }
-    */
+
     public SpannableString checkHint(){
         StringBuffer stringBuffer = questionText;
         final Matcher matcher = Pattern.compile("#\\s*(\\w+)").matcher(stringBuffer);

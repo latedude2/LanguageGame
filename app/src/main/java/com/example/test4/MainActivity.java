@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
         FileRead file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
+        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), this);
         dialoguetext = findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -108,6 +108,7 @@ public class MainActivity extends Activity {
             answerButtonsTextView[i] = findViewById(textViewId);
             answerButtonsTextView[i].setText(exchange.takeAnswers(i));
         }
+
         onSoundViewClick();
 
         //Reseting selected answers
@@ -183,6 +184,8 @@ public class MainActivity extends Activity {
             }
         }
     }
+
+    //TO BE UPDATED //activates when submit_button is clicked
     public void onSubmitClick(View view){
         int[] correctAnswers = exchange.getCorrectAnswers();
         TextView answerField = findViewById(R.id.answer_text);
@@ -196,18 +199,11 @@ public class MainActivity extends Activity {
         }
     }
 
+    //takes the needed audio file and takes it the exchange object to play it there
     public void onSoundViewClick(){
         String audioFileName = "sentence" + exchangeIndex;
         final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
-        final MediaPlayer sentenceAudio = MediaPlayer.create(this, idOfAudioFile);
-        speaker_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (sentenceAudio.isPlaying()) {
-                    sentenceAudio.seekTo(0);
-                } else sentenceAudio.start();
-            }
-        });
+        exchange.sentencePlay(speaker_button, idOfAudioFile);
     }
 
     private void resetWordInputField(String answerToReset)
@@ -220,6 +216,7 @@ public class MainActivity extends Activity {
             }
         }
     }
+
     private void showAnswerText()
     {
         fullAnswer = exchange.getUsersAnswerUnchanged();
@@ -275,12 +272,13 @@ public class MainActivity extends Activity {
 
     }
 
+    //creates the 2D array mapTiles, which holds the structure of the map
     public void loadMapStructure(){
         String idName = "map_structure"; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
         FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
-        mapTiles = fileStructure.readStructureChars();
+        mapTiles = fileStructure.readStructureChars(); //reads all of the chars in the structure and adds them to the 2D array
     }
 
 }
