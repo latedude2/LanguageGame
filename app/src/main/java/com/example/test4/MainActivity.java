@@ -138,12 +138,9 @@ public class MainActivity extends Activity {
 
     }
 
-
     public void onSubmitClick(View view)
     {
         exchange.submitAnswer(view);
-
-
     }
 
     public void onSoundViewClick()
@@ -153,8 +150,6 @@ public class MainActivity extends Activity {
         exchange.sentencePlay(speaker_button, idOfAudioFile);
     }
 
-
-
     //creates the 2D array mapTiles, which holds the structure of the map
     public void loadMapStructure(){
         String idName = "map_structure"; //creates a String name of the file to use in the following line
@@ -163,5 +158,4 @@ public class MainActivity extends Activity {
         FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         mapTiles = fileStructure.readStructureChars(); //reads all of the chars in the structure and adds them to the 2D array
     }
-
 }
