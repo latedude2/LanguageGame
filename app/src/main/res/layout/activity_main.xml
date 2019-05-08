@@ -218,7 +218,7 @@
 
     <ImageView
         android:id="@+id/world_view"
-        android:layout_width="1500dp"
+        android:layout_width="2200dp"
         android:layout_height="1500dp"
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="fitXY"
@@ -260,7 +260,7 @@
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="centerCrop"
         android:visibility="visible"
-        app:srcCompat="@drawable/background"
+        app:srcCompat="@drawable/background_convo"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_width="match_parent" />
