@@ -260,7 +260,7 @@
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="centerCrop"
         android:visibility="visible"
-        app:srcCompat="@drawable/background"
+        app:srcCompat="@drawable/background_convo"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_width="match_parent" />

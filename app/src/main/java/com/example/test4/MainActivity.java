@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
         idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
         backgroundMap.setImageResource(idOfImage);
 
-        idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
+        idOfImage = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationBack.setImageResource(idOfImage);
 
         ImageView submit_button = findViewById(R.id.submit_button);
