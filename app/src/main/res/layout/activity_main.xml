@@ -77,6 +77,41 @@
         app:layout_constraintGuide_percent="0.37" />
 
     <android.support.constraint.Guideline
+        android:id="@+id/guideline_move_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_top_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_move_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_move_bottom_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_move_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_text_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -125,51 +160,33 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="1" />
 
-    <Button
-        android:id="@+id/left_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:onClick="move_characterLeft"
-        android:text="@string/left_button"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintTop_toBottomOf="@+id/up_button" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_move_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
 
-    <Button
-        android:id="@+id/down_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="move_characterDown"
-        android:text="@string/down_button"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
-        app:layout_constraintTop_toBottomOf="@+id/right_button" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_move_left_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.425" />
 
-    <Button
-        android:id="@+id/right_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:onClick="move_characterRight"
-        android:text="@string/right_button"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@+id/left_button"
-        app:layout_constraintTop_toBottomOf="@+id/up_button" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_move_right_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.575" />
 
-    <Button
-        android:id="@+id/up_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="move_characterUp"
-        android:text="@string/up_button"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
-        app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_move_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
 
     <ImageView
         android:id="@+id/npc_world_view0"
@@ -178,6 +195,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="56dp"
         android:contentDescription="@string/content_description_npc_world_image"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/tower" />
@@ -281,6 +299,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:contentDescription="@string/content_description_hint"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/guideline_end_hint_image"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
         app:layout_constraintHorizontal_bias="1.0"
@@ -295,6 +314,7 @@
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/answer_text"
         android:src="@drawable/answerspace"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline_answer_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -308,6 +328,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_text"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_text_field"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -335,6 +356,7 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/proceed_button"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/answer_text_field"
         app:layout_constraintTop_toTopOf="@+id/guideline_submit_button" />
 
@@ -346,6 +368,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
@@ -357,6 +380,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_1"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_0"
         app:layout_constraintStart_toStartOf="@+id/answer_button_0"
@@ -370,6 +394,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_0" />
@@ -381,6 +406,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_1"
         app:layout_constraintStart_toStartOf="@+id/answer_button_1"
@@ -394,6 +420,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_1" />
@@ -405,6 +432,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_2"
         app:layout_constraintStart_toStartOf="@+id/answer_button_2"
@@ -418,6 +446,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
@@ -429,6 +458,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_4"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_3"
         app:layout_constraintStart_toStartOf="@+id/answer_button_3"
@@ -440,11 +470,12 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/answer_button"
+        android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintTop_toBottomOf="@+id/answer_button_3"
-        android:onClick="answerClick" />
+        app:layout_constraintTop_toBottomOf="@+id/answer_button_3" />
 
     <TextView
         android:id="@+id/answer_button_text_4"
@@ -453,6 +484,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_4"
         app:layout_constraintStart_toStartOf="@+id/answer_button_4"
@@ -466,6 +498,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_4" />
@@ -477,6 +510,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_5"
         app:layout_constraintStart_toStartOf="@+id/answer_button_5"
@@ -493,5 +527,27 @@
         app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_screen_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_screen_top" />
+
+    <ImageView
+        android:id="@+id/top_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/dpad_top"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_move_right_middle"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_move_left_middle"
+        tools:layout_editor_absoluteY="563dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/dpad_left"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_move_left"
+        tools:layout_editor_absoluteY="583dp" />
 
 </android.support.constraint.ConstraintLayout>
