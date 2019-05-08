@@ -10,6 +10,7 @@ class GameObject extends Instance {
 
 
     GameObject(){}
+
     GameObject(int x, int y){
         this.x = x;
         this.y = y;
@@ -31,11 +32,11 @@ class GameObject extends Instance {
         this.y = y;
     }
 
-    public void setxGrid(int xGrid) {
+    public void setXGrid(int xGrid) {
         this.xGrid = xGrid;
     }
 
-    public void setyGrid(int yGrid) {
+    public void setYGrid(int yGrid) {
         this.yGrid = yGrid;
     }
 
@@ -46,5 +47,4 @@ class GameObject extends Instance {
     public void disableGameobject(){
 
     }
-
 }
