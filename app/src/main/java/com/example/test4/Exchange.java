@@ -42,7 +42,6 @@ class Exchange extends Instance {
     private int answerIndex;
 
 
-    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int[] correctAnswers, MainActivity mainActivity) {
     public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, MainActivity mainActivity) {
             this.questionText = questionText;
             this.answerText = answerText;
@@ -92,7 +91,8 @@ class Exchange extends Instance {
         });
     }
 
-    public SpannableString checkHint(){
+    public SpannableString checkHint()
+    {
         StringBuffer stringBuffer = questionText;
         final Matcher matcher = Pattern.compile("#\\s*(\\w+)").matcher(stringBuffer);
         while (matcher.find()){
