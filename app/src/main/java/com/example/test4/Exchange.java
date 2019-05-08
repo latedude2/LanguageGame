@@ -26,6 +26,8 @@ class Exchange extends Instance {
 
     private int[] selectAnswers = new int[6]; //all of the possible answers
     private int[] correctAnswers; //answers that are possible to be correct
+    private String usersAnswerUnchanged;    //User's unedited answer to the NPC
+
 
     private ArrayList<Integer> ansWordIndexList = new ArrayList<>();
     private ArrayList<String> ansWordList = new ArrayList<>();
@@ -63,6 +65,7 @@ class Exchange extends Instance {
 
         SpannableString spannableString = new SpannableString(stringBuffer);
         index = 0;
+        usersAnswerUnchanged = spannableString.toString();
         return spannableString;
     }
     /*
@@ -139,7 +142,10 @@ class Exchange extends Instance {
     {
         return wordCount;
     }
-
+    public String getUsersAnswerUnchanged()
+    {
+        return usersAnswerUnchanged;
+    }
     public int[] getCorrectAnswers() {
         return correctAnswers;
     }
