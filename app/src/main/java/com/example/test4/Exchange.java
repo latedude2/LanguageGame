@@ -118,6 +118,8 @@ class Exchange extends Instance {
                             break;
                         }
                     }
+
+
                     int resId = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "drawable", mainActivity.getPackageName());
                     mainActivity.getHintImage().setImageResource(resId);
                 }

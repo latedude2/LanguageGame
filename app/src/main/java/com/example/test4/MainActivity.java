@@ -3,6 +3,7 @@ package com.example.test4;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -24,13 +25,15 @@ public class MainActivity extends Activity {
     private ImageView hintImage;            //Image view to show the hint of a word
     private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
+    private ImageView speaker_button;
+    private ImageView submit_button;
 
     private SelectedAnswer[] selectedAnswers = new SelectedAnswer[6];
     //private String[] selectedAnswers = new String[6];
     //private int[] answerPositionIndexes = new int[6];
     private int selectedAnswerCount = 0;
 
-    int i = 2; //index which counts which exchange it is currently
+    int exchangeIndex = 6; //index which counts which exchange it is currently
 
     int idOfImage;
 
@@ -55,6 +58,8 @@ public class MainActivity extends Activity {
         loadConverstationCharacterImage();
 
         loadMapStructure();
+
+
     }
 
     public void loadLayoutImage(){
@@ -70,16 +75,16 @@ public class MainActivity extends Activity {
         idOfImage = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationBack.setImageResource(idOfImage);
 
-        ImageView submit_button = findViewById(R.id.submit_button);
+        submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.proceed_button);
 
-        ImageView speaker_button = findViewById(R.id.speaker_button);
+        speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);
 
     }
     public void loadExchange()
     {
-        String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
+        String index = Integer.toString(exchangeIndex); //use if it complains about using integer in the String in the following line
         String id = "exchange" + index; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(id,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
@@ -94,13 +99,15 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-        for (i = 0; i < answerButtonsTextView.length; i++){
+        for (int i = 0; i < answerButtonsTextView.length; i++){
             String number = Integer.toString(i);
             String viewText = "answer_button_text_" + number;
             int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
             answerButtonsTextView[i] = findViewById(textViewId);
             answerButtonsTextView[i].setText(exchange.takeAnswers(i));
         }
+
+        onSoundViewClick();
     }
 
     public void loadConverstationCharacterImage(){
@@ -176,9 +183,18 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void onSoundViewClick(View view){
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.test_sound_all_sentence);
-        mp.start();
+    public void onSoundViewClick(){
+        String audioFileName = "sentence" + exchangeIndex;
+        final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
+        final MediaPlayer sentenceAudio = MediaPlayer.create(this, idOfAudioFile);
+        speaker_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sentenceAudio.isPlaying()) {
+                    sentenceAudio.seekTo(0);
+                } else sentenceAudio.start();
+            }
+        });
     }
 
     private SpannableString addClickableWordsToString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int selectedAnswerCount)
