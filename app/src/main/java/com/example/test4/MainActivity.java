@@ -1,6 +1,7 @@
 package com.example.test4;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
@@ -38,22 +39,20 @@ public class MainActivity extends Activity {
     //All world view elements
 
     private Exchange exchange;
+
     private  ConversationController conversationController;
 
+    private TextView[] answerButtonsTextView = new TextView[6];
+    private ImageView speaker_button;
+    private ImageView submit_button;
 
 
-    private String fullAnswer;
-    private int answerSlotCount = 0;
-    private SelectedAnswer[] selectedAnswers = new SelectedAnswer[6];
-    //private String[] selectedAnswers = new String[6];
-    //private int[] answerPositionIndexes = new int[6];
+    private FileRead file;
 
-    int i = 2; //index which counts which exchange it is currently
 
-    int idOfImage;
+    int exchangeIndex = 6; //index which counts which exchange it is currently
 
     int[] answerNum;
-    int timesAnswerChosen = 0;
 
     char[][] mapTiles; //2D array for the map
 
@@ -73,6 +72,8 @@ public class MainActivity extends Activity {
         loadConverstationCharacterImage();
 
         loadMapStructure();
+
+
     }
 
     public void beGone(View view){
@@ -91,48 +92,51 @@ public class MainActivity extends Activity {
 
         conversationLayout = findViewById(R.id.conversation_layout);
 
-        idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
-        backgroundMap.setImageResource(idOfImage);
+        int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
+        backgroundMap.setImageResource(idOfMap);
 
         idOfImage = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationLayout.setImageResource(idOfImage);
 
-        ImageView submit_button = findViewById(R.id.submit_button);
+        submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.proceed_button);
 
-        ImageView speaker_button = findViewById(R.id.speaker_button);
+        speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);
-
     }
+
+    //loads all the elements of the exchange view
     public void loadExchange()
     {
-        String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
+        String index = Integer.toString(exchangeIndex); //use if it complains about using integer in the String in the following line
         String id = "exchange" + index; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(id,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
-        FileRead file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
+        file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
-        dialogueText = findViewById(R.id.dialogue_text);
-        dialogueText.setText(exchange.checkHint());
-        dialogueText.setMovementMethod(LinkMovementMethod.getInstance());
+
+        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), this);
+        dialoguetext = findViewById(R.id.dialogue_text);
+        dialoguetext.setText(exchange.checkHint());
+        dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
 
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-        answerButtonsTextView = new TextView[6];
-
         //exchange.takeAnswers(this.i);
         for (int j = 0; j < answerButtonsTextView.length; j++){
-            getAnswerButtonsTextView()[j].setText(exchange.takeAnswers(j));
+ 
+        for (int i = 0; i < answerButtonsTextView.length; i++){
+            String number = Integer.toString(i);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
+            answerButtonsTextView[i] = findViewById(textViewId);
+            answerButtonsTextView[i].setText(exchange.takeAnswers(i));
         }
 
-        //Reseting selected answers
-        for(int i = 0; i < 6; i++)
-        {
-            selectedAnswers[i] = new SelectedAnswer("____");
-        }
+        onSoundViewClick();
+        exchange.resetSelectedAnswers();
 
     }
 
@@ -251,101 +255,38 @@ public class MainActivity extends Activity {
             answerField.setText(spanString);
         }
     }
-    void putWordInSlot(String ans)
-    {
-        for(int i = 0; i < answerSlotCount; i++)
-        {
-            if(selectedAnswers[i].word == "____") {
-                selectedAnswers[i].word = ans;
-                break;
-            }
-        }
-    }
-    public void onSubmitClick(View view){
-        int[] correctAnswers = exchange.getCorrectAnswers();
-        TextView answerField = findViewById(R.id.answer_text);
-        if (answerNum == correctAnswers)
-        {
-            answerField.setText("You're a good boy");
-        }
-        else
-        {
-            answerField.setText("You're a bad boy");
-        }
-    }
+    //void putWordInSlot(String ans)
 
-    private void resetWordInputField(String answerToReset)
+    public void answerClick(View view)
     {
-        for(int i = 0; i < answerSlotCount; i++)
-        {
-            if(selectedAnswers[i].word.equals(answerToReset))
-            {
-                selectedAnswers[i].word = "____";
-            }
-        }
-    }
-    private void showAnswerText()
-    {
-        fullAnswer = exchange.getUsersAnswerUnchanged();
-        answerSlotCount = 0;
-        String tempString = fullAnswer;
-        while((tempString).contains("____"))
-        {
-            tempString = tempString.substring(tempString.indexOf("____") + 4);
-            fullAnswer = fullAnswer.replaceFirst("____", "#" + answerSlotCount);
-            answerSlotCount++;
-        }
-        SpannableString spanString = buildSpannableString(selectedAnswers, fullAnswer, answerSlotCount);
-        TextView answerField = findViewById(R.id.answer_text);
-        answerField.setText(spanString);
-    }
-
-    private SpannableString buildSpannableString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int answerCount)
-    {
-        //Placing words in string
-        for(int i = 0; i < answerCount; i++)
-        {
-            selectedAnswers[i].answerPositionIndex = stringToAddTo.indexOf("#" + i);        //We need to remember where the string is positioned to be able to set the clickable span
-            stringToAddTo = stringToAddTo.replace("#" + i, selectedAnswers[i].word);
-        }
-        SpannableString spannableString = new SpannableString(stringToAddTo);
-        for(int i = 0; i < answerCount; i++)
-        {
-            if(selectedAnswers[i].word != "____")
-            {
-                ClickableSpan clickableSpan = new ClickableSpan() {
-                    @Override
-                    public void onClick(@NonNull View widget) {
-                        //Getting text of clickable span
-                        //-------------------------------------
-                        TextView tv = (TextView) widget;
-                        Spanned s = (Spanned) tv.getText();
-                        int start = s.getSpanStart(this);
-                        int end = s.getSpanEnd(this);
-                        String clickableSpanString = s.subSequence(start, end).toString();
-
-                        resetWordInputField(clickableSpanString);
-                        showAnswerText();
-                        makeButtonActiveAgain();
-                    }
-                };
-                spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-        return spannableString;
-    }
-    private void makeButtonActiveAgain()
-    {
+        exchange.addAnswer(view);
 
     }
 
+
+    public void onSubmitClick(View view)
+    {
+        exchange.submitAnswer(view);
+
+
+    }
+
+    public void onSoundViewClick()
+    {
+        String audioFileName = "sentence" + exchangeIndex;
+        final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
+        exchange.sentencePlay(speaker_button, idOfAudioFile);
+    }
+
+
+
+    //creates the 2D array mapTiles, which holds the structure of the map
     public void loadMapStructure(){
         String idName = "map_structure"; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
         FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
-        char[][] structure = fileStructure.readStructureChars();
-
+        mapTiles = fileStructure.readStructureChars(); //reads all of the chars in the structure and adds them to the 2D array
     }
 
 }
