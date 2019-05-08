@@ -63,7 +63,7 @@ public class FileRead {
     public StringBuffer[] readAllAnswers(StringBuffer[] text)
     {
         StringBuffer[] answers = new StringBuffer[6];
-        for (int i = 2; i < text.length; i++){
+        for (int i = 2; i < text.length; i++){ //starts from 2 because text of answers start from third line in txt file
             answers[i-2] = text[i];
         }
         return answers;
