@@ -9,8 +9,8 @@ import java.io.InputStreamReader;
 public class FileRead {
 
     private StringBuffer[] allText; //all the text in the file
-    private StringBuffer questionText; //array for normal text of other character
-    private StringBuffer answerText; //array for already written text of answer
+    private StringBuffer questionText; //normal text of other character
+    public StringBuffer answerText;
     private StringBuffer[] allAnswers; //array of all 6 possible answers
     private int[] correctAnswers = new int[6];
 
@@ -21,8 +21,6 @@ public class FileRead {
     public FileRead (InputStream inputStream){
         this.inputStream = inputStream;
     }
-
-    public FileRead(){}
 
     public void read() {
         allText = readAll();

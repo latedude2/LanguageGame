@@ -1,12 +1,13 @@
 package com.example.test4;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,9 +28,12 @@ public class MainActivity extends Activity {
     private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
 
+    private SelectedAnswer[] selectedAnswers = new SelectedAnswer[6];
+    //private String[] selectedAnswers = new String[6];
+    //private int[] answerPositionIndexes = new int[6];
+    private int selectedAnswerCount = 0;
 
-
-    int i = 3; //index which counts which exchange it is currently
+    int i = 2; //index which counts which exchange it is currently
 
     int idOfImage;
 
@@ -52,8 +56,6 @@ public class MainActivity extends Activity {
         loadConverstationCharacterImage();
     }
 
-
-
     public void loadLayoutImage(){
 
         backgroundMap = findViewById(R.id.world_view);
@@ -74,8 +76,8 @@ public class MainActivity extends Activity {
         speaker_button.setImageResource(R.drawable.speaker);
 
     }
-    public void loadExchange(){
-
+    public void loadExchange()
+    {
         String index = Integer.toString(i); //use if it complains about using integer in the String in the following line
         String id = "exchange" + index; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(id,"raw", getPackageName());
@@ -129,7 +131,6 @@ public class MainActivity extends Activity {
         hintImage = findViewById(R.id.hint_img);
         return hintImage;
     }
-
     /*public TextView[] getAnswerButtonsTextView() {
         for (int j = 0; j < answerButtonsTextView.length; j++) {
             String number = Integer.toString(j);
@@ -165,21 +166,160 @@ public class MainActivity extends Activity {
         TextView answerTextView = findViewById(idOfTextView);
         String answerTextToPut = answerTextView.getText().toString();
         TextView answerField = findViewById(R.id.answer_text);
-        String fullAnswer = answerField.getText().toString();
-        answerField.setText(fullAnswer.replaceFirst("____", answerTextToPut));
+        answerField.setMovementMethod(LinkMovementMethod.getInstance());
+        String fullAnswer = exchange.getUsersAnswerUnchanged();
 
-        answerNum[timesAnswerChosen] = java.lang.Character.getNumericValue(takeNum);
-        timesAnswerChosen++;
+        /*
+        String tempString = fullAnswer;
+        int answerPositionCount = 0;
+        while((tempString).contains("____"))
+        {
+            tempString = tempString.substring(tempString.indexOf("____") + 4);
+            answerPositionCount++;
+        }
+        */
+        selectedAnswers[selectedAnswerCount] = new SelectedAnswer();
+
+        selectedAnswers[selectedAnswerCount].word = answerTextToPut;
+        if(answerField.getText().toString().contains("____")) {
+            selectedAnswers[selectedAnswerCount].answerPositionIndex = answerField.getText().toString().indexOf("____");
+            selectedAnswerCount++;
+
+            SpannableString spanString = addClickableWordsToString(selectedAnswers, fullAnswer, selectedAnswerCount);
+
+            answerField.setText(spanString);
+        }
     }
 
     public void onSubmitClick(View view){
         int[] correctAnswers = exchange.getCorrectAnswers();
         TextView answerField = findViewById(R.id.answer_text);
-        if (answerNum == correctAnswers){
-
+        if (answerNum == correctAnswers)
+        {
             answerField.setText("You're a good boy");
-        } else {
+        }
+        else
+        {
             answerField.setText("You're a bad boy");
         }
     }
+
+    private SpannableString addClickableWordsToString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int selectedAnswerCount)
+    {
+        boolean newWordAdded = false;
+        for(int i = 0; i < selectedAnswerCount; i++)
+        {
+            if(getAnswerWithSlotIndex(i) != null) {
+                stringToAddTo = stringToAddTo.replaceFirst("____", getAnswerWithSlotIndex(i).word);
+            }
+            else if(!newWordAdded)
+            {
+                stringToAddTo = stringToAddTo.replaceFirst("____", selectedAnswers[selectedAnswerCount - 1].word);
+                newWordAdded = true;
+            }
+            else
+            {
+
+            }
+
+        }
+        SpannableString spannableString = new SpannableString(stringToAddTo);
+        for(int i = 0; i < selectedAnswerCount; i++)
+        {
+            ClickableSpan clickableSpan = new ClickableSpan() {
+                @Override
+                public void onClick(@NonNull View widget) {
+                    //Getting text of clickable span
+                    //-------------------------------------
+                    TextView tv = (TextView) widget;
+                    Spanned s = (Spanned) tv.getText();
+                    int start = s.getSpanStart(this);
+                    int end = s.getSpanEnd(this);
+                    String clickableSpanString = s.subSequence(start, end).toString();
+
+                    resetWordInputField(clickableSpanString);
+                    showAnswerText();
+                    makeButtonActiveAgain();
+                }
+            };
+            spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return spannableString;
+    }
+    private SelectedAnswer getAnswerWithSlotIndex(int index)
+    {
+        for(int i = 0; i < selectedAnswerCount; i++)
+        {
+            if(selectedAnswers[i].answerSlotIndex == index)
+            {
+                return selectedAnswers[i];
+            }
+        }
+        return null;
+    }
+    private void resetWordInputField(String answerToReset)
+    {
+        for(int i = 0; i < selectedAnswerCount; i++)
+        {
+            if(selectedAnswers[i].word.equals(answerToReset))
+            {
+                selectedAnswers[i] = null;
+                for(int j = i; j < selectedAnswerCount - 1; j++)
+                {
+                    selectedAnswers[j] = selectedAnswers[j + 1];
+                }
+                selectedAnswerCount--;
+            }
+        }
+    }
+    private void showAnswerText()
+    {
+        SpannableString spanString = buildSpannableString(selectedAnswers, exchange.getUsersAnswerUnchanged(), selectedAnswerCount);
+        TextView answerField = findViewById(R.id.answer_text);
+        answerField.setText(spanString);
+    }
+
+    private SpannableString buildSpannableString(SelectedAnswer[] selectedAnswers, String stringToAddTo, int selectedAnswerCount)
+    {
+        SpannableString spannableString = new SpannableString(stringToAddTo);
+        for(int i = 0; i < selectedAnswerCount; i++)
+        {
+            ClickableSpan clickableSpan = new ClickableSpan() {
+                @Override
+                public void onClick(@NonNull View widget) {
+                    //Getting text of clickable span
+                    //-------------------------------------
+                    TextView tv = (TextView) widget;
+                    Spanned s = (Spanned) tv.getText();
+                    int start = s.getSpanStart(this);
+                    int end = s.getSpanEnd(this);
+                    String clickableSpanString = s.subSequence(start, end).toString();
+
+                    resetWordInputField(clickableSpanString);
+                    makeButtonActiveAgain();
+                }
+            };
+            spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return spannableString;
+    }
+    private void makeButtonActiveAgain()
+    {
+
+    }
+
+
+
+    /*public TextView[] getAnswerButtonsText(){
+        answerButtonsTextView = new TextView[6];
+
+        for (i = 0; i < answerButtonsTextView.length; i++){
+            String number = Integer.toString(i);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
+            answerButtonsTextView[i] = findViewById(textViewId);
+        }
+        return answerButtonsTextView;
+    }*/
+
 }
