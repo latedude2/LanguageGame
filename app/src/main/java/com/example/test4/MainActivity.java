@@ -57,7 +57,6 @@ public class MainActivity extends Activity {
     }
 
     public void loadLayoutImage(){
-
         backgroundMap = findViewById(R.id.world_view);
         dPad = new DPad(backgroundMap, this);
 
