@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
         idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
         backgroundMap.setImageResource(idOfImage);
 
-        idOfImage = getResources().getIdentifier("background", "drawable", getPackageName());
+        idOfImage = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationBack.setImageResource(idOfImage);
 
         ImageView submit_button = findViewById(R.id.submit_button);
@@ -284,8 +284,7 @@ public class MainActivity extends Activity {
         int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
         FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
-        StringBuffer[] lines = fileStructure.readStructureLines();
-        char[][] structure = fileStructure.readStructureChars(lines);
+        char[][] structure = fileStructure.readStructureChars();
 
     }
 
