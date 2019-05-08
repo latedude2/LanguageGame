@@ -35,8 +35,8 @@ class Portal extends WorldElement {
     }
 
    public void MovePlayer (PlayerObject player){
-        player.setxGrid(newXGrid);
-        player.setyGrid(newYGrid);
+        player.setXGrid(newXGrid);
+        player.setYGrid(newYGrid);
    }
 
 }
