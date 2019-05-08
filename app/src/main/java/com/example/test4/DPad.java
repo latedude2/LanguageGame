@@ -20,10 +20,10 @@ class DPad {
         moveX =  background.getX();
         moveY =  background.getY();
         this.background = background;
-        upButton = mainActivity.findViewById(R.id.up_button);
+        /*upButton = mainActivity.findViewById(R.id.up_button);
         downButton = mainActivity.findViewById(R.id.down_button);
         leftButton = mainActivity.findViewById(R.id.left_button);
-        rightButton = mainActivity.findViewById(R.id.right_button);
+        rightButton = mainActivity.findViewById(R.id.right_button);*/
 
         //Here we are setting a specific location for the character, this needs to be updated once we have a functional game world
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
@@ -35,10 +35,7 @@ class DPad {
     }
     public void hideButtons()
     {
-        upButton.setVisibility(View.GONE);
-        downButton.setVisibility(View.GONE);
-        leftButton.setVisibility(View.GONE);
-        rightButton.setVisibility(View.GONE);
+
     }
     public void moveUp (){
         moveY += moveDist;

@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 
     private ImageView backgroundMap;        //Image view to show the map
     private ImageView conversationBack;     //Image view to show the background of a conversation
+    private ImageView worldBack;         //Image view to show the background of the workd part
     private DPad dPad;                      //Controls for walking
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
@@ -47,11 +48,11 @@ public class MainActivity extends Activity {
         decorView.setSystemUiVisibility(uiOptions);
 
         loadLayoutImage();
-        dPad.hideButtons();
-        loadExchange();
-        loadConverstationCharacterImage();
+        //dPad.hideButtons();
+        //loadExchange();
+        //loadConverstationCharacterImage();
 
-        loadMapStructure();
+        //loadMapStructure();
 
 
     }
@@ -60,19 +61,23 @@ public class MainActivity extends Activity {
         backgroundMap = findViewById(R.id.world_view);
         dPad = new DPad(backgroundMap, this);
 
-        conversationBack = findViewById(R.id.conversation_layout);
 
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
         backgroundMap.setImageResource(idOfMap);
 
-        int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
-        conversationBack.setImageResource(idOfBackground);
+        worldBack = findViewById(R.id.world_background);
+        int idOfBackground = getResources().getIdentifier("background_world", "drawable", getPackageName());
+        worldBack.setImageResource(idOfBackground);
 
-        submit_button = findViewById(R.id.submit_button);
+        /*conversationBack = findViewById(R.id.conversation_background);
+        int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
+        conversationBack.setImageResource(idOfBackground);*/
+
+        /*submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.proceed_button);
 
         speaker_button = findViewById(R.id.speaker_button);
-        speaker_button.setImageResource(R.drawable.speaker);
+        speaker_button.setImageResource(R.drawable.speaker);*/
     }
 
     //loads all the elements of the exchange view
