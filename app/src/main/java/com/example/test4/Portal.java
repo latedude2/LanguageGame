@@ -12,7 +12,7 @@ class Portal extends WorldElement {
     }
 
 
-    public void MoveMap (int newXDisplacement, int newYDisplacement){
+    public void moveMap (int newXDisplacement, int newYDisplacement){
         map.setX(newXDisplacement);
         map.setY(newYDisplacement);
     }
