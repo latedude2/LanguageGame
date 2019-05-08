@@ -270,7 +270,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/dialogue_text"
-        android:textSize="15sp"
+        android:textSize="23sp"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_dialogue_text_view" />
