@@ -159,7 +159,6 @@ public class MainActivity extends Activity {
             fullAnswer = fullAnswer.replaceFirst("____", "#" + answerSlotCount);
             answerSlotCount++;
         }
-        //System.out.println(fullAnswer);
 
         if(answerField.getText().toString().contains("____"))   //If there is a slot to put the new word in
         {
