@@ -37,8 +37,6 @@ public class MainActivity extends Activity {
 
     int exchangeIndex = 6; //index which counts which exchange it is currently
 
-    int idOfImage;
-
     int[] answerNum;
     int timesAnswerChosen = 0;
 
@@ -71,19 +69,20 @@ public class MainActivity extends Activity {
 
         conversationBack = findViewById(R.id.conversation_view);
 
-        idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
-        backgroundMap.setImageResource(idOfImage);
+        int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
+        backgroundMap.setImageResource(idOfMap);
 
-        idOfImage = getResources().getIdentifier("background_convo", "drawable", getPackageName());
-        conversationBack.setImageResource(idOfImage);
+        int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
+        conversationBack.setImageResource(idOfBackground);
 
         submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.proceed_button);
 
         speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);
-
     }
+
+    //loads all the elements of the exchange view
     public void loadExchange()
     {
         String index = Integer.toString(exchangeIndex); //use if it complains about using integer in the String in the following line
