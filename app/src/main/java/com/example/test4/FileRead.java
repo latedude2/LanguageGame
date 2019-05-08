@@ -88,4 +88,33 @@ public class FileRead {
     public int[] getCorrectAnswers() {
         return correctAnswers;
     }
+
+    public StringBuffer[] readStructureLines(){
+        StringBuffer[] stringBuffers = new StringBuffer[16];
+        int lineIndex = 0;
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            while ((text = bufferedReader.readLine()) != null) {
+                stringBuffers[lineIndex] = new StringBuffer();
+                stringBuffers[lineIndex].append(text);
+                lineIndex++;
+            }
+            inputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuffers;
+    }
+
+    public char[][] readStructureChars(StringBuffer[] lines){
+        char[][] structure = new char[lines.length][lines.toString().length()];
+        for(int i=0; i<lines.length; i++){
+            for(int ii=0; ii<lines.toString().length(); ii++){
+                structure[i][ii] = lines[i].charAt(ii);
+            }
+        }
+        return structure;
+    }
 }

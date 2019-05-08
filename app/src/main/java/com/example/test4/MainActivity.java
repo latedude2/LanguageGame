@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
     int[] answerNum;
     int timesAnswerChosen = 0;
 
+    char[][] mapTiles; //2D array for the map
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,8 @@ public class MainActivity extends Activity {
         dPad.hideButtons();
         loadExchange();
         loadConverstationCharacterImage();
+
+        loadMapStructure();
     }
 
     public void loadLayoutImage(){
@@ -275,18 +279,14 @@ public class MainActivity extends Activity {
 
     }
 
+    public void loadMapStructure(){
+        String idName = "map_structure"; //creates a String name of the file to use in the following line
+        int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
+        InputStream inputStream = this.getResources().openRawResource(idOfFile);
+        FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
+        StringBuffer[] lines = fileStructure.readStructureLines();
+        char[][] structure = fileStructure.readStructureChars(lines);
 
-
-    /*public TextView[] getAnswerButtonsText(){
-        answerButtonsTextView = new TextView[6];
-
-        for (i = 0; i < answerButtonsTextView.length; i++){
-            String number = Integer.toString(i);
-            String viewText = "answer_button_text_" + number;
-            int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
-            answerButtonsTextView[i] = findViewById(textViewId);
-        }
-        return answerButtonsTextView;
-    }*/
+    }
 
 }
