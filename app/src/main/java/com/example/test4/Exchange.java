@@ -1,5 +1,6 @@
 package com.example.test4;
 
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -118,10 +119,17 @@ class Exchange extends Instance {
                             break;
                         }
                     }
-
-
                     int resId = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "drawable", mainActivity.getPackageName());
                     mainActivity.getHintImage().setImageResource(resId);
+
+                    //-------------------------------------
+                    //audio to play
+                    //-------------------------------------
+                    int idOfAudioFile = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "raw", mainActivity.getPackageName());
+                    final MediaPlayer audio = MediaPlayer.create(mainActivity, idOfAudioFile);
+                            if (audio.isPlaying()) {
+                                audio.seekTo(0);
+                            } else audio.start();
                 }
             };
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

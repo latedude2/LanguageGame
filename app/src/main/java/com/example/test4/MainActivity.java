@@ -281,7 +281,6 @@ public class MainActivity extends Activity {
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
         FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         mapTiles = fileStructure.readStructureChars();
-
     }
 
 }
