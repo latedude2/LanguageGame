@@ -32,8 +32,6 @@ public class MainActivity extends Activity {
 
     int exchangeIndex = 6; //index which counts which exchange it is currently
 
-    int idOfImage;
-
     int[] answerNum;
 
     char[][] mapTiles; //2D array for the map
@@ -65,19 +63,20 @@ public class MainActivity extends Activity {
 
         conversationBack = findViewById(R.id.conversation_view);
 
-        idOfImage = getResources().getIdentifier("map", "drawable", getPackageName());
-        backgroundMap.setImageResource(idOfImage);
+        int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
+        backgroundMap.setImageResource(idOfMap);
 
-        idOfImage = getResources().getIdentifier("background_convo", "drawable", getPackageName());
-        conversationBack.setImageResource(idOfImage);
+        int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
+        conversationBack.setImageResource(idOfBackground);
 
         submit_button = findViewById(R.id.submit_button);
         submit_button.setImageResource(R.drawable.proceed_button);
 
         speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);
-
     }
+
+    //loads all the elements of the exchange view
     public void loadExchange()
     {
         String index = Integer.toString(exchangeIndex); //use if it complains about using integer in the String in the following line
@@ -87,7 +86,7 @@ public class MainActivity extends Activity {
         file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), file.getCorrectAnswers(), this);
+        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), this);
         dialoguetext = findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -102,6 +101,7 @@ public class MainActivity extends Activity {
             answerButtonsTextView[i] = findViewById(textViewId);
             answerButtonsTextView[i].setText(exchange.takeAnswers(i));
         }
+
         onSoundViewClick();
         exchange.resetSelectedAnswers();
 
@@ -150,26 +150,18 @@ public class MainActivity extends Activity {
     {
         String audioFileName = "sentence" + exchangeIndex;
         final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
-        final MediaPlayer sentenceAudio = MediaPlayer.create(this, idOfAudioFile);
-        speaker_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (sentenceAudio.isPlaying()) {
-                    sentenceAudio.seekTo(0);
-                } else sentenceAudio.start();
-            }
-        });
+        exchange.sentencePlay(speaker_button, idOfAudioFile);
     }
 
 
 
+    //creates the 2D array mapTiles, which holds the structure of the map
     public void loadMapStructure(){
         String idName = "map_structure"; //creates a String name of the file to use in the following line
         int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
         InputStream inputStream = this.getResources().openRawResource(idOfFile);
         FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
-        char[][] structure = fileStructure.readStructureChars();
-
+        mapTiles = fileStructure.readStructureChars(); //reads all of the chars in the structure and adds them to the 2D array
     }
 
 }

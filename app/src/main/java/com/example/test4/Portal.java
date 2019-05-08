@@ -1,42 +1,22 @@
 package com.example.test4;
 
+import android.widget.ImageView;
+
 class Portal extends WorldElement {
-    private int newXDisplacement;
-    private int newYDisplacement;
-    private int newXGrid;
-    private int newYGrid;
 
-    public Portal (int newXDisplacement, int newYDisplacement, int newXGrid, int newYGrid){
-        this.newXDisplacement = newXDisplacement;
-        this.newYDisplacement = newYDisplacement;
-        this.newXGrid = newXGrid;
-        this.newYGrid = newYGrid;
+    ImageView map;
+
+
+    public Portal (ImageView map){
+        this.map = map;
     }
 
-    public int getNewXDisplacement() {
-        return newXDisplacement;
+
+    public void MoveMap (int newXDisplacement, int newYDisplacement){
+        map.setX(newXDisplacement);
+        map.setY(newYDisplacement);
     }
 
-    public int getNewYDisplacement() {
-        return newYDisplacement;
-    }
 
-    public int getNewXGrid() {
-        return newXGrid;
-    }
-
-    public int getNewYGrid() {
-        return newYGrid;
-    }
-
-    public void MoveMap (PlayerObject player){
-        player.setX(newXDisplacement);
-        player.setY(newYDisplacement);
-    }
-
-   public void MovePlayer (PlayerObject player){
-        player.setXGrid(newXGrid);
-        player.setYGrid(newYGrid);
-   }
 
 }

@@ -1,5 +1,6 @@
 package com.example.test4;
 
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -42,10 +43,10 @@ class Exchange extends Instance {
 
 
     public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int[] correctAnswers, MainActivity mainActivity) {
+    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, MainActivity mainActivity) {
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
-            this.correctAnswers = correctAnswers;
             this.mainActivity = mainActivity;
     }
 
@@ -75,6 +76,20 @@ class Exchange extends Instance {
         index = 0;
         usersAnswerUnchanged = spannableString.toString();
         return spannableString;
+    }
+
+
+    //plays all sentence of question
+    public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
+        final MediaPlayer sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+        speaker_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sentenceAudio.isPlaying()) {
+                    sentenceAudio.seekTo(0); //continues playing the audio from the beginning
+                } else sentenceAudio.start();
+            }
+        });
     }
 
     public SpannableString checkHint(){
@@ -116,10 +131,17 @@ class Exchange extends Instance {
                             break;
                         }
                     }
-
-
                     int resId = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "drawable", mainActivity.getPackageName());
                     mainActivity.getHintImage().setImageResource(resId);
+
+                    //-------------------------------------
+                    //audio to play
+                    //-------------------------------------
+                    int idOfAudioFile = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "raw", mainActivity.getPackageName());
+                    final MediaPlayer audio = MediaPlayer.create(mainActivity, idOfAudioFile);
+                            if (audio.isPlaying()) {
+                                audio.seekTo(0);
+                            } else audio.start();
                 }
             };
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
