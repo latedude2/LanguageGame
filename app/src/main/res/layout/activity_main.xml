@@ -52,8 +52,8 @@
         android:id="@+id/guideline_answer_buttons_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.77"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.77" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_screen_bottom"
@@ -75,6 +75,55 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.37" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_move_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_top_button_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.67" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_top_button_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.76" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_move_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_down_button_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.84" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_down_button_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.93" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_move_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_text_end"
@@ -125,51 +174,33 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="1" />
 
-    <Button
-        android:id="@+id/left_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:onClick="move_characterLeft"
-        android:text="@string/left_button"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintTop_toBottomOf="@+id/up_button" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_move_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
 
-    <Button
-        android:id="@+id/down_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="move_characterDown"
-        android:text="@string/down_button"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
-        app:layout_constraintTop_toBottomOf="@+id/right_button" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_move_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
 
-    <Button
-        android:id="@+id/right_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:onClick="move_characterRight"
-        android:text="@string/right_button"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@+id/left_button"
-        app:layout_constraintTop_toBottomOf="@+id/up_button" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_left_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.38" />
 
-    <Button
-        android:id="@+id/up_button"
-        android:layout_width="58dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="move_characterUp"
-        android:text="@string/up_button"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
-        app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_button_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.62" />
 
     <ImageView
         android:id="@+id/npc_world_view0"
@@ -178,6 +209,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="56dp"
         android:contentDescription="@string/content_description_npc_world_image"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/tower" />
@@ -218,16 +250,17 @@
 
     <ImageView
         android:id="@+id/world_view"
-        android:layout_width="2200dp"
-        android:layout_height="1500dp"
+        android:layout_width="3040dp"
+        android:layout_height="1520dp"
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="fitXY"
         android:src="@drawable/map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_screen_top" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_screen_top"
+        app:layout_constraintVertical_bias="0.457" />
 
     <ImageView
         android:id="@+id/char_world_view"
@@ -249,21 +282,37 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_description_npc"
         android:src="@drawable/big_baker"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_npc_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@id/guideline_exit_bottom" />
 
     <ImageView
-        android:id="@+id/conversation_layout"
+        android:id="@+id/conversation_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="centerCrop"
-        android:visibility="visible"
-        app:srcCompat="@drawable/background_convo"
+        android:src="@drawable/background_convo"
+        android:visibility="gone"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_width="match_parent" />
+
+    <ImageView
+        android:id="@+id/world_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/content_description_world_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_world"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_submit_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/dialogue_text"
@@ -271,6 +320,7 @@
         android:layout_height="wrap_content"
         android:text="@string/dialogue_text"
         android:textSize="23sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_dialogue_text_view" />
@@ -281,6 +331,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:contentDescription="@string/content_description_hint"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/guideline_end_hint_image"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
         app:layout_constraintHorizontal_bias="1.0"
@@ -295,6 +346,7 @@
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/answer_text"
         android:src="@drawable/answerspace"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline_answer_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -308,6 +360,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_text"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_text_field"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -320,6 +373,7 @@
         android:layout_marginStart="4dp"
         android:contentDescription="@string/speaker_button"
         android:src="@drawable/speaker"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_text_end"
@@ -335,6 +389,7 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/proceed_button"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/answer_text_field"
         app:layout_constraintTop_toTopOf="@+id/guideline_submit_button" />
 
@@ -346,6 +401,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
@@ -357,6 +413,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_1"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_0"
         app:layout_constraintStart_toStartOf="@+id/answer_button_0"
@@ -370,6 +427,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_0" />
@@ -381,6 +439,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_1"
         app:layout_constraintStart_toStartOf="@+id/answer_button_1"
@@ -394,6 +453,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_1" />
@@ -405,6 +465,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_2"
         app:layout_constraintStart_toStartOf="@+id/answer_button_2"
@@ -418,6 +479,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
@@ -429,6 +491,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_4"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_3"
         app:layout_constraintStart_toStartOf="@+id/answer_button_3"
@@ -440,11 +503,12 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/answer_button"
+        android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintTop_toBottomOf="@+id/answer_button_3"
-        android:onClick="answerClick" />
+        app:layout_constraintTop_toBottomOf="@+id/answer_button_3" />
 
     <TextView
         android:id="@+id/answer_button_text_4"
@@ -453,6 +517,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_4"
         app:layout_constraintStart_toStartOf="@+id/answer_button_4"
@@ -466,6 +531,7 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_4" />
@@ -477,6 +543,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_5"
         app:layout_constraintStart_toStartOf="@+id/answer_button_5"
@@ -494,5 +561,68 @@
         app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_screen_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_screen_top" />
+
+    <ImageView
+        android:id="@+id/dpad_imageview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/dpad_image_view"
+        android:src="@drawable/dpad_background"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_move_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_move_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_move_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_move_top" />
+
+    <Button
+        android:id="@+id/up_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="move_characterUp"
+        android:text="@string/up_button"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/guideline_top_button_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_button_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left_right"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_button_top" />
+
+    <Button
+        android:id="@+id/left_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="move_characterLeft"
+        android:text="@string/left_button"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_down_button_top"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
+        app:layout_constraintStart_toStartOf="@+id/dpad_imageview"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_button_bottom" />
+
+    <Button
+        android:id="@+id/down_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="move_characterDown"
+        android:text="@string/down_button"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_down_button_down"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_button_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left_right"
+        app:layout_constraintTop_toTopOf="@+id/guideline_down_button_top" />
+
+    <Button
+        android:id="@+id/right_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:onClick="move_characterRight"
+        android:text="@string/right_button"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_down_button_top"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_move_right"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle"
+        app:layout_constraintTop_toTopOf="@+id/guideline_top_button_bottom" />
 
 </android.support.constraint.ConstraintLayout>

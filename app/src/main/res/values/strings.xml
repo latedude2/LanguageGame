@@ -7,10 +7,11 @@
     <string name="submit_button">Submit Button</string>
     <string name="speaker_button">Speaker Button</string>
     <string name="exit_menu_button">Exit/Menu Button</string>
-    <string name="up_button">Exit Button</string>
-    <string name="down_button">Exit Button</string>
-    <string name="left_button">Exit Button</string>
-    <string name="right_button">Exit Button</string>
+    <string name="dpad_image_view">dPad ImageView</string>
+    <string name="up_button">UP Button</string>
+    <string name="down_button">DOWN Button</string>
+    <string name="left_button">LEFT Button</string>
+    <string name="right_button">RIGHT Button</string>
     <string name="menu_button">Exit Button</string>
     <string name="dialogue_text">Dialogue TextView</string>
     <string name="answer_text">Answer TextView</string>

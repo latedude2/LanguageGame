@@ -31,7 +31,7 @@ public class ConversationController extends Instance{
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
         this.answerText = mainActivity.findViewById(R.id.answer_text);
-        this.conversationLayout = mainActivity.findViewById(R.id.conversation_layout);
+        this.conversationLayout = mainActivity.findViewById(R.id.conversation_background);
         this.answerTextField = mainActivity.findViewById(R.id.answer_text_field);
         this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
         this.submitButton = mainActivity.findViewById(R.id.submit_button);
