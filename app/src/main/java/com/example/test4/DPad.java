@@ -13,6 +13,9 @@ class DPad {
     private float moveY;
     private int startX;
     private int startY;
+    //the 32 is from the map border, and the 10 is from the image view placement
+    private int xCorrection = 32 + 10;
+    private int yCorrection = 32;
     Button upButton;
     Button downButton;
     Button leftButton;
@@ -25,9 +28,9 @@ class DPad {
         this.background = background;
 
         //these numbers don't exactly match the calculations, but it is as close as i could get
-        moveDist = dpToPx(95);
-        startX = dpToPx(-1290);
-        startY = dpToPx(-810);
+        moveDist = dpToPx(98);
+        startX = dpToPx(-1344 + xCorrection);
+        startY = dpToPx(-864 + yCorrection);
         /*upButton = mainActivity.findViewById(R.id.up_button);
         downButton = mainActivity.findViewById(R.id.down_button);
         leftButton = mainActivity.findViewById(R.id.left_button);
