@@ -1,13 +1,8 @@
 package com.example.test4;
 
 import android.app.Activity;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,9 +11,11 @@ import java.io.InputStream;
 
 public class MainActivity extends Activity {
 
-    private ImageView backgroundMap;        //Image view to show the map
+    //Name the variables (ImageViews, TextViews, Buttons) as their id to avoid confusion. Thank you.
+
+    private ImageView worldView;        //Image view to show the map
     private ImageView conversationBack;     //Image view to show the background of a conversation
-    private ImageView worldBack;         //Image view to show the background of the workd part
+    private ImageView worldBackground;         //Image view to show the background of the workd part
     private DPad dPad;                      //Controls for walking
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
@@ -30,8 +27,9 @@ public class MainActivity extends Activity {
 
     private FileRead file;
     private ConversationController conversationController;
+    private Instance instance;
 
-    int exchangeIndex = 6; //index which counts which exchange it is currently
+    int exchangeIndex = 4; //index which counts which exchange it is currently
 
     int[] answerNum;
 
@@ -48,27 +46,32 @@ public class MainActivity extends Activity {
         decorView.setSystemUiVisibility(uiOptions);
 
         loadLayoutImage();
-        //dPad.hideButtons();
-        //loadExchange();
-        //loadConverstationCharacterImage();
 
-        //loadMapStructure();
+        dPad.hideDPad();
+        loadExchange(this.exchangeIndex);
+        //loadExchangeTwo();
+        loadConverstationCharacterImage();
+
+        loadMapStructure();
 
 
     }
 
+    MainActivity(){}
+
     public void loadLayoutImage(){
-        backgroundMap = findViewById(R.id.world_view);
-        dPad = new DPad(backgroundMap, this);
+        worldView = findViewById(R.id.world_view);
+        dPad = new DPad(worldView, this);
 
 
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
-        backgroundMap.setImageResource(idOfMap);
+        worldView.setImageResource(idOfMap);
 
-        worldBack = findViewById(R.id.world_background);
+        worldBackground = findViewById(R.id.d_pad_background);
         int idOfBackground = getResources().getIdentifier("background_world", "drawable", getPackageName());
-        worldBack.setImageResource(idOfBackground);
+        worldBackground.setImageResource(idOfBackground);
 
+        dPad.hideDPad();
         /*conversationBack = findViewById(R.id.conversation_background);
         int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationBack.setImageResource(idOfBackground);*/
@@ -80,8 +83,11 @@ public class MainActivity extends Activity {
         speaker_button.setImageResource(R.drawable.speaker);*/
     }
 
+
+
+
     //loads all the elements of the exchange view
-    public void loadExchange()
+    public void loadExchange(int exchangeIndex)
     {
         String index = Integer.toString(exchangeIndex); //use if it complains about using integer in the String in the following line
         String id = "exchange" + index; //creates a String name of the file to use in the following line
@@ -98,15 +104,15 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-        for (int i = 0; i < answerButtonsTextView.length; i++){
-            String number = Integer.toString(i);
+        for (int j = 0; j < answerButtonsTextView.length; j++){
+            String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
             int textViewId = getResources().getIdentifier(viewText, "id", getPackageName());
-            answerButtonsTextView[i] = findViewById(textViewId);
-            answerButtonsTextView[i].setText(exchange.takeAnswers(i));
+            answerButtonsTextView[j] = findViewById(textViewId);
+            answerButtonsTextView[j].setText(exchange.takeAnswers(j));
         }
 
-        onSoundViewClick();
+        //onSoundViewClick();
         exchange.resetSelectedAnswers();
 
     }
@@ -122,10 +128,12 @@ public class MainActivity extends Activity {
 
     public void move_characterDown (View v){
         dPad.moveDown();
+        startConversation(v);
     }
 
     public void move_characterLeft (View v){
         dPad.moveLeft();
+
     }
 
     public void move_characterRight (View v){
@@ -165,6 +173,20 @@ public class MainActivity extends Activity {
 
     public void exitConversation(View view){
         conversationController = new ConversationController(this);
+        dPad = new DPad(worldView, this);
         conversationController.hideConversationElements();
+        dPad.showDPad();
+    }
+
+    public void startConversation(View view){
+        conversationController = new ConversationController(this);
+        dPad = new DPad(worldView,this);
+        conversationController.showConversationElements();
+        dPad.hideDPad();
+    }
+
+    public void loadExchangeTwo(){
+        conversationController = new ConversationController(this);
+        conversationController.loadExchange(exchangeIndex);
     }
 }

@@ -8053,7 +8053,7 @@
 											"top": 54,
 											"width": 162.25244140625,
 											"height": 13,
-											"text": "-exchanges: Exchange[1..*]",
+											"text": "-exchange: Exchange[1..*]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8070,7 +8070,7 @@
 											"top": 69,
 											"width": 162.25244140625,
 											"height": 13,
-											"text": "-background: GameObject",
+											"text": "-worldView: GameObject",
 											"horizontalAlignment": 0
 										},
 										{
@@ -12065,7 +12065,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpXVjqiDOWBAE="
 							},
-							"name": "exchanges",
+							"name": "exchange",
 							"visibility": "private",
 							"type": {
 								"$ref": "AAAAAAFpXZTbb07ln3Q="
@@ -12078,7 +12078,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFpXVjqiDOWBAE="
 							},
-							"name": "background",
+							"name": "worldView",
 							"visibility": "private",
 							"type": {
 								"$ref": "AAAAAAFpUxegn9S5r5Q="
@@ -14129,7 +14129,7 @@
 											"top": 659.5,
 											"width": 109,
 											"height": 13,
-											"text": "Draw background"
+											"text": "Draw worldView"
 										},
 										{
 											"_type": "LabelView",
@@ -17412,7 +17412,7 @@
 											"top": 675.5,
 											"width": 109,
 											"height": 13,
-											"text": "Draw background"
+											"text": "Draw worldView"
 										},
 										{
 											"_type": "LabelView",
@@ -29801,7 +29801,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFpvq0CgGBTU2k="
 					},
-					"name": "Draw background"
+					"name": "Draw worldView"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -30278,7 +30278,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFpvq0CgGBTU2k="
 					},
-					"name": "Draw background"
+					"name": "Draw worldView"
 				},
 				{
 					"_type": "UMLUseCase",

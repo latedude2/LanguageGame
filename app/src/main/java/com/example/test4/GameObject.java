@@ -8,6 +8,9 @@ class GameObject extends Instance {
     private int xGrid;
     private int yGrid;
 
+    private MainActivity mainActivity;
+    private DPad dPad;
+
 
     GameObject(){}
 
@@ -47,4 +50,6 @@ class GameObject extends Instance {
     public void disableGameobject(){
 
     }
+
+
 }

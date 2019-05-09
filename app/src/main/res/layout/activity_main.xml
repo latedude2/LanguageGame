@@ -202,51 +202,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.62" />
 
-    <ImageView
-        android:id="@+id/npc_world_view0"
-        android:layout_width="89dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="56dp"
-        android:contentDescription="@string/content_description_npc_world_image"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
-
-    <ImageView
-        android:id="@+id/npc_world_view1"
-        android:layout_width="89dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="68dp"
-        android:contentDescription="@string/content_description_npc_world_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
-
-    <ImageView
-        android:id="@+id/npc_world_view2"
-        android:layout_width="89dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="60dp"
-        android:contentDescription="@string/content_description_npc_world_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
-
-    <ImageView
-        android:id="@+id/npc_world_view3"
-        android:layout_width="89dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="56dp"
-        android:contentDescription="@string/content_description_npc_world_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tower" />
-
 
     <ImageView
         android:id="@+id/world_view"
@@ -282,7 +237,6 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_description_npc"
         android:src="@drawable/big_baker"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_npc_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@id/guideline_exit_bottom" />
@@ -294,13 +248,12 @@
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="centerCrop"
         android:src="@drawable/background_convo"
-        android:visibility="gone"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_width="match_parent" />
 
     <ImageView
-        android:id="@+id/world_background"
+        android:id="@+id/d_pad_background"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/content_description_world_image"
@@ -320,7 +273,6 @@
         android:layout_height="wrap_content"
         android:text="@string/dialogue_text"
         android:textSize="23sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_dialogue_text_view" />
@@ -331,7 +283,6 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:contentDescription="@string/content_description_hint"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/guideline_end_hint_image"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
         app:layout_constraintHorizontal_bias="1.0"
@@ -346,7 +297,6 @@
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/answer_text"
         android:src="@drawable/answerspace"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline_answer_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -360,7 +310,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/answer_text"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_text_field"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
@@ -373,7 +322,6 @@
         android:layout_marginStart="4dp"
         android:contentDescription="@string/speaker_button"
         android:src="@drawable/speaker"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_text_end"
@@ -389,7 +337,6 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@drawable/proceed_button"
-        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/answer_text_field"
         app:layout_constraintTop_toTopOf="@+id/guideline_submit_button" />
 
@@ -401,7 +348,6 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
@@ -413,7 +359,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_1"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_0"
         app:layout_constraintStart_toStartOf="@+id/answer_button_0"
@@ -427,7 +372,6 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_0" />
@@ -439,7 +383,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_1"
         app:layout_constraintStart_toStartOf="@+id/answer_button_1"
@@ -453,7 +396,6 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_1" />
@@ -465,7 +407,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_2"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_2"
         app:layout_constraintStart_toStartOf="@+id/answer_button_2"
@@ -479,7 +420,6 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toTopOf="@+id/guideline_answer_buttons_top" />
@@ -491,7 +431,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_4"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_3"
         app:layout_constraintStart_toStartOf="@+id/answer_button_3"
@@ -505,7 +444,6 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_3" />
@@ -517,7 +455,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_4"
         app:layout_constraintStart_toStartOf="@+id/answer_button_4"
@@ -531,7 +468,6 @@
         android:contentDescription="@string/answer_button"
         android:onClick="answerClick"
         android:src="@drawable/answer_button"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
         app:layout_constraintTop_toBottomOf="@+id/answer_button_4" />
@@ -543,7 +479,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/answer_button"
         android:textColor="#FFFFFF"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/answer_button_5"
         app:layout_constraintEnd_toEndOf="@+id/answer_button_5"
         app:layout_constraintStart_toStartOf="@+id/answer_button_5"
@@ -563,10 +498,10 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_screen_top" />
 
     <ImageView
-        android:id="@+id/dpad_imageview"
+        android:id="@+id/d_pad_imageview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="@string/dpad_image_view"
+        android:contentDescription="@string/d_pad_image_view"
         android:src="@drawable/dpad_background"
         app:layout_constraintBottom_toTopOf="@+id/guideline_move_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_move_right"
@@ -597,7 +532,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline_down_button_top"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
-        app:layout_constraintStart_toStartOf="@+id/dpad_imageview"
+        app:layout_constraintStart_toStartOf="@+id/d_pad_imageview"
         app:layout_constraintTop_toTopOf="@+id/guideline_top_button_bottom" />
 
     <Button

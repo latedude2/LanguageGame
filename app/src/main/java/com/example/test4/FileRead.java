@@ -22,7 +22,7 @@ public class FileRead {
     public void read() {
         allText = readAll();
         questionText = readQuest(this.allText);
-        answerText = readAnswer(this.allText);
+        setAnswerText(readAnswer(this.allText));
         allAnswers = readAllAnswers(this.allText);
     }
 
@@ -82,6 +82,9 @@ public class FileRead {
         return questionText;
     }
 
+    public void setAnswerText(StringBuffer answerText) {
+        this.answerText = answerText;
+    }
 
     public char[][] readStructureChars(){
         String newLine; //each new read line
