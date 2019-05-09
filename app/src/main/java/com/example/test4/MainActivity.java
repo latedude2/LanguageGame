@@ -133,9 +133,6 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-        submit_button = findViewById(R.id.submit_button);
-        int idOfSubmitButton = getResources().getIdentifier("proceed_button", "drawable", getPackageName());
-        submit_button.setImageResource(idOfSubmitButton);
 
         for (int j = 0; j < answerButtonsTextView.length; j++){
             String number = Integer.toString(j);
@@ -217,11 +214,6 @@ public class MainActivity extends Activity {
 
     public void onSubmitClick(View view)
     {
-        /*submit_button.setImageResource(R.drawable.proceed_button_pressed);
-        pressing_submit = (AnimationDrawable) submit_button.getDrawable();
-        pressing_submit.start();
-        */
-
         exchange.submitAnswer(view);
     }
 
