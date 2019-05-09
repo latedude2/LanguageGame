@@ -10,7 +10,6 @@ import android.widget.ImageView;
 class DPad {
     private int moveDist;
     private ImageView background;
-    private ImageView player;
     private float moveX;
     private float moveY;
     private int startX;
@@ -23,12 +22,11 @@ class DPad {
     Button leftButton;
     Button rightButton;
 
-    DPad (ImageView background, MainActivity mainActivity, ImageView player){
+    DPad (ImageView background, MainActivity mainActivity){
 
         moveX =  background.getX();
         moveY =  background.getY();
         this.background = background;
-        this.player = player;
 
         //these numbers don't exactly match the calculations, but it is as close as i could get
         moveDist = dpToPx(98);
