@@ -502,7 +502,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/d_pad_image_view"
-        android:src="@drawable/dpad_background"
+        android:src="@drawable/dpad_base"
         app:layout_constraintBottom_toTopOf="@+id/guideline_move_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_move_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_move_left"
