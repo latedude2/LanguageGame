@@ -52,7 +52,7 @@ public class ConversationController extends Instance{
 
     }
 
-    public void exitConversation(){
+    public void hideConversationElements(){
         for (int j = 0; j < answerButtonsTextView.length ; j++) {
             getAnswerButtons()[j].setVisibility(View.GONE);
             getAnswerButtonsTextView()[j].setVisibility(View.GONE);

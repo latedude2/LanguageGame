@@ -160,6 +160,6 @@ public class MainActivity extends Activity {
 
     public void exitConversation(View view){
         conversationController = new ConversationController(this);
-        conversationController.exitConversation();
+        conversationController.hideConversationElements();
     }
 }
