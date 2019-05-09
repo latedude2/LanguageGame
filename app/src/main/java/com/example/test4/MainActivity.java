@@ -23,12 +23,19 @@ public class MainActivity extends Activity {
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
     private ImageView char_world_wiev;      // Image view to show player character
+    private ImageView d_pad_imageviev;
 
     //for the different walking animations
     private AnimationDrawable walking_up;
     private AnimationDrawable walking_down;
     private AnimationDrawable walking_left;
     private AnimationDrawable walking_right;
+
+    //for the dpad pressed animations
+    private AnimationDrawable pressing_up;
+    private AnimationDrawable pressing_down;
+    private AnimationDrawable pressing_left;
+    private AnimationDrawable pressing_right;
 
     private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
@@ -86,6 +93,10 @@ public class MainActivity extends Activity {
         char_world_wiev = findViewById(R.id.char_world_view);
         int idOfPlayer = getResources().getIdentifier("main_character", "drawable", getPackageName());
         char_world_wiev.setImageResource(idOfPlayer);
+
+        d_pad_imageviev = findViewById(R.id.d_pad_imageview);
+        int idOfDpad = getResources().getIdentifier("dpad_base", "drawable", getPackageName());
+        d_pad_imageviev.setImageResource(idOfDpad);
         
         dPad.hideDPad();
 
@@ -143,6 +154,11 @@ public class MainActivity extends Activity {
         char_world_wiev.setImageResource(R.drawable.walk_animation_up);
         walking_up = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_up.start();
+
+        d_pad_imageviev.setImageResource(R.drawable.dpad_press_up);
+        pressing_up = (AnimationDrawable) d_pad_imageviev.getDrawable();
+        pressing_up.start();
+
         dPad.moveUp();
     }
 
@@ -150,6 +166,11 @@ public class MainActivity extends Activity {
         char_world_wiev.setImageResource(R.drawable.walk_animation_down);
         walking_down = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_down.start();
+
+        d_pad_imageviev.setImageResource(R.drawable.dpad_press_down);
+        pressing_down = (AnimationDrawable) d_pad_imageviev.getDrawable();
+        pressing_down.start();
+
         dPad.moveDown();
         startConversation(v);
     }
@@ -158,6 +179,11 @@ public class MainActivity extends Activity {
         char_world_wiev.setImageResource(R.drawable.walk_animation_left);
         walking_left = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_left.start();
+
+        d_pad_imageviev.setImageResource(R.drawable.dpad_press_left);
+        pressing_left = (AnimationDrawable) d_pad_imageviev.getDrawable();
+        pressing_left.start();
+
         dPad.moveLeft();
 
     }
@@ -166,6 +192,11 @@ public class MainActivity extends Activity {
         char_world_wiev.setImageResource(R.drawable.walk_animation_right);
         walking_right = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_right.start();
+
+        d_pad_imageviev.setImageResource(R.drawable.dpad_press_right);
+        pressing_right = (AnimationDrawable) d_pad_imageviev.getDrawable();
+        pressing_right.start();
+
         dPad.moveRight();
     }
 
