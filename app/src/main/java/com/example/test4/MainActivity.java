@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
     private TextView[] answerButtonsTextView = new TextView[6];
     private ImageView speaker_button;
     private ImageView submit_button;
+    private AnimationDrawable pressing_submit;
 
     private FileRead file;
     private ConversationController conversationController;
@@ -132,6 +133,10 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
+        submit_button = findViewById(R.id.submit_button);
+        int idOfSubmitButton = getResources().getIdentifier("proceed_button", "drawable", getPackageName());
+        submit_button.setImageResource(idOfSubmitButton);
+
         for (int j = 0; j < answerButtonsTextView.length; j++){
             String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
@@ -212,6 +217,11 @@ public class MainActivity extends Activity {
 
     public void onSubmitClick(View view)
     {
+        /*submit_button.setImageResource(R.drawable.proceed_button_pressed);
+        pressing_submit = (AnimationDrawable) submit_button.getDrawable();
+        pressing_submit.start();
+        */
+
         exchange.submitAnswer(view);
     }
 
