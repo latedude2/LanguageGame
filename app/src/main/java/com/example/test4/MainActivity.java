@@ -70,9 +70,9 @@ public class MainActivity extends Activity {
     MainActivity(){}
 
     public void loadLayoutImage(){
-        backgroundMap = findViewById(R.id.world_view);
+        worldView = findViewById(R.id.world_view);
 
-        dPad = new DPad(backgroundMap, this);
+        dPad = new DPad(worldView, this);
 
 
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
