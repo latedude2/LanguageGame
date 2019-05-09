@@ -1,15 +1,18 @@
 package com.example.test4;
 
 import android.animation.ObjectAnimator;
+import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 class DPad {
-    private int moveDist = 100;
+    private int moveDist;
     private ImageView background;
     private float moveX;
     private float moveY;
+    private int startX;
+    private int startY;
     Button upButton;
     Button downButton;
     Button leftButton;
@@ -20,32 +23,42 @@ class DPad {
         moveX =  background.getX();
         moveY =  background.getY();
         this.background = background;
+
+        //these numbers don't exactly match the calculations, but it is as close as i could get
+        moveDist = dpToPx(95);
+        startX = dpToPx(-1290);
+        startY = dpToPx(-810);
         /*upButton = mainActivity.findViewById(R.id.up_button);
         downButton = mainActivity.findViewById(R.id.down_button);
         leftButton = mainActivity.findViewById(R.id.left_button);
         rightButton = mainActivity.findViewById(R.id.right_button);*/
 
         //Here we are setting a specific location for the character, this needs to be updated once we have a functional game world
-        ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
+        ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), startY);
         animation.setDuration(0);
         animation.start();
-        animation = ObjectAnimator.ofFloat(background, "X", background.getX(), moveX);
-        animation.setDuration(200);
+        animation = ObjectAnimator.ofFloat(background, "X", background.getX(), startX);
+        animation.setDuration(0);
         animation.start();
     }
     public void hideButtons()
     {
 
     }
+
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
     public void moveUp (){
-        moveY += moveDist;
+        moveY = background.getY() + moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
             animation.setDuration(200);
             animation.start();
     }
 
     public void moveDown (){
-        moveY -= moveDist;
+        moveY = background.getY() - moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
             animation.setDuration(200);
             animation.start();
@@ -53,14 +66,14 @@ class DPad {
     }
 
     public void moveLeft (){
-        moveX += moveDist;
+        moveX = background.getX() + moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "X", background.getX(), moveX);
             animation.setDuration(200);
             animation.start();
     }
 
     public void moveRight (){
-        moveX -= moveDist;
+        moveX = background.getX() - moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "X", background.getX(), moveX);
             animation.setDuration(200);
             animation.start();
