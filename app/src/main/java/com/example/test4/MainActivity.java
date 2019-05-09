@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
+    private ImageView char_world_wiev;    // Image view to show player character
     private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
     private ImageView speaker_button;
@@ -59,7 +60,8 @@ public class MainActivity extends Activity {
 
     public void loadLayoutImage(){
         backgroundMap = findViewById(R.id.world_view);
-        dPad = new DPad(backgroundMap, this);
+        char_world_wiev = findViewById(R.id.char_world_view);
+        dPad = new DPad(backgroundMap, this, char_world_wiev);
 
 
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
