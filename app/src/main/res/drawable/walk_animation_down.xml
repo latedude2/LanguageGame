@@ -12,12 +12,5 @@
         android:duration="120"/>
     <item android:drawable="@drawable/main_character"
         android:duration="120"/>
-    <item android:drawable="@drawable/main_front1"
-        android:duration="120"/>
-    <item android:drawable="@drawable/main_character"
-        android:duration="120"/>
-    <item android:drawable="@drawable/main_front2"
-        android:duration="120"/>
-    <item android:drawable="@drawable/main_character"
-        android:duration="120"/>
+
 </animation-list>

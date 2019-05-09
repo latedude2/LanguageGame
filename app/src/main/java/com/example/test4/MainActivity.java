@@ -79,6 +79,10 @@ public class MainActivity extends Activity {
         int idOfBackground = getResources().getIdentifier("background_world", "drawable", getPackageName());
         worldBack.setImageResource(idOfBackground);
 
+        char_world_wiev = findViewById(R.id.char_world_view);
+        int idOfPlayer = getResources().getIdentifier("main_character", "drawable", getPackageName());
+        char_world_wiev.setImageResource(idOfPlayer);
+
         /*conversationBack = findViewById(R.id.conversation_background);
         int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationBack.setImageResource(idOfBackground);*/
@@ -127,33 +131,29 @@ public class MainActivity extends Activity {
     }
 
     public void move_characterUp (View v){
-        char_world_wiev = findViewById(R.id.char_world_view);
-        char_world_wiev.setBackgroundResource(R.drawable.walk_animation_up);
-        walking_up = (AnimationDrawable) char_world_wiev.getBackground();
+        char_world_wiev.setImageResource(R.drawable.walk_animation_up);
+        walking_up = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_up.start();
         dPad.moveUp();
     }
 
     public void move_characterDown (View v){
-        char_world_wiev = findViewById(R.id.char_world_view);
-        char_world_wiev.setBackgroundResource(R.drawable.walk_animation_down);
-        walking_down = (AnimationDrawable) char_world_wiev.getBackground();
+        char_world_wiev.setImageResource(R.drawable.walk_animation_down);
+        walking_down = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_down.start();
         dPad.moveDown();
     }
 
     public void move_characterLeft (View v){
-        char_world_wiev = findViewById(R.id.char_world_view);
-        char_world_wiev.setBackgroundResource(R.drawable.walk_animation_left);
-        walking_left = (AnimationDrawable) char_world_wiev.getBackground();
+        char_world_wiev.setImageResource(R.drawable.walk_animation_left);
+        walking_left = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_left.start();
         dPad.moveLeft();
     }
 
     public void move_characterRight (View v){
-        char_world_wiev = findViewById(R.id.char_world_view);
-        char_world_wiev.setBackgroundResource(R.drawable.walk_animation_right);
-        walking_right = (AnimationDrawable) char_world_wiev.getBackground();
+        char_world_wiev.setImageResource(R.drawable.walk_animation_right);
+        walking_right = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_right.start();
         dPad.moveRight();
     }

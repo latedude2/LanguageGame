@@ -10,6 +10,7 @@ import android.widget.ImageView;
 class DPad {
     private int moveDist;
     private ImageView background;
+    private int animationLength = 540;
     private float moveX;
     private float moveY;
     private int startX;
@@ -57,14 +58,14 @@ class DPad {
     public void moveUp (){
         moveY = background.getY() + moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
-            animation.setDuration(200);
+            animation.setDuration(animationLength);
             animation.start();
     }
 
     public void moveDown (){
         moveY = background.getY() - moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
-            animation.setDuration(200);
+            animation.setDuration(animationLength);
             animation.start();
 
     }
@@ -72,14 +73,14 @@ class DPad {
     public void moveLeft (){
         moveX = background.getX() + moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "X", background.getX(), moveX);
-            animation.setDuration(200);
+            animation.setDuration(animationLength);
             animation.start();
     }
 
     public void moveRight (){
         moveX = background.getX() - moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(background, "X", background.getX(), moveX);
-            animation.setDuration(200);
+            animation.setDuration(animationLength);
             animation.start();
     }
 
