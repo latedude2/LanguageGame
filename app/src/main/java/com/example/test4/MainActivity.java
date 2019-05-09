@@ -233,14 +233,14 @@ public class MainActivity extends Activity {
 
     public void exitConversation(View view){
         conversationController = new ConversationController(this);
-        dPad = new DPad(worldView, this);
+        //dPad = new DPad(worldView, this);
         conversationController.hideConversationElements();
         dPad.showDPad();
     }
 
     public void startConversation(View view){
         conversationController = new ConversationController(this);
-        dPad = new DPad(worldView,this);
+        //dPad = new DPad(worldView,this);
         conversationController.showConversationElements();
         dPad.hideDPad();
     }
