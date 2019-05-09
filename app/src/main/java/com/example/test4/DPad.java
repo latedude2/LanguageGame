@@ -84,30 +84,30 @@ class DPad {
     }
 
     public void moveUp (){
-        moveY = background.getY() + moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
+        moveY = worldView.getY() + moveDist;
+        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
             animation.setDuration(animationLength);
             animation.start();
     }
 
     public void moveDown (){
-        moveY = background.getY() - moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(background, "y", background.getY(), moveY);
+        moveY = worldView.getY() - moveDist;
+        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
             animation.setDuration(animationLength);
             animation.start();
 
     }
 
     public void moveLeft (){
-        moveX = background.getX() + moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(background, "X", background.getX(), moveX);
+        moveX = worldView.getX() + moveDist;
+        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
     }
 
     public void moveRight (){
-        moveX = background.getX() - moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(background, "X", background.getX(), moveX);
+        moveX = worldView.getX() - moveDist;
+        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
     }
