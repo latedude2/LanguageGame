@@ -21,6 +21,7 @@ class Exchange extends Instance {
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
     private StringBuffer[] answers; //array of all 6 possible answers
+    private int currentExchange;
 
     MainActivity mainActivity = new MainActivity();
 
@@ -42,16 +43,13 @@ class Exchange extends Instance {
     private int answerIndex;
 
 
-    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, MainActivity mainActivity) {
+    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int currentExchange, MainActivity mainActivity) {
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
             this.mainActivity = mainActivity;
-
-
+            this.currentExchange = currentExchange;
     }
-
-
 
     public SpannableString checkGap(){
         StringBuffer stringBuffer = answerText;
@@ -345,4 +343,5 @@ class Exchange extends Instance {
     {
 
     }
+
 }

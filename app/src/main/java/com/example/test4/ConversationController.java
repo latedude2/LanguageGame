@@ -19,12 +19,17 @@ public class ConversationController extends Instance{
     private int numExchanges;
     private int currentExchangeID;
     private int exchangeCounter = 0;
+    private int numOfConversations = 5;
+
+    private int conversationId;
+    private int exchangeId;
 
     private Exchange exchange;
     private Exchange[] exchanges = new Exchange[numExchanges];
     private GameObject background;
     private FileRead fileRead;
 
+    private Exchange[] currentConversation = new Exchange[numOfConversations];
 
     //All conversation Elements
     private ImageView npcDialogueView;      //Image of the character you are having the conversation with
@@ -49,18 +54,7 @@ public class ConversationController extends Instance{
 
     ////////////////////////////////////////////////////
 
-    private String fileId;
-    private int idOfFile;
-    private InputStream inputStream;
-
-
     ConversationController(MainActivity mainActivity){
-        //If this is not commented the program doesn't run.
-        /*setIdOfFile(mainActivity.getResources().getIdentifier(getFileId(),"raw", mainActivity.getPackageName()));
-        setInputStream(mainActivity.getResources().openRawResource(getIdOfFile()));
-        setExchange(new Exchange(fileRead.getAnswerText(), fileRead.getQuestionText(), fileRead.getAllAnswers(), mainActivity));
-        setFileRead(new FileRead(getInputStream()));*/
-
         this.npcDialogueView = mainActivity.findViewById(R.id.npc_dialogue_view);
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
@@ -90,31 +84,32 @@ public class ConversationController extends Instance{
         dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
 
         ///////////////////////////////////////////////////////
-
-
-
     }
 
-    public void showExchange(){
-        if (getExchangeCounter() == 0){
-            loadExchange(0);
-            for (int i = 0; i < exchanges.length; i++) {
-                if (getCurrentExchangeID() != 4){
-                    if (exchange.getCheckAnswer()){
-                        setCurrentExchangeID(i);
-                        loadExchange(i);
-                    } else {
-                        exchange.resetAllWordInputFields();
-                        exchange.showAnswerText();
-                    }
+    ConversationController(int numExchanges, int conversationId, int exchangeId, Exchange exchange, MainActivity mainActivity){
+        this.numExchanges = numExchanges;
+        this.conversationId = conversationId;
+        this.exchangeId = exchangeId;
+        this.exchange = exchange;
+    }
 
-                } else {
-                    //exit the conversation
-                }
 
-            }
+
+    public void makeConversation(){
+        for (int i = 0; i < numExchanges; i++) {
+            currentConversation[conversationId] = exchanges[i + numExchanges + exchangeId];
         }
+    }
 
+    public Exchange[] getExchanges() {
+        for (int i = 0; i < numExchanges; i++) {
+            exchanges[i] = getExchange();
+        }
+        return exchanges;
+    }
+
+    public void setExchanges(Exchange[] exchanges) {
+        this.exchanges = exchanges;
     }
 
     public void hideConversationElements(){
@@ -150,22 +145,6 @@ public class ConversationController extends Instance{
         getSubmitButton().setVisibility(View.VISIBLE);
         getExitButton().setVisibility(View.VISIBLE);
         //Hiding DPad, to be moved later
-    }
-
-    public void loadExchange(int currentExchangeID){
-        String index = Integer.toString(currentExchangeID);
-        setFileId("exchange" + index);
-        getFileRead().read();
-        getDialogueText().setText(getExchange().checkHint());
-        getDialogueText().setMovementMethod(LinkMovementMethod.getInstance());
-
-        getAnswerText().setText(getExchange().checkGap());
-
-        for (int i = 0; i <getAnswerButtonsTextView().length ; i++) {
-            getAnswerButtonsTextView()[i].setText(getExchange().takeAnswers(i));
-        }
-
-        getExchange().resetSelectedAnswers();
     }
 
 
@@ -229,30 +208,6 @@ public class ConversationController extends Instance{
         this.currentExchangeID = currentExchangeID;
     }
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public void setFileId(String FileId) {
-        this.fileId = FileId;
-    }
-
-    public int getIdOfFile() {
-        return idOfFile;
-    }
-
-    public void setIdOfFile(int idOfFile) {
-        this.idOfFile = idOfFile;
-    }
-
-    public InputStream getInputStream() {
-        return inputStream;
-    }
-
-    public void setInputStream(InputStream inputStream) {
-        this.inputStream = inputStream;
-    }
-
     public Exchange getExchange() {
         return exchange;
     }
@@ -268,4 +223,5 @@ public class ConversationController extends Instance{
     public void setFileRead(FileRead fileRead) {
         this.fileRead = fileRead;
     }
+
 }

@@ -75,7 +75,6 @@ public class MainActivity extends Activity {
 
     }
 
-    MainActivity(){}
 
     public void loadLayoutImage(){
         worldView = findViewById(R.id.world_view);
@@ -125,7 +124,8 @@ public class MainActivity extends Activity {
         file = new FileRead(inputStream); //creates the file object for all the Strings to be created there
         file.read();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(), this);
+        exchange = new Exchange(file.getAnswerText(), file.getQuestionText(), file.getAllAnswers(),exchangeIndex, this);
+        //conversationController = new ConversationController()
         dialoguetext = findViewById(R.id.dialogue_text);
         dialoguetext.setText(exchange.checkHint());
         dialoguetext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -245,10 +245,5 @@ public class MainActivity extends Activity {
         //dPad = new DPad(worldView,this);
         conversationController.showConversationElements();
         dPad.hideDPad();
-    }
-
-    public void loadExchangeTwo(){
-        conversationController = new ConversationController(this);
-        conversationController.loadExchange(exchangeIndex);
     }
 }

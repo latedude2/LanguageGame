@@ -7,6 +7,7 @@ import android.widget.ImageView;
 public class Instance{
     //private MainActivity mainActivity;
     private DPad dPad;
+    private int currentExchange = 0;
 
     private boolean isActive;
     Instance (){
@@ -19,7 +20,8 @@ public class Instance{
 
     }
 
-
-
+    public int getCurrentExchange() {
+        return currentExchange;
+    }
 
 }
