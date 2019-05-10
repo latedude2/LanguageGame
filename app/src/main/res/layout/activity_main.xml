@@ -527,7 +527,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:onClick="move_characterLeft"
+        android:onClick="movePlayerLeft"
         android:text="@string/left_button"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline_down_button_top"

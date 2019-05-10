@@ -15,5 +15,10 @@ class Character extends WorldElement {
         this.currentConversationId = currentConversationId;
     }
 
+
+
+
+
+
     private void showConversation(){}
 }

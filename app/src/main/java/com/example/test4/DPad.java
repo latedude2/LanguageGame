@@ -3,6 +3,7 @@ package com.example.test4;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
+import android.graphics.drawable.AnimationDrawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ class DPad {
     private float moveY;
     private int startX;
     private int startY;
+    private PlayerObject player;
 
     private Button upButton;
     private Button downButton;
@@ -23,12 +25,19 @@ class DPad {
     private ImageView dPadBackground;       //Image of the area where the DPad is displayed
     private ImageView dPadImageView;        //To be changed later will be divided by 4
 
+    //for the dpad pressed animations
+    private AnimationDrawable pressing_up;
+    private AnimationDrawable pressing_down;
+    private AnimationDrawable pressing_left;
+    private AnimationDrawable pressing_right;
+
     //the 32 is from the map border, and the 10 is from the image view placement
     private int xCorrection = 32 + 10;
     private int yCorrection = 32;
 
 
     DPad (ImageView worldView, MainActivity mainActivity){
+        player = new PlayerObject(mainActivity);
 
         moveX =  worldView.getX();
         moveY =  worldView.getY();
@@ -58,6 +67,10 @@ class DPad {
         dPadBackground = mainActivity.findViewById(R.id.d_pad_background);
         dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
 
+        dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
+        int idOfDpad = mainActivity.getResources().getIdentifier("dpad_base", "drawable", mainActivity.getPackageName());
+        dPadImageView.setImageResource(idOfDpad);
+
     }
     public void hideDPad()
     {
@@ -84,6 +97,12 @@ class DPad {
     }
 
     public void moveUp (){
+        player.moveUp();
+
+        dPadImageView.setImageResource(R.drawable.dpad_press_up);
+        pressing_up = (AnimationDrawable) dPadImageView.getDrawable();
+        pressing_up.start();
+
         moveY = worldView.getY() + moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
             animation.setDuration(animationLength);
@@ -91,6 +110,10 @@ class DPad {
     }
 
     public void moveDown (){
+        dPadImageView.setImageResource(R.drawable.dpad_press_down);
+        pressing_down = (AnimationDrawable) dPadImageView.getDrawable();
+        pressing_down.start();
+
         moveY = worldView.getY() - moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
             animation.setDuration(animationLength);
@@ -99,6 +122,12 @@ class DPad {
     }
 
     public void moveLeft (){
+        player.moveLeft();
+
+        dPadImageView.setImageResource(R.drawable.dpad_press_left);
+        pressing_left = (AnimationDrawable) dPadImageView.getDrawable();
+        pressing_left.start();
+
         moveX = worldView.getX() + moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
@@ -106,6 +135,10 @@ class DPad {
     }
 
     public void moveRight (){
+        dPadImageView.setImageResource(R.drawable.dpad_press_right);
+        pressing_right = (AnimationDrawable) dPadImageView.getDrawable();
+        pressing_right.start();
+
         moveX = worldView.getX() - moveDist;
         ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
