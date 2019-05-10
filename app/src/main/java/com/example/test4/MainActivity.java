@@ -22,25 +22,18 @@ public class MainActivity extends Activity {
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
 
-
-
-
-
     private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
     private ImageView speaker_button;
     private ImageView submit_button;
     private AnimationDrawable pressing_submit;
+    private Character[] characters = new Character[4];
 
     private FileRead file;
     private ConversationController conversationController;
     private Instance instance;
 
     int exchangeIndex = 4; //index which counts which exchange it is currently
-
-    int[] answerNum;
-
-    char[][] mapTiles; //2D array for the map
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,17 +52,15 @@ public class MainActivity extends Activity {
         //loadExchangeTwo();
         loadConverstationCharacterImage();
 
-        loadMapStructure();
-
-
     }
 
     public void loadLayoutImage(){
         worldView = findViewById(R.id.world_view);
-
-
         dPad = new DPad(worldView, this);
-
+        characters[0] = new Character(getResources().getIdentifier("big_niels", "drawable", getPackageName()), 26, 13);
+        characters[1] = new Character(getResources().getIdentifier("big_old", "drawable", getPackageName()), 11, 12);
+        characters[2] = new Character(getResources().getIdentifier("big_clerk", "drawable", getPackageName()), 23, 3);
+        characters[3] = new Character(getResources().getIdentifier("big_baker", "drawable", getPackageName()), 29, 3);
 
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
         worldView.setImageResource(idOfMap);
@@ -79,7 +70,6 @@ public class MainActivity extends Activity {
         worldBackground.setImageResource(idOfBackground);
         
         dPad.hideDPad();
-
         /*conversationBack = findViewById(R.id.conversation_background);
         int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationBack.setImageResource(idOfBackground);*/
@@ -90,9 +80,6 @@ public class MainActivity extends Activity {
         speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);*/
     }
-
-
-
 
     //loads all the elements of the exchange view
     public void loadExchange(int exchangeIndex)
@@ -112,7 +99,6 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-
         for (int j = 0; j < answerButtonsTextView.length; j++){
             String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
@@ -120,12 +106,10 @@ public class MainActivity extends Activity {
             answerButtonsTextView[j] = findViewById(textViewId);
             answerButtonsTextView[j].setText(exchange.takeAnswers(j));
         }
-
         //onSoundViewClick();
         exchange.resetSelectedAnswers();
 
     }
-
     public void loadConverstationCharacterImage(){
         ImageView imageView = findViewById(R.id.npc_dialogue_view);
         imageView.setImageResource(R.drawable.big_baker);
@@ -139,7 +123,7 @@ public class MainActivity extends Activity {
     public void move_characterDown (View v)
     {
         dPad.moveDown();
-        startConversation(v);
+        //startConversation(v);
     }
 
     public void movePlayerLeft(View v)
@@ -152,7 +136,8 @@ public class MainActivity extends Activity {
         dPad.moveRight();
     }
 
-    public ImageView getHintImage(){
+    public ImageView getHintImage()
+    {
         hintImage = findViewById(R.id.hint_img);
         return hintImage;
     }
@@ -174,14 +159,7 @@ public class MainActivity extends Activity {
         exchange.sentencePlay(speaker_button, idOfAudioFile);
     }
 
-    //creates the 2D array mapTiles, which holds the structure of the map
-    public void loadMapStructure(){
-        String idName = "map_structure"; //creates a String name of the file to use in the following line
-        int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
-        InputStream inputStream = this.getResources().openRawResource(idOfFile);
-        FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
-        mapTiles = fileStructure.readStructureChars(); //reads all of the chars in the structure and adds them to the 2D array
-    }
+
 
     public void exitConversation(View view){
         conversationController = new ConversationController(this);

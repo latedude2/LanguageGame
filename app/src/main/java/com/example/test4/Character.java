@@ -3,22 +3,19 @@ package com.example.test4;
 import android.media.Image;
 
 class Character extends WorldElement {
-    private String name;
-    private int characterId;
-    private Image portrait;
+    private int portraitID;
     private int currentConversationId;
 
-    private Character(String name, int characterId, Image portrait, int currentConversationId){
-        this.name = name;
-        this.characterId = characterId;
-        this.portrait = portrait;
-        this.currentConversationId = currentConversationId;
+    Character(int portraitID, int gridX, int gridY){
+        this.setXGrid(gridX);
+        this.setYGrid(gridY);
+        this.portraitID = portraitID;
+        this.currentConversationId = 0;
     }
 
 
+    private void showConversation()
+    {
 
-
-
-
-    private void showConversation(){}
+    }
 }
