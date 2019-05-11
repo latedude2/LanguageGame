@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 
+import static com.example.test4.DPad.dpToPx;
+
 public class MainActivity extends Activity {
 
     //Name the variables (ImageViews, TextViews, Buttons) as their id to avoid confusion. Thank you.
@@ -28,6 +30,7 @@ public class MainActivity extends Activity {
     private ImageView submit_button;
     private AnimationDrawable pressing_submit;
     private Character[] characters = new Character[4];
+    private Portal[] portals = new Portal[6];
 
     private FileRead file;
     private ConversationController conversationController;
@@ -38,14 +41,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        loadLayoutImage();
+
+        setupWorld();
+
 
         dPad.hideDPad();
         loadExchange(this.exchangeIndex);
@@ -54,13 +58,15 @@ public class MainActivity extends Activity {
 
     }
 
-    public void loadLayoutImage(){
+    public void setupWorld(){
         worldView = findViewById(R.id.world_view);
         dPad = new DPad(worldView, this);
         characters[0] = new Character(getResources().getIdentifier("big_niels", "drawable", getPackageName()), 26, 13);
         characters[1] = new Character(getResources().getIdentifier("big_old", "drawable", getPackageName()), 11, 12);
         characters[2] = new Character(getResources().getIdentifier("big_clerk", "drawable", getPackageName()), 23, 3);
         characters[3] = new Character(getResources().getIdentifier("big_baker", "drawable", getPackageName()), 29, 3);
+
+        createPortals();
 
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
         worldView.setImageResource(idOfMap);
@@ -80,7 +86,69 @@ public class MainActivity extends Activity {
         speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);*/
     }
+    private void createPortals()
+    {
+        int moveDist = dpToPx(96);
+        int portalX = 13;
+        int portalY = 4;
+        int newGridX = 28;
+        int newGridY = 14;
+        int offsetX = (newGridX - portalX) * moveDist;
+        int offsetY = (newGridY - portalY) * moveDist;
 
+        portals[0] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
+
+        portalX = 28;
+        portalY = 15;
+        newGridX = 13;
+        newGridY = 5;
+        offsetX = (newGridX - portalX) * moveDist;
+        offsetY = (newGridY - portalY) * moveDist;
+        portals[1] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
+
+        portalX = 3;
+        portalY = 10;
+        newGridX = 26;
+        newGridY = 5;
+        offsetX = (newGridX - portalX) * moveDist;
+        offsetY = (newGridY - portalY) * moveDist;
+        portals[2] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
+
+        portalX = 26;
+        portalY = 6;
+        newGridX = 3;
+        newGridY = 11;
+        offsetX = (newGridX - portalX) * moveDist;
+        offsetY = (newGridY - portalY) * moveDist;
+        portals[3] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
+
+        portalX = 4;
+        portalY = 10;
+        newGridX = 27;
+        newGridY = 5;
+        offsetX = (newGridX - portalX) * moveDist;
+        offsetY = (newGridY - portalY) * moveDist;
+        portals[4] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
+
+        portalX = 27;
+        portalY = 6;
+        newGridX = 4;
+        newGridY = 11;
+        offsetX = (newGridX - portalX) * moveDist;
+        offsetY = (newGridY - portalY) * moveDist;
+        portals[5] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
+    }
+    public Portal getPortalAt(int x, int y)
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            if(portals[i].getGridX() == x && portals[i].getGridY() == y)
+            {
+                return portals[i];
+            }
+        }
+        throw new Error("Portal not found");
+    }
     //loads all the elements of the exchange view
     public void loadExchange(int exchangeIndex)
     {
