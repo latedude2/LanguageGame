@@ -153,6 +153,7 @@ public class MainActivity extends Activity {
     }
 
     public void move_characterUp (View v){
+
         char_world_wiev.setImageResource(R.drawable.walk_animation_up);
         walking_up = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_up.start();
@@ -165,6 +166,7 @@ public class MainActivity extends Activity {
     }
 
     public void move_characterDown (View v){
+
         char_world_wiev.setImageResource(R.drawable.walk_animation_down);
         walking_down = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_down.start();
@@ -178,6 +180,7 @@ public class MainActivity extends Activity {
     }
 
     public void move_characterLeft (View v){
+
         char_world_wiev.setImageResource(R.drawable.walk_animation_left);
         walking_left = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_left.start();
@@ -191,6 +194,7 @@ public class MainActivity extends Activity {
     }
 
     public void move_characterRight (View v){
+
         char_world_wiev.setImageResource(R.drawable.walk_animation_right);
         walking_right = (AnimationDrawable) char_world_wiev.getDrawable();
         walking_right.start();

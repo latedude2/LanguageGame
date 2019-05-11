@@ -24,8 +24,10 @@ class DPad {
     private ImageView dPadImageView;        //To be changed later will be divided by 4
 
     //the 32 is from the map border, and the 10 is from the image view placement
-    private int xCorrection = 32 + 10;
+    private int xCorrection = 28;
     private int yCorrection = 32;
+
+    boolean moving = false;
 
 
     DPad (ImageView worldView, MainActivity mainActivity){
@@ -84,33 +86,37 @@ class DPad {
     }
 
     public void moveUp (){
-        moveY = worldView.getY() + moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
+            moveY = worldView.getY() + moveDist;
+            ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
             animation.setDuration(animationLength);
             animation.start();
     }
 
     public void moveDown (){
-        moveY = worldView.getY() - moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
+            moveY = worldView.getY() - moveDist;
+            ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
             animation.setDuration(animationLength);
             animation.start();
-
     }
 
-    public void moveLeft (){
-        moveX = worldView.getX() + moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
+    public void moveLeft () {
+            moveX = worldView.getX() + moveDist;
+            ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
     }
 
     public void moveRight (){
-        moveX = worldView.getX() - moveDist;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
+            moveX = worldView.getX() - moveDist;
+            ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
     }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
 
     //Create getters for ImageViews when we are done.
 }
