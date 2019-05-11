@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +37,8 @@ public class MainActivity extends Activity {
     private FileRead file;
     private ConversationController conversationController;
     private Instance instance;
+
+    private int moveDist = 0;
 
     int exchangeIndex = 4; //index which counts which exchange it is currently
 
@@ -68,6 +72,13 @@ public class MainActivity extends Activity {
 
         createPortals();
 
+        ImageView imageView = findViewById(R.id.world_view);
+        ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
+        params.width = 64 + moveDist * 32;
+        params.height = 64 + moveDist * 16;
+// existing height is ok as is, no need to edit it
+        imageView.setLayoutParams(params);
+
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
         worldView.setImageResource(idOfMap);
 
@@ -88,54 +99,62 @@ public class MainActivity extends Activity {
     }
     private void createPortals()
     {
-        int moveDist = dpToPx(96);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        //int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        moveDist = width/4;
+
+        //portal outside niels home
         int portalX = 13;
         int portalY = 4;
-        int newGridX = 28;
-        int newGridY = 14;
+        int newGridX = 27;
+        int newGridY = 15;
         int offsetX = (newGridX - portalX) * moveDist;
-        int offsetY = (newGridY - portalY) * moveDist;
+        int offsetY = (newGridY - (portalY + 1)) * moveDist;
 
         portals[0] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
-
-        portalX = 28;
-        portalY = 15;
+        //portal inside niels home
+        portalX = 27;
+        portalY = 16;
         newGridX = 13;
         newGridY = 5;
         offsetX = (newGridX - portalX) * moveDist;
-        offsetY = (newGridY - portalY) * moveDist;
+        offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[1] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
+        //left door to shop
         portalX = 3;
         portalY = 10;
-        newGridX = 26;
-        newGridY = 5;
+        newGridX = 25;
+        newGridY = 6;
         offsetX = (newGridX - portalX) * moveDist;
-        offsetY = (newGridY - portalY) * moveDist;
+        offsetY = (newGridY - (portalY + 1)) * moveDist;
         portals[2] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
-        portalX = 26;
-        portalY = 6;
+        //left door exit from shop
+        portalX = 25;
+        portalY = 7;
         newGridX = 3;
         newGridY = 11;
         offsetX = (newGridX - portalX) * moveDist;
-        offsetY = (newGridY - portalY) * moveDist;
+        offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[3] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         portalX = 4;
         portalY = 10;
-        newGridX = 27;
-        newGridY = 5;
+        newGridX = 26;
+        newGridY = 6;
         offsetX = (newGridX - portalX) * moveDist;
-        offsetY = (newGridY - portalY) * moveDist;
+        offsetY = (newGridY - (portalY + 1)) * moveDist;
         portals[4] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
-        portalX = 27;
-        portalY = 6;
+        portalX = 26;
+        portalY = 7;
         newGridX = 4;
         newGridY = 11;
         offsetX = (newGridX - portalX) * moveDist;
-        offsetY = (newGridY - portalY) * moveDist;
+        offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[5] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
     }
     public Portal getPortalAt(int x, int y)
@@ -183,25 +202,28 @@ public class MainActivity extends Activity {
         imageView.setImageResource(R.drawable.big_baker);
     }
 
-    public void move_characterUp (View v)
+    public void move_characterUp (final View v)
     {
         dPad.moveUp();
+        disableDpadFor();
     }
 
-    public void move_characterDown (View v)
+    public void move_characterDown (final View v)
     {
         dPad.moveDown();
-        //startConversation(v);
+        disableDpadFor();
     }
 
-    public void movePlayerLeft(View v)
+    public void movePlayerLeft(final View v)
     {
         dPad.moveLeft();
+        disableDpadFor();
     }
 
-    public void move_characterRight (View v)
+    public void move_characterRight (final View v)
     {
         dPad.moveRight();
+        disableDpadFor();
     }
 
     public ImageView getHintImage()
@@ -246,5 +268,40 @@ public class MainActivity extends Activity {
     public void loadExchangeTwo(){
         conversationController = new ConversationController(this);
         conversationController.loadExchange(exchangeIndex);
+    }
+    public void disableDpadFor()
+    {
+        final View v = findViewById(R.id.up_button);
+        v.setEnabled(false);
+        v.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                v.setEnabled(true);
+            }
+        }, dPad.getAnimationLength());
+        final View v2 = findViewById(R.id.down_button);
+        v2.setEnabled(false);
+        v2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                v2.setEnabled(true);
+            }
+        }, dPad.getAnimationLength());
+        final View v3 = findViewById(R.id.left_button);
+        v3.setEnabled(false);
+        v3.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                v3.setEnabled(true);
+            }
+        }, dPad.getAnimationLength());
+        final View v4 = findViewById(R.id.right_button);
+        v4.setEnabled(false);
+        v4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                v4.setEnabled(true);
+            }
+        }, dPad.getAnimationLength());
     }
 }

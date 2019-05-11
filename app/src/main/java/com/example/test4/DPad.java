@@ -1,9 +1,9 @@
 package com.example.test4;
 
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -51,11 +51,18 @@ class DPad {
         this.worldView = worldView;
 
         //these numbers don't exactly match the calculations, but it is as close as i could get
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        mainActivity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        //int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        moveDist = width/4;
 
-        moveDist = dpToPx(96);
-        startX = dpToPx(-1344 + xCorrection);
-        startY = dpToPx(-864 + yCorrection);
-
+        startX = -120 - moveDist * 13;
+        startY = -120 - moveDist * 8;
+        //startX = dpToPx(-1344 + xCorrection);
+        //startY = dpToPx(-864 + yCorrection);
+        //startX = -(32 + moveDist * 28);
+        //startY = -(32 + moveDist * 14);
 
         //Here we are setting a specific location for the character, this needs to be updated once we have a functional game world
         ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), startY);
@@ -202,6 +209,9 @@ class DPad {
     private char checkRight()
     {
         return mapTiles[player.getYGrid()][player.getXGrid() + 1];
-
+    }
+    public int getAnimationLength()
+    {
+        return animationLength;
     }
 }

@@ -20,8 +20,8 @@ public class PlayerObject extends GameObject {
 
     public PlayerObject(MainActivity mainActivity){
         this.mainActivity = mainActivity;
-        setXGrid(28);
-        setYGrid(13);
+        setXGrid(27);
+        setYGrid(14);
         char_world_view = mainActivity.findViewById(R.id.char_world_view);
         int idOfPlayer = mainActivity.getResources().getIdentifier("main_character", "drawable", mainActivity.getPackageName());
         char_world_view.setImageResource(idOfPlayer);

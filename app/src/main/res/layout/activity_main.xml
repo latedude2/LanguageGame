@@ -205,8 +205,8 @@
 
     <ImageView
         android:id="@+id/world_view"
-        android:layout_width="3138dp"
-        android:layout_height="1600dp"
+        android:layout_width="10dp"
+        android:layout_height="1800dp"
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="fitXY"
         android:src="@drawable/map"
