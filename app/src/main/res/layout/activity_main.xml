@@ -205,7 +205,7 @@
 
     <ImageView
         android:id="@+id/world_view"
-        android:layout_width="3136dp"
+        android:layout_width="3168dp"
         android:layout_height="1600dp"
         android:contentDescription="@string/content_description_world_image"
         android:scaleType="fitXY"
@@ -527,7 +527,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:onClick="movePlayerLeft"
+        android:onClick="move_characterLeft"
         android:text="@string/left_button"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline_down_button_top"
