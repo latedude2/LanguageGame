@@ -18,14 +18,19 @@ public class ConversationController extends Instance{
     private int sizeSix = 6;
     private int numExchanges;
     private int currentExchangeID;
+    private int currentConversationID;
     private int exchangeCounter = 0;
     private int numOfConversations = 5;
 
+
+
     private int conversationId;
+    private int[] exchangeList;
     private int exchangeId;
 
     private Exchange exchange;
-    private Exchange[] exchanges = new Exchange[numExchanges];
+    private int[] exchanges;
+    private MainActivity mainActivity;
     private GameObject background;
     private FileRead fileRead;
 
@@ -86,31 +91,43 @@ public class ConversationController extends Instance{
         ///////////////////////////////////////////////////////
     }
 
-    ConversationController(int numExchanges, int conversationId, int exchangeId, Exchange exchange, MainActivity mainActivity){
-        this.numExchanges = numExchanges;
-        this.conversationId = conversationId;
-        this.exchangeId = exchangeId;
-        this.exchange = exchange;
-    }
-
-
-
-    public void makeConversation(){
-        for (int i = 0; i < numExchanges; i++) {
-            currentConversation[conversationId] = exchanges[i + numExchanges + exchangeId];
-        }
-    }
-
-    public Exchange[] getExchanges() {
-        for (int i = 0; i < numExchanges; i++) {
-            exchanges[i] = getExchange();
-        }
-        return exchanges;
-    }
-
-    public void setExchanges(Exchange[] exchanges) {
+    ConversationController(int[] exchanges, MainActivity mainActivity){
         this.exchanges = exchanges;
+        this.mainActivity = mainActivity;
     }
+
+    public int getExchangeId() {
+
+        currentExchangeID = exchanges[0];
+        if (exchange.getCheckAnswer()){
+            currentExchangeID++;
+        }
+        exchangeId = currentExchangeID;
+        return exchangeId;
+    }
+
+    public void loadExchange()
+    {
+        String fileIndex = Integer.toString(4); //use if it complains about using integer in the String in the following line
+        String IDToString = "exchange" + fileIndex; //creates a String name of the file to use in the following line
+        int fileID = mainActivity.getResources().getIdentifier(IDToString,"raw", mainActivity.getPackageName());
+        InputStream inputStream = (mainActivity.getResources().openRawResource(fileID));
+        fileRead = new FileRead(inputStream);
+        fileRead.read();
+        exchange = new Exchange(fileRead.getAnswerText(), fileRead.getQuestionText(), fileRead.getAllAnswers(), mainActivity);
+        //creates exchange object which consists of all the Strings to be put in that one created exchange
+        dialogueText.setText(exchange.checkHint());
+        dialogueText.setMovementMethod(LinkMovementMethod.getInstance());
+        answerText.setText(exchange.checkGap());
+
+        for (int j = 0; j < answerButtonsTextView.length; j++){
+            answerButtonsTextView[j].setText(exchange.takeAnswers(j));
+        }
+        //onSoundViewClick();
+        exchange.resetSelectedAnswers();
+
+    }
+
 
     public void hideConversationElements(){
         for (int j = 0; j < answerButtonsTextView.length ; j++) {
@@ -214,14 +231,6 @@ public class ConversationController extends Instance{
 
     public void setExchange(Exchange exchange) {
         this.exchange = exchange;
-    }
-
-    public FileRead getFileRead() {
-        return fileRead;
-    }
-
-    public void setFileRead(FileRead fileRead) {
-        this.fileRead = fileRead;
     }
 
 }

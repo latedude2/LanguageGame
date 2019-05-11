@@ -14,6 +14,7 @@ public class FileRead {
     private StringBuffer[] allAnswers; //array of all 6 possible answers
 
     private InputStream inputStream; //the text file which is taken
+    private MainActivity mainActivity;
 
     public FileRead (InputStream inputStream){
         this.inputStream = inputStream;

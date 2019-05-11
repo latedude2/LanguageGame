@@ -21,9 +21,15 @@ class Exchange extends Instance {
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
     private StringBuffer[] answers; //array of all 6 possible answers
+    private TextView answerTextView;            //Text view to hold the text of the user
+    private TextView dialogueTextView;          //Text view to hold the text of the NPC
+    private ImageView hintImageView;            //Image view to show the hint of a word
+    private TextView[] answerButtonsTextView = new TextView[6];
+
+    private Exchange exchange;
     private int currentExchange;
 
-    MainActivity mainActivity = new MainActivity();
+    MainActivity mainActivity;
 
     private ArrayList<Integer> wordIndexList = new ArrayList<>();
     private ArrayList<String> wordList = new ArrayList<>();
@@ -42,14 +48,46 @@ class Exchange extends Instance {
     private SelectedAnswer[] selectedAnswers = new SelectedAnswer[6];
     private int answerIndex;
 
+    private FileRead fileRead; //creates the file object for all the Strings to be created there
 
-    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, int currentExchange, MainActivity mainActivity) {
+
+    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, MainActivity mainActivity) {
             this.questionText = questionText;
             this.answerText = answerText;
             this.answers = answers;
             this.mainActivity = mainActivity;
-            this.currentExchange = currentExchange;
+
+            this.dialogueTextView = mainActivity.findViewById(R.id.dialogue_text);
+            this.answerTextView = mainActivity.findViewById(R.id.answer_text);
+            this.hintImageView = mainActivity.findViewById(R.id.hint_img);
+
+        for (int i = 0; i < answerButtonsTextView.length; i++) {
+            String number = Integer.toString(i);
+            String viewText = "answer_button_text_" + number;
+            int textViewId = mainActivity.getResources().getIdentifier(viewText, "id", mainActivity.getPackageName());
+            this.answerButtonsTextView[i] = mainActivity.findViewById(textViewId);
+        }
     }
+
+
+
+    /*public void loadExchange()
+    {
+        mainActivity.stream(currentExchange);
+        fileRead.read();
+        //creates exchange object which consists of all the Strings to be put in that one created exchange
+
+        dialogueTextView.setText(checkHint());
+        dialogueTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        answerTextView.setText(checkGap());
+
+        for (int j = 0; j < answerButtonsTextView.length; j++){
+            answerButtonsTextView[j].setText(takeAnswers(j));
+        }
+        //onSoundViewClick();
+        resetSelectedAnswers();
+
+    }*/
 
     public SpannableString checkGap(){
         StringBuffer stringBuffer = answerText;
@@ -343,5 +381,4 @@ class Exchange extends Instance {
     {
 
     }
-
 }
