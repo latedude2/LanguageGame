@@ -34,7 +34,7 @@ class DPad {
     private AnimationDrawable pressing_right;
 
     //the 32 is from the map border, and the 10 is from the image view placement
-    private int xCorrection = 32 + 10;
+    private int xCorrection = 28;
     private int yCorrection = 32;
 
     char[][] mapTiles; //2D array for the map
@@ -52,7 +52,7 @@ class DPad {
 
         //these numbers don't exactly match the calculations, but it is as close as i could get
 
-        moveDist = dpToPx(98);
+        moveDist = dpToPx(96);
         startX = dpToPx(-1344 + xCorrection);
         startY = dpToPx(-864 + yCorrection);
 
@@ -115,8 +115,11 @@ class DPad {
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
             animation.setDuration(animationLength);
             animation.start();
-
-
+        }
+        else if(checkUp() == '2')
+        {
+            Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
+            p.teleport(player);
         }
     }
 
@@ -134,6 +137,11 @@ class DPad {
             animation.setDuration(animationLength);
             animation.start();
 
+        }
+        else if(checkDown() == '2')
+        {
+            Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() + 1);
+            p.teleport(player);
         }
     }
 
