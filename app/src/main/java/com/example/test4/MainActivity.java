@@ -59,6 +59,7 @@ public class MainActivity extends Activity {
         setupWorld();
 
 
+
         loadConversation();
         dPad.hideDPad();
 
@@ -243,6 +244,12 @@ public class MainActivity extends Activity {
         //dPad = new DPad(worldView,this);
         conversationController.showConversationElements();
         dPad.hideDPad();
+    }
+
+    public void loadConversation(){
+        for (int i = 0; i < characters.length; i++) {
+            characters[i].showConversation();
+        }
     }
 
     public int getOldManID() {

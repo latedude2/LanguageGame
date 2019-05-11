@@ -91,24 +91,32 @@ public class ConversationController extends Instance{
         ///////////////////////////////////////////////////////
     }
 
-    ConversationController(int[] exchanges, MainActivity mainActivity){
+    ConversationController(int[] exchanges, int conversationId, MainActivity mainActivity){
         this.exchanges = exchanges;
         this.mainActivity = mainActivity;
+        this.conversationId = conversationId;
     }
 
     public int getExchangeId() {
-
+        numExchanges = 0;
         currentExchangeID = exchanges[0];
         if (exchange.getCheckAnswer()){
             currentExchangeID++;
+            numExchanges++;
+            if (numExchanges == exchanges.length)
+                conversationId++;
         }
         exchangeId = currentExchangeID;
         return exchangeId;
     }
 
+    public int getConversationId() {
+        return conversationId;
+    }
+
     public void loadExchange()
     {
-        String fileIndex = Integer.toString(4); //use if it complains about using integer in the String in the following line
+        String fileIndex = Integer.toString(getExchangeId()); //use if it complains about using integer in the String in the following line
         String IDToString = "exchange" + fileIndex; //creates a String name of the file to use in the following line
         int fileID = mainActivity.getResources().getIdentifier(IDToString,"raw", mainActivity.getPackageName());
         InputStream inputStream = (mainActivity.getResources().openRawResource(fileID));

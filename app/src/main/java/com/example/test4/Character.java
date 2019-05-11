@@ -18,10 +18,12 @@ class Character extends WorldElement {
         this.portraitID = portraitID;
         this.conversation = conversation;
         this.mainActivity = mainActivity;
-        conversationController = new ConversationController(getExchanges() , mainActivity);
+        conversationController = new ConversationController(getExchanges(), getConversationID(), mainActivity);
     }
+    Character(){}
 
     public int getConversationID() {
+
         return conversationID;
     }
 
@@ -39,6 +41,7 @@ class Character extends WorldElement {
     }
 
     public int[] getExchanges() {
+        conversationID = conversationController.getConversationId();
         if (conversationID ==0)
             exchanges = new int[] {0,1,2};
         else if (conversationID == 1)
