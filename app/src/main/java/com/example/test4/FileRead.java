@@ -89,7 +89,7 @@ public class FileRead {
     public char[][] readStructureChars(){
         String newLine; //each new read line
         StringBuffer oldLine = new StringBuffer(); //
-        char[][] mapTiles = new char[16][33]; //the 2 dimensional array to be returned to the activity
+        char[][] mapTiles = new char[17][34]; //the 2 dimensional array to be returned to the activity
         int lineIndex = 0; // lines starting from 0 to be read afterwards one by one
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

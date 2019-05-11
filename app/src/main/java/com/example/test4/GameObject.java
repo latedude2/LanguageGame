@@ -43,13 +43,14 @@ class GameObject extends Instance {
         this.yGrid = yGrid;
     }
 
-    public void changeImage(Image newImage){
+    public int getXGrid() { return xGrid; }
 
+    public int getYGrid() {
+        return yGrid;
     }
 
-    public void disableGameobject(){
+    public void changeImage(Image newImage)
+    {
 
     }
-
-
 }

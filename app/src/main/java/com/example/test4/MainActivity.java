@@ -2,7 +2,6 @@ package com.example.test4;
 
 import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -24,20 +23,6 @@ public class MainActivity extends Activity {
     private TextView answerText;            //Text view to hold the text of the user
     private TextView dialoguetext;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
-    private ImageView char_world_wiev;      // Image view to show player character
-    private ImageView d_pad_imageviev;
-
-    //for the different walking animations
-    private AnimationDrawable walking_up;
-    private AnimationDrawable walking_down;
-    private AnimationDrawable walking_left;
-    private AnimationDrawable walking_right;
-
-    //for the dpad pressed animations
-    private AnimationDrawable pressing_up;
-    private AnimationDrawable pressing_down;
-    private AnimationDrawable pressing_left;
-    private AnimationDrawable pressing_right;
 
     private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
@@ -52,10 +37,6 @@ public class MainActivity extends Activity {
     private Instance instance;
 
     int exchangeIndex = 4; //index which counts which exchange it is currently
-
-    int[] answerNum;
-
-    char[][] mapTiles; //2D array for the map
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +56,15 @@ public class MainActivity extends Activity {
         //loadExchangeTwo();
         loadConverstationCharacterImage();
 
-        loadMapStructure();
-
-
     }
 
     public void setupWorld(){
         worldView = findViewById(R.id.world_view);
-
         dPad = new DPad(worldView, this);
-
+        characters[0] = new Character(getResources().getIdentifier("big_niels", "drawable", getPackageName()), 26, 13);
+        characters[1] = new Character(getResources().getIdentifier("big_old", "drawable", getPackageName()), 11, 12);
+        characters[2] = new Character(getResources().getIdentifier("big_clerk", "drawable", getPackageName()), 23, 3);
+        characters[3] = new Character(getResources().getIdentifier("big_baker", "drawable", getPackageName()), 29, 3);
 
         createPortals();
 
@@ -94,18 +74,8 @@ public class MainActivity extends Activity {
         worldBackground = findViewById(R.id.d_pad_background);
         int idOfBackground = getResources().getIdentifier("background_world", "drawable", getPackageName());
         worldBackground.setImageResource(idOfBackground);
-
-        
-        char_world_wiev = findViewById(R.id.char_world_view);
-        int idOfPlayer = getResources().getIdentifier("main_character", "drawable", getPackageName());
-        char_world_wiev.setImageResource(idOfPlayer);
-
-        d_pad_imageviev = findViewById(R.id.d_pad_imageview);
-        int idOfDpad = getResources().getIdentifier("dpad_base", "drawable", getPackageName());
-        d_pad_imageviev.setImageResource(idOfDpad);
         
         dPad.hideDPad();
-
         /*conversationBack = findViewById(R.id.conversation_background);
         int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
         conversationBack.setImageResource(idOfBackground);*/
@@ -197,7 +167,6 @@ public class MainActivity extends Activity {
         answerText = findViewById(R.id.answer_text);
         answerText.setText(exchange.checkGap());
 
-
         for (int j = 0; j < answerButtonsTextView.length; j++){
             String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
@@ -205,72 +174,38 @@ public class MainActivity extends Activity {
             answerButtonsTextView[j] = findViewById(textViewId);
             answerButtonsTextView[j].setText(exchange.takeAnswers(j));
         }
-
         //onSoundViewClick();
         exchange.resetSelectedAnswers();
 
     }
-
     public void loadConverstationCharacterImage(){
         ImageView imageView = findViewById(R.id.npc_dialogue_view);
         imageView.setImageResource(R.drawable.big_baker);
     }
 
-    public void move_characterUp (View v){
-
-        char_world_wiev.setImageResource(R.drawable.walk_animation_up);
-        walking_up = (AnimationDrawable) char_world_wiev.getDrawable();
-        walking_up.start();
-
-        d_pad_imageviev.setImageResource(R.drawable.dpad_press_up);
-        pressing_up = (AnimationDrawable) d_pad_imageviev.getDrawable();
-        pressing_up.start();
-
+    public void move_characterUp (View v)
+    {
         dPad.moveUp();
     }
 
-    public void move_characterDown (View v){
-
-        char_world_wiev.setImageResource(R.drawable.walk_animation_down);
-        walking_down = (AnimationDrawable) char_world_wiev.getDrawable();
-        walking_down.start();
-
-        d_pad_imageviev.setImageResource(R.drawable.dpad_press_down);
-        pressing_down = (AnimationDrawable) d_pad_imageviev.getDrawable();
-        pressing_down.start();
-
+    public void move_characterDown (View v)
+    {
         dPad.moveDown();
-        startConversation(v);
+        //startConversation(v);
     }
 
-    public void move_characterLeft (View v){
-
-        char_world_wiev.setImageResource(R.drawable.walk_animation_left);
-        walking_left = (AnimationDrawable) char_world_wiev.getDrawable();
-        walking_left.start();
-
-        d_pad_imageviev.setImageResource(R.drawable.dpad_press_left);
-        pressing_left = (AnimationDrawable) d_pad_imageviev.getDrawable();
-        pressing_left.start();
-
+    public void movePlayerLeft(View v)
+    {
         dPad.moveLeft();
-
     }
 
-    public void move_characterRight (View v){
-
-        char_world_wiev.setImageResource(R.drawable.walk_animation_right);
-        walking_right = (AnimationDrawable) char_world_wiev.getDrawable();
-        walking_right.start();
-
-        d_pad_imageviev.setImageResource(R.drawable.dpad_press_right);
-        pressing_right = (AnimationDrawable) d_pad_imageviev.getDrawable();
-        pressing_right.start();
-
+    public void move_characterRight (View v)
+    {
         dPad.moveRight();
     }
 
-    public ImageView getHintImage(){
+    public ImageView getHintImage()
+    {
         hintImage = findViewById(R.id.hint_img);
         return hintImage;
     }
@@ -292,14 +227,7 @@ public class MainActivity extends Activity {
         exchange.sentencePlay(speaker_button, idOfAudioFile);
     }
 
-    //creates the 2D array mapTiles, which holds the structure of the map
-    public void loadMapStructure(){
-        String idName = "map_structure"; //creates a String name of the file to use in the following line
-        int idOfFile = getResources().getIdentifier(idName,"raw", getPackageName());
-        InputStream inputStream = this.getResources().openRawResource(idOfFile);
-        FileRead fileStructure = new FileRead(inputStream); //creates the file object for all the Strings to be created there
-        mapTiles = fileStructure.readStructureChars(); //reads all of the chars in the structure and adds them to the 2D array
-    }
+
 
     public void exitConversation(View view){
         conversationController = new ConversationController(this);
