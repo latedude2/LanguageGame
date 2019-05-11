@@ -18,13 +18,23 @@ public class ConversationController extends Instance{
     private int sizeSix = 6;
     private int numExchanges;
     private int currentExchangeID;
+    private int currentConversationID;
     private int exchangeCounter = 0;
+    private int numOfConversations = 5;
+
+
+
+    private int conversationId;
+    private int[] exchangeList;
+    private int exchangeId;
 
     private Exchange exchange;
-    private Exchange[] exchanges = new Exchange[numExchanges];
+    private int[] exchanges;
+    private MainActivity mainActivity;
     private GameObject background;
     private FileRead fileRead;
 
+    private Exchange[] currentConversation = new Exchange[numOfConversations];
 
     //All conversation Elements
     private ImageView npcDialogueView;      //Image of the character you are having the conversation with
@@ -49,18 +59,7 @@ public class ConversationController extends Instance{
 
     ////////////////////////////////////////////////////
 
-    private String fileId;
-    private int idOfFile;
-    private InputStream inputStream;
-
-
     ConversationController(MainActivity mainActivity){
-        //If this is not commented the program doesn't run.
-        /*setIdOfFile(mainActivity.getResources().getIdentifier(getFileId(),"raw", mainActivity.getPackageName()));
-        setInputStream(mainActivity.getResources().openRawResource(getIdOfFile()));
-        setExchange(new Exchange(fileRead.getAnswerText(), fileRead.getQuestionText(), fileRead.getAllAnswers(), mainActivity));
-        setFileRead(new FileRead(getInputStream()));*/
-
         this.npcDialogueView = mainActivity.findViewById(R.id.npc_dialogue_view);
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
@@ -90,32 +89,53 @@ public class ConversationController extends Instance{
         dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
 
         ///////////////////////////////////////////////////////
-
-
-
     }
 
-    public void showExchange(){
-        if (getExchangeCounter() == 0){
-            loadExchange(0);
-            for (int i = 0; i < exchanges.length; i++) {
-                if (getCurrentExchangeID() != 4){
-                    if (exchange.getCheckAnswer()){
-                        setCurrentExchangeID(i);
-                        loadExchange(i);
-                    } else {
-                        exchange.resetAllWordInputFields();
-                        exchange.showAnswerText();
-                    }
+    ConversationController(int[] exchanges, int conversationId, MainActivity mainActivity){
+        this.exchanges = exchanges;
+        this.mainActivity = mainActivity;
+        this.conversationId = conversationId;
+    }
 
-                } else {
-                    //exit the conversation
-                }
-
-            }
+    public int getExchangeId() {
+        numExchanges = 0;
+        currentExchangeID = exchanges[0];
+        if (exchange.getCheckAnswer()){
+            currentExchangeID++;
+            numExchanges++;
+            if (numExchanges == exchanges.length)
+                conversationId++;
         }
+        exchangeId = currentExchangeID;
+        return exchangeId;
+    }
+
+    public int getConversationId() {
+        return conversationId;
+    }
+
+    public void loadExchange()
+    {
+        String fileIndex = Integer.toString(getExchangeId()); //use if it complains about using integer in the String in the following line
+        String IDToString = "exchange" + fileIndex; //creates a String name of the file to use in the following line
+        int fileID = mainActivity.getResources().getIdentifier(IDToString,"raw", mainActivity.getPackageName());
+        InputStream inputStream = (mainActivity.getResources().openRawResource(fileID));
+        fileRead = new FileRead(inputStream);
+        fileRead.read();
+        exchange = new Exchange(fileRead.getAnswerText(), fileRead.getQuestionText(), fileRead.getAllAnswers(), mainActivity);
+        //creates exchange object which consists of all the Strings to be put in that one created exchange
+        dialogueText.setText(exchange.checkHint());
+        dialogueText.setMovementMethod(LinkMovementMethod.getInstance());
+        answerText.setText(exchange.checkGap());
+
+        for (int j = 0; j < answerButtonsTextView.length; j++){
+            answerButtonsTextView[j].setText(exchange.takeAnswers(j));
+        }
+        //onSoundViewClick();
+        exchange.resetSelectedAnswers();
 
     }
+
 
     public void hideConversationElements(){
         for (int j = 0; j < answerButtonsTextView.length ; j++) {
@@ -150,22 +170,6 @@ public class ConversationController extends Instance{
         getSubmitButton().setVisibility(View.VISIBLE);
         getExitButton().setVisibility(View.VISIBLE);
         //Hiding DPad, to be moved later
-    }
-
-    public void loadExchange(int currentExchangeID){
-        String index = Integer.toString(currentExchangeID);
-        setFileId("exchange" + index);
-        getFileRead().read();
-        getDialogueText().setText(getExchange().checkHint());
-        getDialogueText().setMovementMethod(LinkMovementMethod.getInstance());
-
-        getAnswerText().setText(getExchange().checkGap());
-
-        for (int i = 0; i <getAnswerButtonsTextView().length ; i++) {
-            getAnswerButtonsTextView()[i].setText(getExchange().takeAnswers(i));
-        }
-
-        getExchange().resetSelectedAnswers();
     }
 
 
@@ -229,30 +233,6 @@ public class ConversationController extends Instance{
         this.currentExchangeID = currentExchangeID;
     }
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public void setFileId(String FileId) {
-        this.fileId = FileId;
-    }
-
-    public int getIdOfFile() {
-        return idOfFile;
-    }
-
-    public void setIdOfFile(int idOfFile) {
-        this.idOfFile = idOfFile;
-    }
-
-    public InputStream getInputStream() {
-        return inputStream;
-    }
-
-    public void setInputStream(InputStream inputStream) {
-        this.inputStream = inputStream;
-    }
-
     public Exchange getExchange() {
         return exchange;
     }
@@ -261,11 +241,4 @@ public class ConversationController extends Instance{
         this.exchange = exchange;
     }
 
-    public FileRead getFileRead() {
-        return fileRead;
-    }
-
-    public void setFileRead(FileRead fileRead) {
-        this.fileRead = fileRead;
-    }
 }
