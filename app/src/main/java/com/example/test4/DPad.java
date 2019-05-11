@@ -34,7 +34,7 @@ class DPad {
     private AnimationDrawable pressing_right;
 
     //the 32 is from the map border, and the 10 is from the image view placement
-    private int xCorrection = 32 + 10;
+    private int xCorrection = 28;
     private int yCorrection = 32;
 
     char[][] mapTiles; //2D array for the map
