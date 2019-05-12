@@ -13,7 +13,7 @@ import java.io.InputStream;
 class DPad {
     private int moveDist;
     private ImageView worldView;
-    private int animationLength = 540;
+    private int animationLength = 50;       //should be 540
     private float moveX;
     private float moveY;
     private int startX;
@@ -132,8 +132,10 @@ class DPad {
         }
         else if(checkUp() == '2')
         {
-            Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
-            p.teleport(player);
+            if(mainActivity.talkedToNiels) {
+                Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
+                p.teleport(player);
+            }
         }
     }
 
@@ -154,8 +156,11 @@ class DPad {
         }
         else if(checkDown() == '2')
         {
-            Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() + 1);
-            p.teleport(player);
+            if(mainActivity.talkedToNiels)
+            {
+                Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() + 1);
+                p.teleport(player);
+            }
         }
     }
 

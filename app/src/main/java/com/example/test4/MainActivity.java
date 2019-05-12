@@ -17,32 +17,22 @@ import static com.example.test4.DPad.dpToPx;
 public class MainActivity extends Activity {
 
     //Name the variables (ImageViews, TextViews, Buttons) as their id to avoid confusion. Thank you.
-
     private ImageView worldView;        //Image view to show the map
-    private ImageView conversationBack;     //Image view to show the background of a conversation
     private ImageView worldBackground;         //Image view to show the background of the workd part
     private DPad dPad;                      //Controls for walking
-    private TextView answerText;            //Text view to hold the text of the user
-    private TextView dialogueText;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
 
-    private TextView[] answerButtonsTextView = new TextView[6];
-    private ImageView speaker_button;
-    private ImageView submit_button;
-    private AnimationDrawable pressing_submit;
     private Character[] characters = new Character[4];
     private Portal[] portals = new Portal[6];
 
-    //private FileRead file;
-    private ConversationController conversationController;
 
     private int moveDist = 0;
 
-    private int storyProgress;
+    public boolean talkedToNiels = false;
+    public boolean gotBread = false;
+    public boolean gotMilk = false;
 
     Character characterTalkingToYou;
-
-    private FileRead fileRead; //creates the file object for all the Strings to be created there
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +46,6 @@ public class MainActivity extends Activity {
 
         setupWorld();
 
-        //dPad.hideDPad();
         dPad.showDPad();
         loadConverstationCharacterImage();
     }
@@ -82,43 +71,34 @@ public class MainActivity extends Activity {
         worldBackground.setImageResource(idOfBackground);
 
         dPad.hideDPad();
-        /*conversationBack = findViewById(R.id.conversation_background);
-        int idOfBackground = getResources().getIdentifier("background_convo", "drawable", getPackageName());
-        conversationBack.setImageResource(idOfBackground);*/
-
-        /*submit_button = findViewById(R.id.submit_button);
-        submit_button.setImageResource(R.drawable.proceed_button);
-
-        speaker_button = findViewById(R.id.speaker_button);
-        speaker_button.setImageResource(R.drawable.speaker);*/
     }
     private void createCharacters()
     {
         ConversationController[] conversations = new ConversationController[2];
         int[] exchanges = {0, 1, 2};
-        conversations[0] = new ConversationController(exchanges , this);
+        conversations[0] = new ConversationController(exchanges , this, "Niels");
         exchanges = new int[] {11, 12, 13, 14};
-        conversations[1] = new ConversationController(exchanges , this);
+        conversations[1] = new ConversationController(exchanges , this, "Niels");
         int uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
-        characters[0] = new Character(uncleID, 26, 14, conversations, this);
+        characters[0] = new Character("Niels", uncleID, 26, 14, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {3,4};
-        conversations[0] = new ConversationController(exchanges , this);
+        conversations[0] = new ConversationController(exchanges , this, "Old");
         int oldManID = getResources().getIdentifier("big_old", "drawable", getPackageName());
-        characters[1] = new Character(oldManID, 11, 12, conversations, this);
+        characters[1] = new Character("Old", oldManID, 11, 12, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {5, 6, 7};
-        conversations[0] = new ConversationController(exchanges , this);
+        conversations[0] = new ConversationController(exchanges , this, "Clerk");
         int clerkID = getResources().getIdentifier("big_clerk", "drawable", getPackageName());
-        characters[2] = new Character(clerkID, 23, 2, conversations, this);
+        characters[2] = new Character("Clerk", clerkID, 23, 2, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {8, 9, 10};
-        conversations[0] = new ConversationController(exchanges , this);
+        conversations[0] = new ConversationController(exchanges , this, "Baker");
         int bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
-        characters[3] = new Character(bakerID, 29, 2, conversations, this);
+        characters[3] = new Character("Baker", bakerID, 29, 2, conversations, this);
 
 
     }
@@ -126,7 +106,6 @@ public class MainActivity extends Activity {
     {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        //int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
         moveDist = width/4;
 
@@ -166,6 +145,7 @@ public class MainActivity extends Activity {
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[3] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
+        //right door to shop
         portalX = 4;
         portalY = 10;
         newGridX = 26;
@@ -174,6 +154,7 @@ public class MainActivity extends Activity {
         offsetY = (newGridY - (portalY + 1)) * moveDist;
         portals[4] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
+        //right door exit from shop
         portalX = 26;
         portalY = 7;
         newGridX = 4;
@@ -183,6 +164,7 @@ public class MainActivity extends Activity {
         portals[5] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
     }
     public Portal getPortalAt(int x, int y)
+    //Returns portal located at given coordinates
     {
         for(int i = 0; i < 6; i++)
         {
@@ -194,6 +176,7 @@ public class MainActivity extends Activity {
         throw new Error("Portal not found");
     }
     public Character getCharacterAt(int x, int y)
+    //Returns character located at given coordinates
     {
         for(int i = 0; i < 4; i++)
         {
@@ -204,27 +187,6 @@ public class MainActivity extends Activity {
         }
         throw new Error("Character not found");
     }
-    //loads all the elements of the exchange view
-    /*public void loadExchange(int exchangeIndex)
-    {
-        stream(exchangeIndex);
-        getFile().read();
-        //creates exchange object which consists of all the Strings to be put in that one created exchange
-        setExchange(new Exchange(getFile().getAnswerText(), getFile().getQuestionText(), getFile().getAllAnswers(),exchangeIndex, this));
-        //conversationController = new ConversationController()
-        getDialoguetext().setText(getExchange().checkHint());
-        getDialoguetext().setMovementMethod(LinkMovementMethod.getInstance());
-
-
-        getAnswerText().setText(getExchange().checkGap());
-
-        for (int j = 0; j < answerButtonsTextView.length; j++){
-            getAnswerButtonsTextView()[j].setText(getExchange().takeAnswers(j));
-        }
-        //onSoundViewClick();
-        getExchange().resetSelectedAnswers();
-
-    }*/
     public DPad getdPad()
     {
         return dPad;
@@ -274,6 +236,7 @@ public class MainActivity extends Activity {
     public void onSoundViewClick() {
         String audioFileName = "sentence" + characterTalkingToYou.getCurrentConversationController().getCurrentExchangeID();
         final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
+        ImageView speaker_button = findViewById(R.id.speaker_button);
         characterTalkingToYou.getCurrentConversationController().getCurrentExchange().sentencePlay(speaker_button, idOfAudioFile);
     }
 

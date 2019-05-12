@@ -16,25 +16,14 @@ public class ConversationController extends Instance{
     private OurButton continueButton;
 
     private int sizeSix = 6;
-    private int numExchanges;
     private int currentExchangeID;
-    private int currentConversationID;
     private int exchangeCounter = 0;
-    private int numOfConversations = 5;
+    private String name;
 
-
-
-    private int conversationId;
-    private int[] exchangeList;
-    private int exchangeId;
 
     private Exchange exchange;
     private int[] exchanges;
     private MainActivity mainActivity;
-    private GameObject background;
-    private FileRead fileRead;
-
-    private Exchange[] currentConversation = new Exchange[numOfConversations];
 
     //All conversation Elements
     private ImageView npcDialogueView;      //Image of the character you are having the conversation with
@@ -65,7 +54,8 @@ public class ConversationController extends Instance{
         ///////////////////////////////////////////////////////
     }
 
-    ConversationController(int[] exchanges, MainActivity mainActivity){
+    ConversationController(int[] exchanges, MainActivity mainActivity, String name){
+        this.name = name;
         this.npcDialogueView = mainActivity.findViewById(R.id.npc_dialogue_view);
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
@@ -96,8 +86,10 @@ public class ConversationController extends Instance{
 
     public void startConversation()
     {
+        currentExchangeID = 0;
         showConversationElements();
         exchange = new Exchange(exchanges[0], mainActivity, this);
+
     }
     public void nextExchange()
     {
@@ -109,6 +101,18 @@ public class ConversationController extends Instance{
         }
         else
         {
+            if(name.equals("Niels"))
+            {
+                mainActivity.talkedToNiels = true;
+            }
+            else if (name.equals("Baker"))
+            {
+                mainActivity.gotBread = true;
+            }
+            else if(name.equals("Clerk"))
+            {
+                mainActivity.gotMilk = true;
+            }
             hideConversationElements();
             mainActivity.getdPad().showDPad();
         }

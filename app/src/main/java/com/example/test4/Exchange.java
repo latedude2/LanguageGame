@@ -151,7 +151,7 @@ class Exchange extends Instance {
             ClickableSpan clickableSpan = new ClickableSpan() {//final
                 @Override
                 public void onClick(@NonNull View widget) {
-                    parentConversationController.getHintImage().setVisibility(View.GONE); //make hint view visible
+                    parentConversationController.getHintImage().setVisibility(View.VISIBLE); //make hint view visible
                     //Simonas code example: https://stackoverflow.com/questions/15488238/using-android-getidentifier
                     int currentWord = 0;
                     //Getting text of clickable span
@@ -233,7 +233,6 @@ class Exchange extends Instance {
    }
     void submitAnswer(View view)
     {
-        TextView answerField = mainActivity.findViewById(R.id.answer_text);
         if (checkAnswer())
         {
             parentConversationController.nextExchange();
