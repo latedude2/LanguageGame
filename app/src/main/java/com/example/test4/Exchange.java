@@ -1,5 +1,6 @@
 package com.example.test4;
 
+import android.app.VoiceInteractor;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
@@ -26,10 +27,8 @@ class Exchange extends Instance {
     private ImageView hintImageView;            //Image view to show the hint of a word
     private TextView[] answerButtonsTextView = new TextView[6];
 
-    private Exchange exchange;
-    private int currentExchange;
-
     MainActivity mainActivity;
+    ConversationController parentConversationController;
 
     private ArrayList<Integer> wordIndexList = new ArrayList<>();
     private ArrayList<String> wordList = new ArrayList<>();
@@ -51,15 +50,14 @@ class Exchange extends Instance {
     private FileRead fileRead; //creates the file object for all the Strings to be created there
 
 
-    public Exchange(StringBuffer answerText, StringBuffer questionText, StringBuffer[] answers, MainActivity mainActivity) {
-            this.questionText = questionText;
-            this.answerText = answerText;
-            this.answers = answers;
-            this.mainActivity = mainActivity;
+    public Exchange(int index, MainActivity mainActivity, ConversationController conversationController) {
+        this.mainActivity = mainActivity;
+        this.parentConversationController = conversationController;
 
-            this.dialogueTextView = mainActivity.findViewById(R.id.dialogue_text);
-            this.answerTextView = mainActivity.findViewById(R.id.answer_text);
-            this.hintImageView = mainActivity.findViewById(R.id.hint_img);
+        this.dialogueTextView = mainActivity.findViewById(R.id.dialogue_text);
+        this.answerTextView = mainActivity.findViewById(R.id.answer_text);
+        this.hintImageView = mainActivity.findViewById(R.id.hint_img);
+
 
         for (int i = 0; i < answerButtonsTextView.length; i++) {
             String number = Integer.toString(i);
@@ -67,27 +65,29 @@ class Exchange extends Instance {
             int textViewId = mainActivity.getResources().getIdentifier(viewText, "id", mainActivity.getPackageName());
             this.answerButtonsTextView[i] = mainActivity.findViewById(textViewId);
         }
+        loadExchange(index);
+
     }
-
-
-
-    /*public void loadExchange()
+    public void loadExchange(int exchangeId)
     {
-        mainActivity.stream(currentExchange);
+        String fileIndex = Integer.toString(exchangeId); //use if it complains about using integer in the String in the following line
+        String IDToString = "exchange" + fileIndex; //creates a String name of the file to use in the following line
+        int fileID = mainActivity.getResources().getIdentifier(IDToString,"raw", mainActivity.getPackageName());
+        InputStream inputStream = (mainActivity.getResources().openRawResource(fileID));
+        fileRead = new FileRead(inputStream);
         fileRead.read();
+        questionText = fileRead.getQuestionText();
+        answerText = fileRead.getAnswerText();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-
-        dialogueTextView.setText(checkHint());
+        dialogueTextView.setText(checkHint());          //crash here
         dialogueTextView.setMovementMethod(LinkMovementMethod.getInstance());
         answerTextView.setText(checkGap());
-
+        answers = fileRead.getAllAnswers();
         for (int j = 0; j < answerButtonsTextView.length; j++){
             answerButtonsTextView[j].setText(takeAnswers(j));
         }
-        //onSoundViewClick();
         resetSelectedAnswers();
-
-    }*/
+    }
 
     public SpannableString checkGap(){
         StringBuffer stringBuffer = answerText;
@@ -151,6 +151,7 @@ class Exchange extends Instance {
             ClickableSpan clickableSpan = new ClickableSpan() {//final
                 @Override
                 public void onClick(@NonNull View widget) {
+                    parentConversationController.getHintImage().setVisibility(View.GONE); //make hint view visible
                     //Simonas code example: https://stackoverflow.com/questions/15488238/using-android-getidentifier
                     int currentWord = 0;
                     //Getting text of clickable span
@@ -235,7 +236,7 @@ class Exchange extends Instance {
         TextView answerField = mainActivity.findViewById(R.id.answer_text);
         if (checkAnswer())
         {
-            answerField.setText("You're a good boy");
+            parentConversationController.nextExchange();
         }
         else
         {

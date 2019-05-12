@@ -26,12 +26,6 @@ public class MainActivity extends Activity {
     private TextView dialogueText;          //Text view to hold the text of the NPC
     private ImageView hintImage;            //Image view to show the hint of a word
 
-    private int uncleID;
-    private int oldManID;
-    private int bakerID;
-    private int clerkID;
-
-    private Exchange exchange;
     private TextView[] answerButtonsTextView = new TextView[6];
     private ImageView speaker_button;
     private ImageView submit_button;
@@ -41,12 +35,12 @@ public class MainActivity extends Activity {
 
     //private FileRead file;
     private ConversationController conversationController;
-    private Instance instance;
 
     private int moveDist = 0;
 
-    int exchangeID;
-    int exchangeIndex = 4; //index which counts which exchange it is currently
+    private int storyProgress;
+
+    Character characterTalkingToYou;
 
     private FileRead fileRead; //creates the file object for all the Strings to be created there
 
@@ -62,40 +56,22 @@ public class MainActivity extends Activity {
 
         setupWorld();
 
-
-
-        loadConversation();
-        dPad.hideDPad();
-
-        //loadExchange(this.exchangeIndex);
-        //loadExchangeTwo();
+        //dPad.hideDPad();
+        dPad.showDPad();
         loadConverstationCharacterImage();
-
     }
 
     public void setupWorld(){
         worldView = findViewById(R.id.world_view);
         dPad = new DPad(worldView, this);
-        uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
-        characters[0] = new Character(uncleID, 26, 13, new int[2], this);
-        characters[0].setConversation(new int[] {0,4});
-        oldManID = getResources().getIdentifier("big_old", "drawable", getPackageName());
-        characters[1] = new Character(oldManID, 11, 12, new int[1], this);
-        characters[1].setConversation(new int[]{1});
-        clerkID = getResources().getIdentifier("big_clerk", "drawable", getPackageName());
-        characters[2] = new Character(clerkID, 23, 3, new int[1], this);
-        characters[2].setConversation(new int[]{2});
-        bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
-        characters[3] = new Character(bakerID, 29, 3, new int[1], this);
-        characters[3].setConversation(new int[]{3});
-
+        createCharacters();
         createPortals();
 
         ImageView imageView = findViewById(R.id.world_view);
         ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
         params.width = 64 + moveDist * 32;
         params.height = 64 + moveDist * 16;
-// existing height is ok as is, no need to edit it
+        // existing height is ok as is, no need to edit it
         imageView.setLayoutParams(params);
 
         int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
@@ -115,6 +91,36 @@ public class MainActivity extends Activity {
 
         speaker_button = findViewById(R.id.speaker_button);
         speaker_button.setImageResource(R.drawable.speaker);*/
+    }
+    private void createCharacters()
+    {
+        ConversationController[] conversations = new ConversationController[2];
+        int[] exchanges = {0, 1, 2};
+        conversations[0] = new ConversationController(exchanges , this);
+        exchanges = new int[] {11, 12, 13, 14};
+        conversations[1] = new ConversationController(exchanges , this);
+        int uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
+        characters[0] = new Character(uncleID, 26, 14, conversations, this);
+
+        conversations = new ConversationController[1];
+        exchanges = new int[] {3,4};
+        conversations[0] = new ConversationController(exchanges , this);
+        int oldManID = getResources().getIdentifier("big_old", "drawable", getPackageName());
+        characters[1] = new Character(oldManID, 11, 12, conversations, this);
+
+        conversations = new ConversationController[1];
+        exchanges = new int[] {5, 6, 7};
+        conversations[0] = new ConversationController(exchanges , this);
+        int clerkID = getResources().getIdentifier("big_clerk", "drawable", getPackageName());
+        characters[2] = new Character(clerkID, 23, 2, conversations, this);
+
+        conversations = new ConversationController[1];
+        exchanges = new int[] {8, 9, 10};
+        conversations[0] = new ConversationController(exchanges , this);
+        int bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
+        characters[3] = new Character(bakerID, 29, 2, conversations, this);
+
+
     }
     private void createPortals()
     {
@@ -180,12 +186,23 @@ public class MainActivity extends Activity {
     {
         for(int i = 0; i < 6; i++)
         {
-            if(portals[i].getGridX() == x && portals[i].getGridY() == y)
+            if(portals[i].getXGrid() == x && portals[i].getYGrid() == y)
             {
                 return portals[i];
             }
         }
         throw new Error("Portal not found");
+    }
+    public Character getCharacterAt(int x, int y)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if(characters[i].getXGrid() == x && characters[i].getYGrid() == y)
+            {
+                return characters[i];
+            }
+        }
+        throw new Error("Character not found");
     }
     //loads all the elements of the exchange view
     /*public void loadExchange(int exchangeIndex)
@@ -208,6 +225,10 @@ public class MainActivity extends Activity {
         getExchange().resetSelectedAnswers();
 
     }*/
+    public DPad getdPad()
+    {
+        return dPad;
+    }
     public void loadConverstationCharacterImage() {
         ImageView imageView = findViewById(R.id.npc_dialogue_view);
         imageView.setImageResource(R.drawable.big_baker);
@@ -243,56 +264,31 @@ public class MainActivity extends Activity {
     }
 
     public void answerClick(View view) {
-        exchange.addAnswer(view);
-
+        characterTalkingToYou.getCurrentConversationController().getCurrentExchange().addAnswer(view);
     }
 
     public void onSubmitClick(View view) {
-        exchange.submitAnswer(view);
+        characterTalkingToYou.getCurrentConversationController().getCurrentExchange().submitAnswer(view);
     }
 
     public void onSoundViewClick() {
-        String audioFileName = "sentence" + exchangeIndex;
+        String audioFileName = "sentence" + characterTalkingToYou.getCurrentConversationController().getCurrentExchangeID();
         final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
-        exchange.sentencePlay(speaker_button, idOfAudioFile);
+        characterTalkingToYou.getCurrentConversationController().getCurrentExchange().sentencePlay(speaker_button, idOfAudioFile);
     }
 
-
     public void exitConversation(View view) {
-        conversationController = new ConversationController(this);
-        //dPad = new DPad(worldView, this);
-        conversationController.hideConversationElements();
+        characterTalkingToYou.getCurrentConversationController().hideConversationElements();
         dPad.showDPad();
     }
 
-    public void startConversation(View view) {
-        conversationController = new ConversationController(this);
-        //dPad = new DPad(worldView,this);
-        conversationController.showConversationElements();
-        dPad.hideDPad();
-    }
-
+    /*
     public void loadConversation(){
         for (int i = 0; i < characters.length; i++) {
             characters[i].showConversation();
         }
     }
-
-    public int getOldManID() {
-        return oldManID;
-    }
-
-    public int getClerkID() {
-        return clerkID;
-    }
-
-    public int getBakerID() {
-        return bakerID;
-    }
-
-    public int getUncleID() {
-        return uncleID;
-    }
+    */
     public void disableDpadFor()
     {
         final View v = findViewById(R.id.up_button);

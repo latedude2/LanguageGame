@@ -52,14 +52,105 @@ public class ConversationController extends Instance{
     //All world view Elements
     private ImageView dPadBackground;       //Image of the area where the DPad is displayed
     private ImageView dPadImageView;        //To be changed later will be divided by 4
-    private Button upButton;
-    private Button downButton;
-    private Button rightButton;
-    private Button leftButton;
 
     ////////////////////////////////////////////////////
 
     ConversationController(MainActivity mainActivity){
+
+
+        //Dpad elements to be changed later
+        dPadBackground = mainActivity.findViewById(R.id.d_pad_background);
+        dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
+
+        ///////////////////////////////////////////////////////
+    }
+
+    ConversationController(int[] exchanges, MainActivity mainActivity){
+        this.npcDialogueView = mainActivity.findViewById(R.id.npc_dialogue_view);
+        this.hintImage = mainActivity.findViewById(R.id.hint_img);
+        this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
+        this.answerText = mainActivity.findViewById(R.id.answer_text);
+        this.conversationBackground = mainActivity.findViewById(R.id.conversation_background);
+        this.answerTextField = mainActivity.findViewById(R.id.answer_text_field);
+        this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
+        this.submitButton = mainActivity.findViewById(R.id.submit_button);
+        this.exitButton = mainActivity.findViewById(R.id.exit_button);
+        for (int j = 0; j < sizeSix; j++) {
+            String number = Integer.toString(j);
+            String viewText = "answer_button_text_" + number;
+            String imageView = "answer_button_" + number;
+            int textViewId = mainActivity.getResources().getIdentifier(viewText, "id", mainActivity.getPackageName());
+            int imageViewId= mainActivity.getResources().getIdentifier(imageView, "id", mainActivity.getPackageName());
+            this.answerButtonsTextView[j] = mainActivity.findViewById(textViewId);
+            this.answerButtons[j] = mainActivity.findViewById(imageViewId);
+        }
+
+        this.exchanges = exchanges;
+        this.mainActivity = mainActivity;
+    }
+
+    public Exchange getCurrentExchange()
+    {
+        return exchange;
+    }
+
+    public void startConversation()
+    {
+        showConversationElements();
+        exchange = new Exchange(exchanges[0], mainActivity, this);
+    }
+    public void nextExchange()
+    {
+        hintImage.setVisibility(View.GONE);
+        currentExchangeID++;
+        if(exchanges.length > currentExchangeID)
+        {
+            exchange = new Exchange(exchanges[currentExchangeID], mainActivity, this);
+        }
+        else
+        {
+            hideConversationElements();
+            mainActivity.getdPad().showDPad();
+        }
+    }
+    public void hideConversationElements(){
+        /*
+        this.npcDialogueView = mainActivity.findViewById(R.id.npc_dialogue_view);
+        this.hintImage = mainActivity.findViewById(R.id.hint_img);
+        this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
+        this.answerText = mainActivity.findViewById(R.id.answer_text);
+        this.conversationBackground = mainActivity.findViewById(R.id.conversation_background);
+        this.answerTextField = mainActivity.findViewById(R.id.answer_text_field);
+        this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
+        this.submitButton = mainActivity.findViewById(R.id.submit_button);
+        this.exitButton = mainActivity.findViewById(R.id.exit_button);
+        for (int j = 0; j < sizeSix; j++) {
+            String number = Integer.toString(j);
+            String viewText = "answer_button_text_" + number;
+            String imageView = "answer_button_" + number;
+            int textViewId = mainActivity.getResources().getIdentifier(viewText, "id", mainActivity.getPackageName());
+            int imageViewId= mainActivity.getResources().getIdentifier(imageView, "id", mainActivity.getPackageName());
+            this.answerButtonsTextView[j] = mainActivity.findViewById(textViewId);
+            this.answerButtons[j] = mainActivity.findViewById(imageViewId);
+        }
+        */
+        for (int j = 0; j < answerButtonsTextView.length ; j++) {
+            answerButtons[j].setVisibility(View.GONE);
+            answerButtonsTextView[j].setVisibility(View.GONE);
+        }
+        getNpcDialogueView().setVisibility(View.GONE);
+        getHintImage().setVisibility(View.GONE);
+        getDialogueText().setVisibility(View.GONE);
+        getAnswerText().setVisibility(View.GONE);
+        getConversationBackground().setVisibility(View.GONE);
+        getAnswerTextField().setVisibility(View.GONE);
+        getSpeakerButton().setVisibility(View.GONE);
+        getSubmitButton().setVisibility(View.GONE);
+        getExitButton().setVisibility(View.GONE);
+        //Showing DPad, to be moved later
+    }
+
+    public void showConversationElements(){
         this.npcDialogueView = mainActivity.findViewById(R.id.npc_dialogue_view);
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
@@ -78,97 +169,19 @@ public class ConversationController extends Instance{
             this.answerButtonsTextView[j] = mainActivity.findViewById(textViewId);
             this.answerButtons[j]=mainActivity.findViewById(imageViewId);
         }
-
-
-        //Dpad elements to be changed later
-        upButton = mainActivity.findViewById(R.id.up_button);
-        downButton = mainActivity.findViewById(R.id.down_button);
-        leftButton = mainActivity.findViewById(R.id.left_button);
-        rightButton = mainActivity.findViewById(R.id.right_button);
-        dPadBackground = mainActivity.findViewById(R.id.d_pad_background);
-        dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
-
-        ///////////////////////////////////////////////////////
-    }
-
-    ConversationController(int[] exchanges, int conversationId, MainActivity mainActivity){
-        this.exchanges = exchanges;
-        this.mainActivity = mainActivity;
-        this.conversationId = conversationId;
-    }
-
-    public int getExchangeId() {
-        numExchanges = 0;
-        currentExchangeID = exchanges[0];
-        if (exchange.getCheckAnswer()){
-            currentExchangeID++;
-            numExchanges++;
-            if (numExchanges == exchanges.length)
-                conversationId++;
-        }
-        exchangeId = currentExchangeID;
-        return exchangeId;
-    }
-
-    public int getConversationId() {
-        return conversationId;
-    }
-
-    public void loadExchange()
-    {
-        String fileIndex = Integer.toString(getExchangeId()); //use if it complains about using integer in the String in the following line
-        String IDToString = "exchange" + fileIndex; //creates a String name of the file to use in the following line
-        int fileID = mainActivity.getResources().getIdentifier(IDToString,"raw", mainActivity.getPackageName());
-        InputStream inputStream = (mainActivity.getResources().openRawResource(fileID));
-        fileRead = new FileRead(inputStream);
-        fileRead.read();
-        exchange = new Exchange(fileRead.getAnswerText(), fileRead.getQuestionText(), fileRead.getAllAnswers(), mainActivity);
-        //creates exchange object which consists of all the Strings to be put in that one created exchange
-        dialogueText.setText(exchange.checkHint());
-        dialogueText.setMovementMethod(LinkMovementMethod.getInstance());
-        answerText.setText(exchange.checkGap());
-
-        for (int j = 0; j < answerButtonsTextView.length; j++){
-            answerButtonsTextView[j].setText(exchange.takeAnswers(j));
-        }
-        //onSoundViewClick();
-        exchange.resetSelectedAnswers();
-
-    }
-
-
-    public void hideConversationElements(){
         for (int j = 0; j < answerButtonsTextView.length ; j++) {
-            getAnswerButtons()[j].setVisibility(View.GONE);
-            getAnswerButtonsTextView()[j].setVisibility(View.GONE);
+            answerButtons[j].setVisibility(View.VISIBLE);
+            answerButtonsTextView[j].setVisibility(View.VISIBLE);
         }
-        getNpcDialogueView().setVisibility(View.GONE);
-        getHintImage().setVisibility(View.GONE);
-        getDialogueText().setVisibility(View.GONE);
-        getAnswerText().setVisibility(View.GONE);
-        getConversationBackground().setVisibility(View.GONE);
-        getAnswerTextField().setVisibility(View.GONE);
-        getSpeakerButton().setVisibility(View.GONE);
-        getSubmitButton().setVisibility(View.GONE);
-        getExitButton().setVisibility(View.GONE);
-        //Showing DPad, to be moved later
-
-    }
-
-    public void showConversationElements(){
-        for (int j = 0; j < answerButtonsTextView.length ; j++) {
-            getAnswerButtons()[j].setVisibility(View.VISIBLE);
-            getAnswerButtonsTextView()[j].setVisibility(View.VISIBLE);
-        }
-        getNpcDialogueView().setVisibility(View.VISIBLE);
-        getHintImage().setVisibility(View.VISIBLE);
-        getDialogueText().setVisibility(View.VISIBLE);
-        getAnswerText().setVisibility(View.VISIBLE);
-        getConversationBackground().setVisibility(View.VISIBLE);
-        getAnswerTextField().setVisibility(View.VISIBLE);
-        getSpeakerButton().setVisibility(View.VISIBLE);
-        getSubmitButton().setVisibility(View.VISIBLE);
-        getExitButton().setVisibility(View.VISIBLE);
+        npcDialogueView.setVisibility(View.VISIBLE);
+        hintImage.setVisibility(View.VISIBLE);
+        dialogueText.setVisibility(View.VISIBLE);
+        answerText.setVisibility(View.VISIBLE);
+        conversationBackground.setVisibility(View.VISIBLE);
+        answerTextField.setVisibility(View.VISIBLE);
+        speakerButton.setVisibility(View.VISIBLE);
+        submitButton.setVisibility(View.VISIBLE);
+        exitButton.setVisibility(View.VISIBLE);
         //Hiding DPad, to be moved later
     }
 

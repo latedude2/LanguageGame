@@ -6,8 +6,6 @@ import android.widget.ImageView;
 class Portal extends WorldElement {
 
     ImageView map;
-    private int gridX;
-    private int gridY;
     private int offsetWorldX;
     private int offsetWorldY;
     private int destGridX;
@@ -15,8 +13,8 @@ class Portal extends WorldElement {
 
     public Portal (ImageView map, int portalGridX, int portalGridY, int offsetWorldX, int offsetWorldY, int gridX, int gridY){
         this.map = map;
-        this.gridX = portalGridX;
-        this.gridY = portalGridY;
+        this.setXGrid(portalGridX);
+        this.setYGrid(portalGridY);
         this.offsetWorldX = offsetWorldX;
         this.offsetWorldY = offsetWorldY;
         destGridX = gridX;
@@ -47,6 +45,7 @@ class Portal extends WorldElement {
         map.setY(destY);
         */
     }
+    /*
     public int getGridX()
     {
         return gridX;
@@ -55,6 +54,7 @@ class Portal extends WorldElement {
     {
         return gridY;
     }
+    */
 
 
 

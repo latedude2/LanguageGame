@@ -123,6 +123,13 @@ class DPad {
             animation.setDuration(animationLength);
             animation.start();
         }
+        else if (checkUp() == '1')
+        {
+            Character character = mainActivity.getCharacterAt(player.getXGrid(), player.getYGrid() - 1);
+            mainActivity.characterTalkingToYou = character;
+            hideDPad();
+            character.startConversation();
+        }
         else if(checkUp() == '2')
         {
             Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
