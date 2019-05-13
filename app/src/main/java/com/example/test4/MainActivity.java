@@ -65,6 +65,8 @@ public class MainActivity extends Activity {
         setSizeForAnswerScrollView();
         applyFonts();
 
+        dPad.switchDpadToConversation();
+
         ImageView imageView = findViewById(R.id.world_view);
         ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
         params.width = 64 + moveDist * 38;
@@ -206,24 +208,28 @@ public class MainActivity extends Activity {
     {
         dPad.moveUp();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public void move_characterDown (final View v)
     {
         dPad.moveDown();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public void movePlayerLeft(final View v)
     {
         dPad.moveLeft();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public void move_characterRight (final View v)
     {
         dPad.moveRight();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public ImageView getHintImage() {

@@ -254,7 +254,7 @@ class DPad {
         return animationLength;
     }
 
-   /* public void switchDpadToConversation (){
+   public void switchDpadToConversation (){
         if(checkUp() == '1'){
             dPadImageView.setImageResource(R.drawable.dpad_convo_press_up);
         }
@@ -264,7 +264,7 @@ class DPad {
         else if (checkLeft() == '1'){
             dPadImageView.setImageResource(R.drawable.dpad_convo_press_left);
         }
-    } */
+    }
 }
 
 
