@@ -176,6 +176,12 @@ class DPad {
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
+        }else if (checkLeft() == '1')
+        {
+            Character character = mainActivity.getCharacterAt(player.getXGrid() - 1, player.getYGrid());
+            mainActivity.characterTalkingToYou = character;
+            hideDPad();
+            character.startConversation();
         }
     }
 
@@ -193,6 +199,12 @@ class DPad {
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
+        }else if (checkRight() == '1')
+        {
+            Character character = mainActivity.getCharacterAt(player.getXGrid() + 1, player.getYGrid());
+            mainActivity.characterTalkingToYou = character;
+            hideDPad();
+            character.startConversation();
         }
     }
     //Create getters for ImageViews when we are done.

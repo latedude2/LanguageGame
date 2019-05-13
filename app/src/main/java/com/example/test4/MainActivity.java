@@ -120,18 +120,18 @@ public class MainActivity extends Activity {
 
         //portal outside niels home
         int portalX = 16;
-        int portalY = 6;
-        int newGridX = 27;
-        int newGridY = 15;
+        int portalY = 5;
+        int newGridX = 31;
+        int newGridY = 17;
         int offsetX = (newGridX - portalX) * moveDist;
         int offsetY = (newGridY - (portalY + 1)) * moveDist;
 
         portals[0] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
         //portal inside niels home
-        portalX = 27;
-        portalY = 16;
-        newGridX = 13;
-        newGridY = 5;
+        portalX = 31;
+        portalY = 18;
+        newGridX = 16;
+        newGridY = 6;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[1] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
