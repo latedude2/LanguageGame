@@ -58,8 +58,8 @@ public class MainActivity extends Activity {
 
         ImageView imageView = findViewById(R.id.world_view);
         ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
-        params.width = 64 + moveDist * 32;
-        params.height = 64 + moveDist * 16;
+        params.width = 64 + moveDist * 38;
+        params.height = 64 + moveDist * 20;
         // existing height is ok as is, no need to edit it
         imageView.setLayoutParams(params);
 

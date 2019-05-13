@@ -219,8 +219,8 @@
 
     <ImageView
         android:id="@+id/char_world_view"
-        android:layout_width="89dp"
-        android:layout_height="78dp"
+        android:layout_width="98dp"
+        android:layout_height="87dp"
         android:layout_marginBottom="500dp"
         android:contentDescription="@string/content_description_char_world_image"
         android:src="@drawable/main_character"
