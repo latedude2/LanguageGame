@@ -1,6 +1,7 @@
 package com.example.test4;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -8,7 +9,12 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 
@@ -31,6 +37,7 @@ public class MainActivity extends Activity {
     public boolean talkedToNiels = false;
     public boolean gotBread = false;
     public boolean gotMilk = false;
+    protected boolean answer_scrollable = false;
 
     Character characterTalkingToYou;
 
@@ -55,6 +62,8 @@ public class MainActivity extends Activity {
         dPad = new DPad(worldView, this);
         createCharacters();
         createPortals();
+        setSizeForAnswerScrollView();
+        applyFonts();
 
         ImageView imageView = findViewById(R.id.world_view);
         ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
@@ -286,5 +295,30 @@ public class MainActivity extends Activity {
                 v4.setEnabled(true);
             }
         }, dPad.getAnimationLength());
+    }
+
+    private void setSizeForAnswerScrollView(){
+        ImageView answer_text_field = findViewById(R.id.answer_text_field);
+        ScrollView answer_scrollview = findViewById(R.id.answer_scrollview);
+        LinearLayout answer_LL = findViewById(R.id.answer_LL);
+
+        answer_scrollview.getLayoutParams().height = answer_text_field.getHeight();
+    }
+
+    private void applyFonts() {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/MerchantCopyMod.ttf");
+
+        TextView[] toChangeFont = {findViewById(R.id.answer_text),
+                findViewById(R.id.dialogue_text),
+                findViewById(R.id.answer_button_text_0),
+                findViewById(R.id.answer_button_text_1),
+                findViewById(R.id.answer_button_text_2),
+                findViewById(R.id.answer_button_text_3),
+                findViewById(R.id.answer_button_text_4),
+                findViewById(R.id.answer_button_text_5)};
+
+        for (TextView t : toChangeFont) {
+            t.setTypeface(font);
+        }
     }
 }
