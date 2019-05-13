@@ -89,25 +89,25 @@ public class MainActivity extends Activity {
         exchanges = new int[] {11, 12, 13, 14};
         conversations[1] = new ConversationController(exchanges , this, "Niels");
         int uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
-        characters[0] = new Character("Niels", uncleID, 26, 14, conversations, this);
+        characters[0] = new Character("Niels", uncleID, 30, 16, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {3,4};
         conversations[0] = new ConversationController(exchanges , this, "Old");
         int oldManID = getResources().getIdentifier("big_old", "drawable", getPackageName());
-        characters[1] = new Character("Old", oldManID, 11, 12, conversations, this);
+        characters[1] = new Character("Old", oldManID, 14, 14, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {5, 6, 7};
         conversations[0] = new ConversationController(exchanges , this, "Clerk");
         int clerkID = getResources().getIdentifier("big_clerk", "drawable", getPackageName());
-        characters[2] = new Character("Clerk", clerkID, 23, 2, conversations, this);
+        characters[2] = new Character("Clerk", clerkID, 27, 4, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {8, 9, 10};
         conversations[0] = new ConversationController(exchanges , this, "Baker");
         int bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
-        characters[3] = new Character("Baker", bakerID, 29, 2, conversations, this);
+        characters[3] = new Character("Baker", bakerID, 33, 4, conversations, this);
 
 
     }
@@ -119,8 +119,8 @@ public class MainActivity extends Activity {
         moveDist = width/4;
 
         //portal outside niels home
-        int portalX = 13;
-        int portalY = 4;
+        int portalX = 16;
+        int portalY = 6;
         int newGridX = 27;
         int newGridY = 15;
         int offsetX = (newGridX - portalX) * moveDist;
