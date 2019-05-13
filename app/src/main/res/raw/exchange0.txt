@@ -1,5 +1,5 @@
 Godmorgen Alex, har du et øjeblik?
-Ja, hvad &1 der
+Ja, hvad &0 der
 er
 har
 vil

@@ -233,7 +233,7 @@ public class MainActivity extends Activity {
         characterTalkingToYou.getCurrentConversationController().getCurrentExchange().submitAnswer(view);
     }
 
-    public void onSoundViewClick() {
+    public void onSoundViewClick(View v) {
         String audioFileName = "sentence" + characterTalkingToYou.getCurrentConversationController().getCurrentExchangeID();
         final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
         ImageView speaker_button = findViewById(R.id.speaker_button);
