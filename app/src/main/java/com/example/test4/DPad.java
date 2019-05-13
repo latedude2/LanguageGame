@@ -13,7 +13,7 @@ import java.io.InputStream;
 class DPad {
     private int moveDist;
     private ImageView worldView;
-    private int animationLength = 50;       //should be 540
+    private int animationLength = 500;       //should be 540
     private float moveX;
     private float moveY;
     private int startX;
@@ -57,8 +57,8 @@ class DPad {
         int width = displayMetrics.widthPixels;
         moveDist = width/4;
 
-        startX = -120 - moveDist * 13;
-        startY = -120 - moveDist * 8;
+        startX = (int)Math.round(-120 - moveDist * 14.35);
+        startY = (int)Math.round(-120 - moveDist * 8.1);
         //startX = dpToPx(-1344 + xCorrection);
         //startY = dpToPx(-864 + yCorrection);
         //startX = -(32 + moveDist * 28);
@@ -176,6 +176,12 @@ class DPad {
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
+        }else if (checkLeft() == '1')
+        {
+            Character character = mainActivity.getCharacterAt(player.getXGrid() - 1, player.getYGrid());
+            mainActivity.characterTalkingToYou = character;
+            hideDPad();
+            character.startConversation();
         }
     }
 
@@ -193,6 +199,12 @@ class DPad {
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
+        }else if (checkRight() == '1')
+        {
+            Character character = mainActivity.getCharacterAt(player.getXGrid() + 1, player.getYGrid());
+            mainActivity.characterTalkingToYou = character;
+            hideDPad();
+            character.startConversation();
         }
     }
     //Create getters for ImageViews when we are done.

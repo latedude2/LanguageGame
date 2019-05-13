@@ -1,6 +1,7 @@
 package com.example.test4;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -8,7 +9,12 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 
@@ -31,6 +37,7 @@ public class MainActivity extends Activity {
     public boolean talkedToNiels = false;
     public boolean gotBread = false;
     public boolean gotMilk = false;
+    protected boolean answer_scrollable = false;
 
     Character characterTalkingToYou;
 
@@ -55,11 +62,13 @@ public class MainActivity extends Activity {
         dPad = new DPad(worldView, this);
         createCharacters();
         createPortals();
+        setSizeForAnswerScrollView();
+        applyFonts();
 
         ImageView imageView = findViewById(R.id.world_view);
         ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
-        params.width = 64 + moveDist * 32;
-        params.height = 64 + moveDist * 16;
+        params.width = 64 + moveDist * 38;
+        params.height = 64 + moveDist * 20;
         // existing height is ok as is, no need to edit it
         imageView.setLayoutParams(params);
 
@@ -80,25 +89,25 @@ public class MainActivity extends Activity {
         exchanges = new int[] {11, 12, 13, 14};
         conversations[1] = new ConversationController(exchanges , this, "Niels");
         int uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
-        characters[0] = new Character("Niels", uncleID, 26, 14, conversations, this);
+        characters[0] = new Character("Niels", uncleID, 30, 16, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {3,4};
         conversations[0] = new ConversationController(exchanges , this, "Old");
         int oldManID = getResources().getIdentifier("big_old", "drawable", getPackageName());
-        characters[1] = new Character("Old", oldManID, 11, 12, conversations, this);
+        characters[1] = new Character("Old", oldManID, 14, 14, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {5, 6, 7};
         conversations[0] = new ConversationController(exchanges , this, "Clerk");
         int clerkID = getResources().getIdentifier("big_clerk", "drawable", getPackageName());
-        characters[2] = new Character("Clerk", clerkID, 23, 2, conversations, this);
+        characters[2] = new Character("Clerk", clerkID, 27, 4, conversations, this);
 
         conversations = new ConversationController[1];
         exchanges = new int[] {8, 9, 10};
         conversations[0] = new ConversationController(exchanges , this, "Baker");
         int bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
-        characters[3] = new Character("Baker", bakerID, 29, 2, conversations, this);
+        characters[3] = new Character("Baker", bakerID, 33, 4, conversations, this);
 
 
     }
@@ -110,19 +119,19 @@ public class MainActivity extends Activity {
         moveDist = width/4;
 
         //portal outside niels home
-        int portalX = 13;
-        int portalY = 4;
-        int newGridX = 27;
-        int newGridY = 15;
+        int portalX = 16;
+        int portalY = 5;
+        int newGridX = 31;
+        int newGridY = 17;
         int offsetX = (newGridX - portalX) * moveDist;
         int offsetY = (newGridY - (portalY + 1)) * moveDist;
 
         portals[0] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
         //portal inside niels home
-        portalX = 27;
-        portalY = 16;
-        newGridX = 13;
-        newGridY = 5;
+        portalX = 31;
+        portalY = 18;
+        newGridX = 16;
+        newGridY = 6;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[1] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
@@ -286,5 +295,30 @@ public class MainActivity extends Activity {
                 v4.setEnabled(true);
             }
         }, dPad.getAnimationLength());
+    }
+
+    private void setSizeForAnswerScrollView(){
+        ImageView answer_text_field = findViewById(R.id.answer_text_field);
+        ScrollView answer_scrollview = findViewById(R.id.answer_scrollview);
+        LinearLayout answer_LL = findViewById(R.id.answer_LL);
+
+        answer_scrollview.getLayoutParams().height = answer_text_field.getHeight();
+    }
+
+    private void applyFonts() {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/MerchantCopyMod.ttf");
+
+        TextView[] toChangeFont = {findViewById(R.id.answer_text),
+                findViewById(R.id.dialogue_text),
+                findViewById(R.id.answer_button_text_0),
+                findViewById(R.id.answer_button_text_1),
+                findViewById(R.id.answer_button_text_2),
+                findViewById(R.id.answer_button_text_3),
+                findViewById(R.id.answer_button_text_4),
+                findViewById(R.id.answer_button_text_5)};
+
+        for (TextView t : toChangeFont) {
+            t.setTypeface(font);
+        }
     }
 }
