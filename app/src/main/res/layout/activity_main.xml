@@ -323,12 +323,13 @@
 
     <ImageView
         android:id="@+id/speaker_button"
-        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:contentDescription="@string/speaker_button"
+        android:onClick="onSoundViewClick"
         android:src="@drawable/speaker"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_text_end"
