@@ -54,7 +54,6 @@ public class MainActivity extends Activity {
         setupWorld();
 
         dPad.showDPad();
-        loadConverstationCharacterImage();
     }
 
     public void setupWorld(){
@@ -200,10 +199,7 @@ public class MainActivity extends Activity {
     {
         return dPad;
     }
-    public void loadConverstationCharacterImage() {
-        ImageView imageView = findViewById(R.id.npc_dialogue_view);
-        imageView.setImageResource(R.drawable.big_baker);
-    }
+    
 
     public void move_characterUp (final View v)
     {

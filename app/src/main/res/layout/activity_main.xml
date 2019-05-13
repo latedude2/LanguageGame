@@ -236,7 +236,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_description_npc"
-        android:src="@drawable/big_baker"
+        android:src="@drawable/big_niels"
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_npc_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"

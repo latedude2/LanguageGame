@@ -90,6 +90,23 @@ public class ConversationController extends Instance{
         showConversationElements();
         exchange = new Exchange(exchanges[0], mainActivity, this);
 
+        if(name.equals("Niels"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_niels);
+        }
+        else if (name.equals("Baker"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_baker);
+        }
+        else if(name.equals("Clerk"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_clerk);
+        }
+        else if(name.equals("Old"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_old);
+        }
+
     }
     public void nextExchange()
     {
@@ -113,6 +130,7 @@ public class ConversationController extends Instance{
             {
                 mainActivity.gotMilk = true;
             }
+
             hideConversationElements();
             mainActivity.getdPad().showDPad();
         }
