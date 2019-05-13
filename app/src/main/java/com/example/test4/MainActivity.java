@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
 
         //portal outside niels home
         int portalX = 16;
-        int portalY = 5;
+        int portalY = 6;
         int newGridX = 31;
         int newGridY = 17;
         int offsetX = (newGridX - portalX) * moveDist;
@@ -131,43 +131,43 @@ public class MainActivity extends Activity {
         portalX = 31;
         portalY = 18;
         newGridX = 16;
-        newGridY = 6;
+        newGridY = 7;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[1] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //left door to shop
-        portalX = 3;
-        portalY = 10;
-        newGridX = 25;
-        newGridY = 6;
+        portalX = 6;
+        portalY = 12;
+        newGridX = 29;
+        newGridY = 8;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY + 1)) * moveDist;
         portals[2] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //left door exit from shop
-        portalX = 25;
-        portalY = 7;
-        newGridX = 3;
-        newGridY = 11;
+        portalX = 29;
+        portalY = 9;
+        newGridX = 6;
+        newGridY = 13;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[3] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //right door to shop
-        portalX = 4;
-        portalY = 10;
-        newGridX = 26;
-        newGridY = 6;
+        portalX = 7;
+        portalY = 12;
+        newGridX = 30;
+        newGridY = 8;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY + 1)) * moveDist;
         portals[4] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //right door exit from shop
-        portalX = 26;
-        portalY = 7;
-        newGridX = 4;
-        newGridY = 11;
+        portalX = 30;
+        portalY = 10;
+        newGridX = 7;
+        newGridY = 14;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[5] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
