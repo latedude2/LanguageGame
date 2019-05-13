@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     private int moveDist = 0;
 
     public boolean talkedToNiels = false;
+    public boolean talkedToOld = false;
     public boolean gotBread = false;
     public boolean gotMilk = false;
     protected boolean answer_scrollable = false;
@@ -199,7 +200,7 @@ public class MainActivity extends Activity {
     {
         return dPad;
     }
-    
+
 
     public void move_characterUp (final View v)
     {

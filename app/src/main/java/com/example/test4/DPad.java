@@ -132,7 +132,7 @@ class DPad {
         }
         else if(checkUp() == '2')
         {
-            if(mainActivity.talkedToNiels) {
+            if(mainActivity.talkedToOld) {
                 Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
                 p.teleport(player);
             }

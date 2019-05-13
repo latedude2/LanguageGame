@@ -122,6 +122,10 @@ public class ConversationController extends Instance{
             {
                 mainActivity.talkedToNiels = true;
             }
+            else if (name.equals("Old"))
+            {
+                mainActivity.talkedToOld = true;
+            }
             else if (name.equals("Baker"))
             {
                 mainActivity.gotBread = true;
