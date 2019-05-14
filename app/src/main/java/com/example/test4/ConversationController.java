@@ -89,6 +89,7 @@ public class ConversationController extends Instance{
         currentExchangeID = 0;
         exchangeCounter = 0;
         showConversationElements();
+        hintImage.setVisibility(View.GONE);
         exchange = new Exchange(exchanges[0], mainActivity, this);
 
         if(name.equals("Niels"))
