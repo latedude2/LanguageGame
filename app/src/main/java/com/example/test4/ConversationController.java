@@ -202,7 +202,7 @@ public class ConversationController extends Instance{
             answerButtonsTextView[j].setVisibility(View.VISIBLE);
         }
         npcDialogueView.setVisibility(View.VISIBLE);
-        hintImage.setVisibility(View.VISIBLE);
+        //hintImage.setVisibility(View.VISIBLE);
         dialogueText.setVisibility(View.VISIBLE);
         answerText.setVisibility(View.VISIBLE);
         conversationBlur.setVisibility(View.VISIBLE);
