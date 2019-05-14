@@ -282,6 +282,16 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_submit_button"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/dialogue_scrollIndicator"
+        android:layout_width="18dp"
+        android:layout_height="10dp"
+        android:src="@drawable/scroll_indicator"
+        android:layout_marginLeft="42dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/dialogue_scrollview"
+        app:layout_constraintBottom_toBottomOf="@id/dialogue_scrollview"/>
+
     <ScrollView
         android:id="@+id/dialogue_scrollview"
         android:layout_width="0dp"
@@ -331,6 +341,17 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@id/guideline_answer_text_view" />
+
+    <ImageView
+        android:id="@+id/answer_scrollIndicator"
+        android:layout_width="12dp"
+        android:layout_height="7dp"
+        android:src="@drawable/scroll_indicator"
+        android:visibility="gone"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintEnd_toEndOf="@id/answer_scrollview"
+        app:layout_constraintBottom_toBottomOf="@id/answer_scrollview"/>
 
     <ScrollView
         android:id="@+id/answer_scrollview"
