@@ -233,7 +233,7 @@ public class MainActivity extends Activity {
         dPad.switchDpadToConversation();
 
         //if you go in front of fridge, then you can get the last convo with niels
-        dPad.testCheat();
+        //dPad.testCheat();
     }
 
     public ImageView getHintImage() {
