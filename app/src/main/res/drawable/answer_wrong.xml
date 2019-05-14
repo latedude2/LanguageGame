@@ -1,0 +1,11 @@
+
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/answerspace"
+        android:duration="60"/>
+    <item android:drawable="@drawable/answerspace_wrong"
+        android:duration="240"/>
+    <item android:drawable="@drawable/answerspace"
+        android:duration="60"/>
+
+</animation-list>

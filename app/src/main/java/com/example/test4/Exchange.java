@@ -242,7 +242,7 @@ class Exchange extends Instance {
         {
             answerbg = mainActivity.findViewById(R.id.answer_text_field);
 
-            answerbg.setImageResource(R.drawable.answerspace_incorrect);
+            answerbg.setImageResource(R.drawable.answer_wrong);
             background_incorrect = (AnimationDrawable) answerbg.getDrawable();
             background_incorrect.start();
 
