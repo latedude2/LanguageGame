@@ -85,6 +85,8 @@ public class ConversationController extends Instance{
 
     public void startConversation()
     {
+        //answerTextField.scrollTo(0,0);
+        //dialogueText.scrollTo(0,0);
         hintImage.setVisibility(View.GONE);
         currentExchangeID = 0;
         exchangeCounter = 0;
@@ -112,6 +114,8 @@ public class ConversationController extends Instance{
 
     public void nextExchange()
     {
+        //answerTextField.scrollTo(0,0);
+        //dialogueText.scrollTo(0,0);
         hintImage.setVisibility(View.GONE);
         exchangeCounter++;
         if(exchanges.length > exchangeCounter)
