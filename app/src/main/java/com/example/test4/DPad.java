@@ -63,8 +63,8 @@ class DPad {
         int width = displayMetrics.widthPixels;
         moveDist = width/4;
 
-        startX = (int)Math.round(-120 - moveDist * 14.35);
-        startY = (int)Math.round(-120 - moveDist * 8.1);
+        startX = (int)Math.round(-80 -moveDist * 14.5);
+        startY = (int)Math.round( -moveDist * 8.5);
         //startX = dpToPx(-1344 + xCorrection);
         //startY = dpToPx(-864 + yCorrection);
         //startX = -(32 + moveDist * 28);
@@ -141,7 +141,6 @@ class DPad {
         }
         else if(checkUp() == '2')
         {
-
                 Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
                 p.teleport(player);
 
