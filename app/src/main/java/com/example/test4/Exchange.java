@@ -394,7 +394,7 @@ class Exchange extends Instance {
     private boolean checkScrollable(){
         answer_LL = mainActivity.findViewById(R.id.answer_LL);
         answer_SV = mainActivity.findViewById(R.id.answer_scrollview);
-        if (answer_LL.getMeasuredHeight() >= answer_SV.getHeight()) {
+        if (answer_LL.getHeight() >= answer_SV.getHeight()) {
             return true;
         } else {return false;}
     }

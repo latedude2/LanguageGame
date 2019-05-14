@@ -39,6 +39,7 @@ public class ConversationController extends Instance{
     private TextView[] answerButtonsTextView = new TextView[sizeSix]; //List of the answer choices displayed
     private ImageView[] answerButtons = new ImageView[sizeSix];   //List of Images where the answer choices are displayed on
     private ImageView dialogueScrollIndicator;    //Indicator to show that the dialogue continues below
+    private ImageView answerScrollIndicator;    //Indicator to show that the dialogue continues below
 
     //All world view Elements
     private ImageView dPadBackground;       //Image of the area where the DPad is displayed
@@ -69,6 +70,7 @@ public class ConversationController extends Instance{
         this.submitButton = mainActivity.findViewById(R.id.submit_button);
         this.exitButton = mainActivity.findViewById(R.id.exit_button);
         this.dialogueScrollIndicator = mainActivity.findViewById(R.id.dialogue_scrollIndicator);
+        this.answerScrollIndicator = mainActivity.findViewById(R.id.answer_scrollIndicator);
         for (int j = 0; j < sizeSix; j++) {
             String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
@@ -217,6 +219,7 @@ public class ConversationController extends Instance{
         submitButton.setVisibility(View.VISIBLE);
         exitButton.setVisibility(View.VISIBLE);
         dialogueScrollIndicator.setVisibility(View.VISIBLE);
+        answerScrollIndicator.setVisibility(View.VISIBLE);
         //Hiding DPad, to be moved later
     }
 
