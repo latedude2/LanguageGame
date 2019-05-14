@@ -83,6 +83,8 @@ public class ConversationController extends Instance{
 
     public void startConversation()
     {
+        mainActivity.findViewById(R.id.answer_scrollview).scrollTo(0,0);
+        mainActivity.findViewById(R.id.dialogue_scrollview).scrollTo(0,0);
         currentExchangeID = 0;
         currentExchangeID = exchanges[exchangeCounter];
         showConversationElements();
@@ -108,6 +110,8 @@ public class ConversationController extends Instance{
 
     public void nextExchange()
     {
+        mainActivity.findViewById(R.id.answer_scrollview).scrollTo(0,0);
+        mainActivity.findViewById(R.id.dialogue_scrollview).scrollTo(0,0);
         hintImage.setVisibility(View.GONE);
         exchangeCounter++;
         if(exchanges.length > exchangeCounter)
