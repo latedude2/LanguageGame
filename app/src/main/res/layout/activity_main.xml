@@ -286,7 +286,6 @@
         android:id="@+id/dialogue_scrollview"
         android:layout_width="0dp"
         android:layout_height="90dp"
-        android:padding="1dp"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
         app:layout_constraintTop_toTopOf="@+id/guideline_dialogue_text_view">
@@ -337,6 +336,8 @@
         android:id="@+id/answer_scrollview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/answer_text_field"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_text_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
