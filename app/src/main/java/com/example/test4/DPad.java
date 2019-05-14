@@ -33,6 +33,12 @@ class DPad {
     private AnimationDrawable pressing_left;
     private AnimationDrawable pressing_right;
 
+    //for dpad animations when starting conversation
+    private AnimationDrawable convo_pressing_up;
+    private AnimationDrawable convo_pressing_left;
+    private AnimationDrawable convo_pressing_right;
+
+
     //the 32 is from the map border, and the 10 is from the image view placement
     private int xCorrection = 28;
     private int yCorrection = 32;
@@ -125,6 +131,9 @@ class DPad {
         }
         else if (checkUp() == '1')
         {
+            convo_pressing_up = (AnimationDrawable) dPadImageView.getDrawable();
+            convo_pressing_up.start();
+
             Character character = mainActivity.getCharacterAt(player.getXGrid(), player.getYGrid() - 1);
             mainActivity.characterTalkingToYou = character;
             hideDPad();
@@ -132,10 +141,10 @@ class DPad {
         }
         else if(checkUp() == '2')
         {
-            if(mainActivity.talkedToNiels) {
+
                 Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
                 p.teleport(player);
-            }
+
         }
     }
 
@@ -178,6 +187,9 @@ class DPad {
             animation.start();
         }else if (checkLeft() == '1')
         {
+            convo_pressing_left = (AnimationDrawable) dPadImageView.getDrawable();
+            convo_pressing_left.start();
+
             Character character = mainActivity.getCharacterAt(player.getXGrid() - 1, player.getYGrid());
             mainActivity.characterTalkingToYou = character;
             hideDPad();
@@ -201,6 +213,9 @@ class DPad {
             animation.start();
         }else if (checkRight() == '1')
         {
+            convo_pressing_right = (AnimationDrawable) dPadImageView.getDrawable();
+            convo_pressing_right.start();
+
             Character character = mainActivity.getCharacterAt(player.getXGrid() + 1, player.getYGrid());
             mainActivity.characterTalkingToYou = character;
             hideDPad();
@@ -238,4 +253,18 @@ class DPad {
     {
         return animationLength;
     }
+
+   public void switchDpadToConversation (){
+        if(checkUp() == '1'){
+            dPadImageView.setImageResource(R.drawable.dpad_convo_press_up);
+        }
+        else if (checkRight() == '1'){
+            dPadImageView.setImageResource(R.drawable.dpad_convo_press_right);
+        }
+        else if (checkLeft() == '1'){
+            dPadImageView.setImageResource(R.drawable.dpad_convo_press_left);
+        }
+    }
 }
+
+

@@ -30,6 +30,7 @@ public class ConversationController extends Instance{
     private ImageView hintImage;            //Image view to show the hint of a word
     private TextView dialogueText;          //Text view to hold the text of the NPC
     private TextView answerText;            //Text view to hold the text of the user
+    private ImageView conversationBlur;     //Image view to blur out world during conversations
     private ImageView conversationBackground;     //Image view to show the background of a conversation
     private ImageView answerTextField;      //Image where the answer is displayed on
     private ImageView speakerButton;        //Clickable image to play the sound
@@ -61,6 +62,7 @@ public class ConversationController extends Instance{
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
         this.answerText = mainActivity.findViewById(R.id.answer_text);
+        this.conversationBlur = mainActivity.findViewById(R.id.conversation_blur);
         this.conversationBackground = mainActivity.findViewById(R.id.conversation_background);
         this.answerTextField = mainActivity.findViewById(R.id.answer_text_field);
         this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
@@ -92,6 +94,23 @@ public class ConversationController extends Instance{
         showConversationElements();
         exchange = new Exchange(exchanges[0], mainActivity, this);
 
+        if(name.equals("Niels"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_niels);
+        }
+        else if (name.equals("Baker"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_baker);
+        }
+        else if(name.equals("Clerk"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_clerk);
+        }
+        else if(name.equals("Old"))
+        {
+            npcDialogueView.setImageResource(R.drawable.big_old);
+        }
+
     }
     public void nextExchange()
     {
@@ -107,6 +126,10 @@ public class ConversationController extends Instance{
             {
                 mainActivity.talkedToNiels = true;
             }
+            else if (name.equals("Old"))
+            {
+                mainActivity.talkedToOld = true;
+            }
             else if (name.equals("Baker"))
             {
                 mainActivity.gotBread = true;
@@ -115,6 +138,7 @@ public class ConversationController extends Instance{
             {
                 mainActivity.gotMilk = true;
             }
+
             hideConversationElements();
             mainActivity.getdPad().showDPad();
         }
@@ -125,6 +149,7 @@ public class ConversationController extends Instance{
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
         this.answerText = mainActivity.findViewById(R.id.answer_text);
+        this.conversationBlur = mainActivity.findViewById(R.id.conversation_blur);
         this.conversationBackground = mainActivity.findViewById(R.id.conversation_background);
         this.answerTextField = mainActivity.findViewById(R.id.answer_text_field);
         this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
@@ -148,6 +173,7 @@ public class ConversationController extends Instance{
         getHintImage().setVisibility(View.GONE);
         getDialogueText().setVisibility(View.GONE);
         getAnswerText().setVisibility(View.GONE);
+        getConversationBlur().setVisibility(View.GONE);
         getConversationBackground().setVisibility(View.GONE);
         getAnswerTextField().setVisibility(View.GONE);
         getSpeakerButton().setVisibility(View.GONE);
@@ -161,6 +187,7 @@ public class ConversationController extends Instance{
         this.hintImage = mainActivity.findViewById(R.id.hint_img);
         this.dialogueText = mainActivity.findViewById(R.id.dialogue_text);
         this.answerText = mainActivity.findViewById(R.id.answer_text);
+        this.conversationBlur = mainActivity.findViewById(R.id.conversation_blur);
         this.conversationBackground = mainActivity.findViewById(R.id.conversation_background);
         this.answerTextField = mainActivity.findViewById(R.id.answer_text_field);
         this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
@@ -183,6 +210,7 @@ public class ConversationController extends Instance{
         hintImage.setVisibility(View.VISIBLE);
         dialogueText.setVisibility(View.VISIBLE);
         answerText.setVisibility(View.VISIBLE);
+        conversationBlur.setVisibility(View.VISIBLE);
         conversationBackground.setVisibility(View.VISIBLE);
         answerTextField.setVisibility(View.VISIBLE);
         speakerButton.setVisibility(View.VISIBLE);
@@ -207,6 +235,10 @@ public class ConversationController extends Instance{
 
     public TextView getAnswerText() {
         return answerText;
+    }
+
+    public ImageView getConversationBlur(){
+        return conversationBlur;
     }
 
     public ImageView getConversationBackground() {

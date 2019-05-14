@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     private int moveDist = 0;
 
     public boolean talkedToNiels = false;
+    public boolean talkedToOld = false;
     public boolean gotBread = false;
     public boolean gotMilk = false;
     public boolean answer_scrollable = false;
@@ -55,7 +56,6 @@ public class MainActivity extends Activity {
         setupWorld();
 
         dPad.showDPad();
-        loadConverstationCharacterImage();
     }
 
     public void setupWorld(){
@@ -65,6 +65,8 @@ public class MainActivity extends Activity {
         createPortals();
         setSizeForAnswerScrollView();
         applyFonts();
+
+        dPad.switchDpadToConversation();
 
         ImageView imageView = findViewById(R.id.world_view);
         ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
@@ -121,7 +123,7 @@ public class MainActivity extends Activity {
 
         //portal outside niels home
         int portalX = 16;
-        int portalY = 5;
+        int portalY = 6;
         int newGridX = 31;
         int newGridY = 17;
         int offsetX = (newGridX - portalX) * moveDist;
@@ -132,43 +134,43 @@ public class MainActivity extends Activity {
         portalX = 31;
         portalY = 18;
         newGridX = 16;
-        newGridY = 6;
+        newGridY = 7;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[1] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //left door to shop
-        portalX = 3;
-        portalY = 10;
-        newGridX = 25;
-        newGridY = 6;
+        portalX = 6;
+        portalY = 12;
+        newGridX = 29;
+        newGridY = 8;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY + 1)) * moveDist;
         portals[2] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //left door exit from shop
-        portalX = 25;
-        portalY = 7;
-        newGridX = 3;
-        newGridY = 11;
+        portalX = 29;
+        portalY = 9;
+        newGridX = 6;
+        newGridY = 13;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[3] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //right door to shop
-        portalX = 4;
-        portalY = 10;
-        newGridX = 26;
-        newGridY = 6;
+        portalX = 7;
+        portalY = 12;
+        newGridX = 30;
+        newGridY = 8;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY + 1)) * moveDist;
         portals[4] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
 
         //right door exit from shop
-        portalX = 26;
-        portalY = 7;
-        newGridX = 4;
-        newGridY = 11;
+        portalX = 30;
+        portalY = 9;
+        newGridX = 7;
+        newGridY = 13;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[5] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
@@ -201,33 +203,34 @@ public class MainActivity extends Activity {
     {
         return dPad;
     }
-    public void loadConverstationCharacterImage() {
-        ImageView imageView = findViewById(R.id.npc_dialogue_view);
-        imageView.setImageResource(R.drawable.big_baker);
-    }
+
 
     public void move_characterUp (final View v)
     {
         dPad.moveUp();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public void move_characterDown (final View v)
     {
         dPad.moveDown();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public void movePlayerLeft(final View v)
     {
         dPad.moveLeft();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public void move_characterRight (final View v)
     {
         dPad.moveRight();
         disableDpadFor();
+        dPad.switchDpadToConversation();
     }
 
     public ImageView getHintImage() {
