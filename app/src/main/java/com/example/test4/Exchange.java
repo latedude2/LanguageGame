@@ -16,14 +16,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Exchange extends Instance {
-    private GameObject[] UIObjects; //images shown after pressing the hintButton
-
     private StringBuffer questionText; //array for normal text of other character
     private StringBuffer answerText; //array for already written text of answer
     private StringBuffer[] answers; //array of all 6 possible answers
     private TextView answerTextView;            //Text view to hold the text of the user
     private TextView dialogueTextView;          //Text view to hold the text of the NPC
-    private ImageView hintImageView;            //Image view to show the hint of a word
     private TextView[] answerButtonsTextView = new TextView[6];
 
     MainActivity mainActivity;
@@ -33,7 +30,6 @@ class Exchange extends Instance {
     private ArrayList<String> wordList = new ArrayList<>();
     private int wordCount = 0;
 
-    private int[] selectAnswers = new int[6]; //all of the possible answers
     private int[] correctAnswers; //answers that are possible to be correct
     private String usersAnswerUnchanged;    //User's unedited answer to the NPC
 
@@ -55,8 +51,6 @@ class Exchange extends Instance {
 
         this.dialogueTextView = mainActivity.findViewById(R.id.dialogue_text);
         this.answerTextView = mainActivity.findViewById(R.id.answer_text);
-        this.hintImageView = mainActivity.findViewById(R.id.hint_img);
-
 
         for (int i = 0; i < answerButtonsTextView.length; i++) {
             String number = Integer.toString(i);
@@ -78,7 +72,7 @@ class Exchange extends Instance {
         questionText = fileRead.getQuestionText();
         answerText = fileRead.getAnswerText();
         //creates exchange object which consists of all the Strings to be put in that one created exchange
-        dialogueTextView.setText(checkHint());          //crash here
+        dialogueTextView.setText(checkHint());
         dialogueTextView.setMovementMethod(LinkMovementMethod.getInstance());
         answerTextView.setText(checkGap());
         answers = fileRead.getAllAnswers();
@@ -115,8 +109,6 @@ class Exchange extends Instance {
         usersAnswerUnchanged = spannableString.toString();
         return spannableString;
     }
-
-
     //plays all sentence of question
     public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
         final MediaPlayer sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
@@ -242,10 +234,15 @@ class Exchange extends Instance {
             showAnswerText();
         }
     }
-
+    void makeButtonDissapear(View view)
+    {
+        view.setVisibility(View.GONE);
+        getAnswerButtonTextView(view).setVisibility(View.GONE);
+    }
     void addAnswer(View view)
     {
         String answerTextToPut = getTextOfClickedAnswerButton(view);
+        //makeButtonDissapear(view);
 
         TextView answerField = mainActivity.findViewById(R.id.answer_text);                  //Get answer text Text View
         answerField.setMovementMethod(LinkMovementMethod.getInstance());        //Make the text view clickable. This enables us to add ClickableSpan to this Text View
@@ -273,9 +270,14 @@ class Exchange extends Instance {
             answerSlotCount++;                                  //counting the amount of slots
         }
     }
-
     private String getTextOfClickedAnswerButton(View view)
     //Get the text of the clicked answer image view. This connects the image view to the text view in a way.
+    {
+        answerTextView = getAnswerButtonTextView(view);
+        return answerTextView.getText().toString();
+    }
+    TextView getAnswerButtonTextView(View view)
+    //returns the text view of the clicked answer button
     {
         ImageView answer = (ImageView) view;
         int id = answer.getId();
@@ -284,8 +286,7 @@ class Exchange extends Instance {
         answerIndex = Integer.parseInt(String.valueOf(takeNum));
         String textViewName = "answer_button_text_" + takeNum;
         int idOfTextView = mainActivity.getResources().getIdentifier(textViewName, "id", mainActivity.getPackageName());
-        TextView answerTextView = mainActivity.findViewById(idOfTextView);
-        return answerTextView.getText().toString();
+        return mainActivity.findViewById(idOfTextView);
     }
     private void putWordInSlot(String ans, int index)
     //Sets and empty selected answer slot to a specified string
