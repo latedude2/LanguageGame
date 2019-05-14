@@ -81,6 +81,7 @@ class Exchange extends Instance {
             answerButtonsTextView[j].setText(takeAnswers(j));
         }
         resetSelectedAnswers();
+        prepareStringForAddingWords();
     }
 
     public SpannableString checkGap(){
