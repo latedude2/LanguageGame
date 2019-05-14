@@ -37,7 +37,8 @@ public class MainActivity extends Activity {
     public boolean talkedToNiels = false;
     public boolean gotBread = false;
     public boolean gotMilk = false;
-    protected boolean answer_scrollable = false;
+    public boolean answer_scrollable = false;
+    public boolean dialogue_scrollable = false;
 
     Character characterTalkingToYou;
 
