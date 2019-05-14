@@ -315,6 +315,7 @@ class Exchange extends Instance {
         for(int i = 0; i < answerSlotCount; i++)
         {
             selectedAnswers[i].word = "____";
+            selectedAnswers[i].IDForCheckingAnswer = -1;
         }
     }
 
