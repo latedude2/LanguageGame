@@ -114,7 +114,6 @@ class Exchange extends Instance {
     //plays all sentence of question
     public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
         sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
-        sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
         playAudio();
     }
 
