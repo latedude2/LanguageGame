@@ -167,9 +167,9 @@ public class MainActivity extends Activity {
 
         //right door exit from shop
         portalX = 30;
-        portalY = 10;
+        portalY = 9;
         newGridX = 7;
-        newGridY = 14;
+        newGridY = 13;
         offsetX = (newGridX - portalX) * moveDist;
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[5] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
