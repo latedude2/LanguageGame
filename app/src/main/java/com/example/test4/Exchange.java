@@ -43,7 +43,6 @@ class Exchange extends Instance {
     private int answerIndex;
 
     private FileRead fileRead; //creates the file object for all the Strings to be created there
-    private MediaPlayer sentenceAudio;
 
 
     public Exchange(int index, MainActivity mainActivity, ConversationController conversationController) {
@@ -112,15 +111,17 @@ class Exchange extends Instance {
     }
     //plays all sentence of question
     public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
-        sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
-        playAudio();
+        final MediaPlayer sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+        speaker_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sentenceAudio.isPlaying()) {
+                    sentenceAudio.seekTo(0); //continues playing the audio from the beginning
+                } else sentenceAudio.start();
+            }
+        });
     }
-    private void playAudio()
-    {
-        if (sentenceAudio.isPlaying()) {
-            sentenceAudio.seekTo(0); //continues playing the audio from the beginning
-        } else sentenceAudio.start();
-    }
+
     public SpannableString checkHint()
     {
         StringBuffer stringBuffer = questionText;
@@ -164,6 +165,7 @@ class Exchange extends Instance {
                     }
                     int resId = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "drawable", mainActivity.getPackageName());
                     mainActivity.getHintImage().setImageResource(resId);
+
                     //-------------------------------------
                     //audio to play
                     //-------------------------------------
