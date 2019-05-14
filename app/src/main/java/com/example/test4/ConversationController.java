@@ -43,8 +43,6 @@ public class ConversationController extends Instance{
     ////////////////////////////////////////////////////
 
     ConversationController(MainActivity mainActivity){
-
-
         //Dpad elements to be changed later
         dPadBackground = mainActivity.findViewById(R.id.d_pad_background);
         dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
@@ -86,6 +84,7 @@ public class ConversationController extends Instance{
     public void startConversation()
     {
         currentExchangeID = 0;
+        currentExchangeID = exchanges[exchangeCounter];
         showConversationElements();
         exchange = new Exchange(exchanges[0], mainActivity, this);
 
@@ -110,10 +109,10 @@ public class ConversationController extends Instance{
     public void nextExchange()
     {
         hintImage.setVisibility(View.GONE);
-        currentExchangeID++;
-        if(exchanges.length > currentExchangeID)
+        exchangeCounter++;
+        if(exchanges.length > exchangeCounter)
         {
-            exchange = new Exchange(exchanges[currentExchangeID], mainActivity, this);
+            exchange = new Exchange(exchanges[exchangeCounter], mainActivity, this);
         }
         else
         {
@@ -137,6 +136,8 @@ public class ConversationController extends Instance{
             hideConversationElements();
             mainActivity.getdPad().showDPad();
         }
+        currentExchangeID = exchanges[exchangeCounter];
+
     }
     public void hideConversationElements(){
         /*
