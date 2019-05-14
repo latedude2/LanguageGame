@@ -1,5 +1,6 @@
 package com.example.test4;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
@@ -22,6 +23,7 @@ class Exchange extends Instance {
     private TextView answerTextView;            //Text view to hold the text of the user
     private TextView dialogueTextView;          //Text view to hold the text of the NPC
     private TextView[] answerButtonsTextView = new TextView[6];
+    private ImageView answerbg;
 
     MainActivity mainActivity;
     ConversationController parentConversationController;
@@ -44,6 +46,8 @@ class Exchange extends Instance {
 
     private MediaPlayer sentenceAudio;
 
+    private AnimationDrawable background_incorrect; // changes the background
+
     private FileRead fileRead; //creates the file object for all the Strings to be created there
 
 
@@ -63,6 +67,7 @@ class Exchange extends Instance {
         loadExchange(index);
 
     }
+
     public void loadExchange(int exchangeId)
     {
         String fileIndex = Integer.toString(exchangeId); //use if it complains about using integer in the String in the following line
@@ -112,6 +117,7 @@ class Exchange extends Instance {
         return spannableString;
     }
     //plays all sentence of question
+
     public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
         sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
         playAudio();
@@ -122,6 +128,7 @@ class Exchange extends Instance {
             sentenceAudio.seekTo(0); //continues playing the audio from the beginning
         } else sentenceAudio.start();
     }
+
     public SpannableString checkHint()
     {
         StringBuffer stringBuffer = questionText;
@@ -216,13 +223,14 @@ class Exchange extends Instance {
         return word;
     }
     //-----------------
-   void resetSelectedAnswers()
-   {
+    void resetSelectedAnswers()
+    {
        for(int i = 0; i < 6; i++)
        {
            selectedAnswers[i] = new SelectedAnswer("____");
        }
    }
+
     void submitAnswer(View view)
     {
         if (checkAnswer())
@@ -231,6 +239,12 @@ class Exchange extends Instance {
         }
         else
         {
+            answerbg = mainActivity.findViewById(R.id.answer_text_field);
+
+            answerbg.setImageResource(R.drawable.answer_wrong);
+            background_incorrect = (AnimationDrawable) answerbg.getDrawable();
+            background_incorrect.start();
+
             resetAllWordInputFields();
             showAnswerText();
         }

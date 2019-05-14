@@ -84,6 +84,7 @@ public class MainActivity extends Activity {
 
         dPad.hideDPad();
     }
+
     private void createCharacters()
     {
         ConversationController[] conversations = new ConversationController[2];
@@ -114,6 +115,7 @@ public class MainActivity extends Activity {
 
 
     }
+
     private void createPortals()
     {
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -175,6 +177,7 @@ public class MainActivity extends Activity {
         offsetY = (newGridY - (portalY - 1)) * moveDist;
         portals[5] = new Portal(worldView, portalX, portalY, offsetX, offsetY, newGridX , newGridY);
     }
+
     public Portal getPortalAt(int x, int y)
     //Returns portal located at given coordinates
     {
@@ -187,6 +190,7 @@ public class MainActivity extends Activity {
         }
         throw new Error("Portal not found");
     }
+
     public Character getCharacterAt(int x, int y)
     //Returns character located at given coordinates
     {
@@ -199,6 +203,7 @@ public class MainActivity extends Activity {
         }
         throw new Error("Character not found");
     }
+
     public DPad getdPad()
     {
         return dPad;
