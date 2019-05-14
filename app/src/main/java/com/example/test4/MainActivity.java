@@ -55,7 +55,9 @@ public class MainActivity extends Activity {
 
         setupWorld();
 
-        dPad.showDPad();
+        characters[0].startConversation();
+        findViewById(R.id.exit_button).setVisibility(View.GONE);
+        //dPad.showDPad();
     }
 
     public void setupWorld(){
@@ -86,14 +88,12 @@ public class MainActivity extends Activity {
     }
     private void createCharacters()
     {
-        ConversationController[] conversations = new ConversationController[2];
-        int[] exchanges = {0, 1, 2};
+        ConversationController[] conversations = new ConversationController[1];
+        int[] exchanges = {9, 12, 2, 8, 10, 11, 3, 5, 6, 1, 4, 13, 14, 0, 7};
         conversations[0] = new ConversationController(exchanges , this, "Niels");
-        exchanges = new int[] {11, 12, 13, 14};
-        conversations[1] = new ConversationController(exchanges , this, "Niels");
         int uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
         characters[0] = new Character("Niels", uncleID, 30, 16, conversations, this);
-
+        /*
         conversations = new ConversationController[1];
         exchanges = new int[] {3,4};
         conversations[0] = new ConversationController(exchanges , this, "Old");
@@ -111,8 +111,7 @@ public class MainActivity extends Activity {
         conversations[0] = new ConversationController(exchanges , this, "Baker");
         int bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
         characters[3] = new Character("Baker", bakerID, 33, 4, conversations, this);
-
-
+        */
     }
     private void createPortals()
     {
@@ -251,7 +250,7 @@ public class MainActivity extends Activity {
 
     public void onSoundViewClick(View v) {
         String audioFileName = "sentence" + characterTalkingToYou.getCurrentConversationController().getCurrentExchangeID();
-        final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
+        int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
         ImageView speaker_button = findViewById(R.id.speaker_button);
         characterTalkingToYou.getCurrentConversationController().getCurrentExchange().sentencePlay(speaker_button, idOfAudioFile);
     }
