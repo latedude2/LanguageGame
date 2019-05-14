@@ -1,12 +1,9 @@
 package com.example.test4;
 
-import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
 
 public class ConversationController extends Instance{
 
@@ -38,8 +35,6 @@ public class ConversationController extends Instance{
     private ImageView exitButton;           //Clickable image to exit the conversation
     private TextView[] answerButtonsTextView = new TextView[sizeSix]; //List of the answer choices displayed
     private ImageView[] answerButtons = new ImageView[sizeSix];   //List of Images where the answer choices are displayed on
-    private ImageView dialogueScrollIndicator;    //Indicator to show that the dialogue continues below
-    private ImageView answerScrollIndicator;    //Indicator to show that the dialogue continues below
 
     //All world view Elements
     private ImageView dPadBackground;       //Image of the area where the DPad is displayed
@@ -69,8 +64,6 @@ public class ConversationController extends Instance{
         this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
         this.submitButton = mainActivity.findViewById(R.id.submit_button);
         this.exitButton = mainActivity.findViewById(R.id.exit_button);
-        this.dialogueScrollIndicator = mainActivity.findViewById(R.id.dialogue_scrollIndicator);
-        this.answerScrollIndicator = mainActivity.findViewById(R.id.answer_scrollIndicator);
         for (int j = 0; j < sizeSix; j++) {
             String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
@@ -112,8 +105,8 @@ public class ConversationController extends Instance{
         {
             npcDialogueView.setImageResource(R.drawable.big_old);
         }
-
     }
+
     public void nextExchange()
     {
         hintImage.setVisibility(View.GONE);
@@ -218,8 +211,6 @@ public class ConversationController extends Instance{
         speakerButton.setVisibility(View.VISIBLE);
         submitButton.setVisibility(View.VISIBLE);
         exitButton.setVisibility(View.VISIBLE);
-        dialogueScrollIndicator.setVisibility(View.VISIBLE);
-        answerScrollIndicator.setVisibility(View.VISIBLE);
         //Hiding DPad, to be moved later
     }
 
