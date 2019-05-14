@@ -35,6 +35,8 @@ public class ConversationController extends Instance{
     private ImageView exitButton;           //Clickable image to exit the conversation
     private TextView[] answerButtonsTextView = new TextView[sizeSix]; //List of the answer choices displayed
     private ImageView[] answerButtons = new ImageView[sizeSix];   //List of Images where the answer choices are displayed on
+    private ImageView dialogueScrollIndicator;    //Indicator to show that the dialogue continues below
+    private ImageView answerScrollIndicator;    //Indicator to show that the dialogue continues below
 
     //All world view Elements
     private ImageView dPadBackground;       //Image of the area where the DPad is displayed
@@ -43,6 +45,8 @@ public class ConversationController extends Instance{
     ////////////////////////////////////////////////////
 
     ConversationController(MainActivity mainActivity){
+
+
         //Dpad elements to be changed later
         dPadBackground = mainActivity.findViewById(R.id.d_pad_background);
         dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
@@ -62,6 +66,9 @@ public class ConversationController extends Instance{
         this.speakerButton = mainActivity.findViewById(R.id.speaker_button);
         this.submitButton = mainActivity.findViewById(R.id.submit_button);
         this.exitButton = mainActivity.findViewById(R.id.exit_button);
+        this.dialogueScrollIndicator = mainActivity.findViewById(R.id.dialogue_scrollIndicator);
+        this.answerScrollIndicator = mainActivity.findViewById(R.id.answer_scrollIndicator);
+
         for (int j = 0; j < sizeSix; j++) {
             String number = Integer.toString(j);
             String viewText = "answer_button_text_" + number;
@@ -85,11 +92,12 @@ public class ConversationController extends Instance{
     {
         mainActivity.findViewById(R.id.answer_scrollview).scrollTo(0,0);
         mainActivity.findViewById(R.id.dialogue_scrollview).scrollTo(0,0);
+        hintImage.setVisibility(View.GONE);
         currentExchangeID = 0;
-        currentExchangeID = exchanges[exchangeCounter];
+        exchangeCounter = 0;
         showConversationElements();
+        hintImage.setVisibility(View.GONE);
         exchange = new Exchange(exchanges[0], mainActivity, this);
-
         if(name.equals("Niels"))
         {
             npcDialogueView.setImageResource(R.drawable.big_niels);
@@ -140,8 +148,6 @@ public class ConversationController extends Instance{
             hideConversationElements();
             mainActivity.getdPad().showDPad();
         }
-        currentExchangeID = exchanges[exchangeCounter];
-
     }
     public void hideConversationElements(){
         /*
@@ -179,6 +185,8 @@ public class ConversationController extends Instance{
         getSpeakerButton().setVisibility(View.GONE);
         getSubmitButton().setVisibility(View.GONE);
         getExitButton().setVisibility(View.GONE);
+        dialogueScrollIndicator.setVisibility(View.GONE);
+        answerScrollIndicator.setVisibility(View.GONE);
         //Showing DPad, to be moved later
     }
 
@@ -207,7 +215,7 @@ public class ConversationController extends Instance{
             answerButtonsTextView[j].setVisibility(View.VISIBLE);
         }
         npcDialogueView.setVisibility(View.VISIBLE);
-        hintImage.setVisibility(View.VISIBLE);
+        //hintImage.setVisibility(View.VISIBLE);
         dialogueText.setVisibility(View.VISIBLE);
         answerText.setVisibility(View.VISIBLE);
         conversationBlur.setVisibility(View.VISIBLE);
@@ -216,6 +224,8 @@ public class ConversationController extends Instance{
         speakerButton.setVisibility(View.VISIBLE);
         submitButton.setVisibility(View.VISIBLE);
         exitButton.setVisibility(View.VISIBLE);
+        dialogueScrollIndicator.setVisibility(View.VISIBLE);
+        answerScrollIndicator.setVisibility(View.VISIBLE);
         //Hiding DPad, to be moved later
     }
 
@@ -277,7 +287,7 @@ public class ConversationController extends Instance{
     }
 
     public int getCurrentExchangeID() {
-        return currentExchangeID;
+        return exchanges[exchangeCounter];
     }
 
     public void setCurrentExchangeID(int currentExchangeID) {

@@ -1,5 +1,7 @@
 package com.example.test4;
 
+import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
@@ -8,6 +10,8 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -22,6 +26,9 @@ class Exchange extends Instance {
     private TextView answerTextView;            //Text view to hold the text of the user
     private TextView dialogueTextView;          //Text view to hold the text of the NPC
     private TextView[] answerButtonsTextView = new TextView[6];
+    private ImageView answerbg;
+    private ScrollView answer_SV;
+    private LinearLayout answer_LL;
 
     MainActivity mainActivity;
     ConversationController parentConversationController;
@@ -42,8 +49,11 @@ class Exchange extends Instance {
     private SelectedAnswer[] selectedAnswers = new SelectedAnswer[6];
     private int answerIndex;
 
-    private FileRead fileRead; //creates the file object for all the Strings to be created there
     private MediaPlayer sentenceAudio;
+
+    private AnimationDrawable background_incorrect; // changes the background
+
+    private FileRead fileRead; //creates the file object for all the Strings to be created there
 
 
     public Exchange(int index, MainActivity mainActivity, ConversationController conversationController) {
@@ -62,6 +72,7 @@ class Exchange extends Instance {
         loadExchange(index);
 
     }
+
     public void loadExchange(int exchangeId)
     {
         String fileIndex = Integer.toString(exchangeId); //use if it complains about using integer in the String in the following line
@@ -80,6 +91,11 @@ class Exchange extends Instance {
         for (int j = 0; j < answerButtonsTextView.length; j++){
             answerButtonsTextView[j].setText(takeAnswers(j));
         }
+
+        if(checkScrollable()){
+            answerTextView.setTextColor(Color.YELLOW);
+        }
+
         resetSelectedAnswers();
         prepareStringForAddingWords();
     }
@@ -112,16 +128,20 @@ class Exchange extends Instance {
         return spannableString;
     }
     //plays all sentence of question
+
     public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
+        if(sentenceAudio != null)
+            sentenceAudio.release();
         sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
         playAudio();
     }
-    private void playAudio()
-    {
+
+    private void playAudio() {
         if (sentenceAudio.isPlaying()) {
             sentenceAudio.seekTo(0); //continues playing the audio from the beginning
         } else sentenceAudio.start();
     }
+
     public SpannableString checkHint()
     {
         StringBuffer stringBuffer = questionText;
@@ -165,14 +185,17 @@ class Exchange extends Instance {
                     }
                     int resId = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "drawable", mainActivity.getPackageName());
                     mainActivity.getHintImage().setImageResource(resId);
+
                     //-------------------------------------
                     //audio to play
                     //-------------------------------------
                     int idOfAudioFile = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "raw", mainActivity.getPackageName());
-                    final MediaPlayer audio = MediaPlayer.create(mainActivity, idOfAudioFile);
-                            if (audio.isPlaying()) {
-                                audio.seekTo(0);
-                            } else audio.start();
+                    if(sentenceAudio != null)
+                        sentenceAudio.release();
+                    sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+                            if (sentenceAudio.isPlaying()) {
+                                sentenceAudio.seekTo(0);
+                            } else sentenceAudio.start();
                 }
             };
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -215,21 +238,42 @@ class Exchange extends Instance {
         return word;
     }
     //-----------------
-   void resetSelectedAnswers()
-   {
+    void resetSelectedAnswers()
+    {
        for(int i = 0; i < 6; i++)
        {
            selectedAnswers[i] = new SelectedAnswer("____");
        }
    }
+
     void submitAnswer(View view)
     {
         if (checkAnswer())
         {
+            answerbg = mainActivity.findViewById(R.id.answer_text_field);
+
+            answerbg.setImageResource(R.drawable.answer_correct);
+            background_incorrect = (AnimationDrawable) answerbg.getDrawable();
+            background_incorrect.start();
+
+            final int idOfAudioFile = mainActivity.getResources().getIdentifier("correct", "raw", mainActivity.getPackageName());
+            sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+            playAudio();
+
             parentConversationController.nextExchange();
         }
         else
         {
+            answerbg = mainActivity.findViewById(R.id.answer_text_field);
+
+            answerbg.setImageResource(R.drawable.answer_wrong);
+            background_incorrect = (AnimationDrawable) answerbg.getDrawable();
+            background_incorrect.start();
+
+            final int idOfAudioFile = mainActivity.getResources().getIdentifier("incorrect", "raw", mainActivity.getPackageName());
+            sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+            playAudio();
+
             resetAllWordInputFields();
             showAnswerText();
         }
@@ -257,7 +301,7 @@ class Exchange extends Instance {
             answerField.setText(spanString);
         }
     }
-    private void prepareStringForAddingWords()
+    public void prepareStringForAddingWords()
     //reseting the full answer to represent the original text, giving each slot its own number, counting the amount of slots
     {
         fullAnswer = getUsersAnswerUnchanged();        //reseting the full answer to represent the original text
@@ -308,6 +352,7 @@ class Exchange extends Instance {
             if(selectedAnswers[i].word.equals(answerToReset))
             {
                 selectedAnswers[i].word = "____";
+                selectedAnswers[i].IDForCheckingAnswer = -1;
             }
         }
     }
@@ -370,7 +415,6 @@ class Exchange extends Instance {
 
                         resetWordInputField(clickableSpanString);
                         showAnswerText();
-                        makeButtonActiveAgain();
                     }
                 };
                 spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -381,5 +425,13 @@ class Exchange extends Instance {
     private void makeButtonActiveAgain()
     {
 
+    }
+
+    private boolean checkScrollable(){
+        answer_LL = mainActivity.findViewById(R.id.answer_LL);
+        answer_SV = mainActivity.findViewById(R.id.answer_scrollview);
+        if (answerTextView.getMeasuredHeight() >= answer_SV.getHeight() + 35) {
+            return true;
+        } else {return false;}
     }
 }
