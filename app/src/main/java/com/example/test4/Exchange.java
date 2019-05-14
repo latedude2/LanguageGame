@@ -130,6 +130,8 @@ class Exchange extends Instance {
     //plays all sentence of question
 
     public void sentencePlay(ImageView speaker_button, int idOfAudioFile) {
+        if(sentenceAudio != null)
+            sentenceAudio.release();
         sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
         playAudio();
     }
@@ -188,10 +190,12 @@ class Exchange extends Instance {
                     //audio to play
                     //-------------------------------------
                     int idOfAudioFile = mainActivity.getResources().getIdentifier(getWordFile(currentWord), "raw", mainActivity.getPackageName());
-                    final MediaPlayer audio = MediaPlayer.create(mainActivity, idOfAudioFile);
-                            if (audio.isPlaying()) {
-                                audio.seekTo(0);
-                            } else audio.start();
+                    if(sentenceAudio != null)
+                        sentenceAudio.release();
+                    sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+                            if (sentenceAudio.isPlaying()) {
+                                sentenceAudio.seekTo(0);
+                            } else sentenceAudio.start();
                 }
             };
             spannableString.setSpan(clickableSpan, wordIndexList.get(i) - i, wordIndexList.get(i) - i + wordList.get(i).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
