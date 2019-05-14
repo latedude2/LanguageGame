@@ -1,5 +1,5 @@
 Perfekt, tak. Hvordan er #vejret i dag?
-Vejret er &0 godt lige nu, &4 der kommer nok &1 senere.
+Godt, &4 der kommer nok &1 senere.
 rigtig
 regn
 ifølge

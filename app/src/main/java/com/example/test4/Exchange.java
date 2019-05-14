@@ -237,6 +237,9 @@ class Exchange extends Instance {
         if (checkAnswer())
         {
             parentConversationController.nextExchange();
+            final int idOfAudioFile = mainActivity.getResources().getIdentifier("correct", "raw", mainActivity.getPackageName());
+            sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+            playAudio();
         }
         else
         {
@@ -245,6 +248,10 @@ class Exchange extends Instance {
             answerbg.setImageResource(R.drawable.answer_wrong);
             background_incorrect = (AnimationDrawable) answerbg.getDrawable();
             background_incorrect.start();
+
+            final int idOfAudioFile = mainActivity.getResources().getIdentifier("incorrect", "raw", mainActivity.getPackageName());
+            sentenceAudio = MediaPlayer.create(mainActivity, idOfAudioFile);
+            playAudio();
 
             resetAllWordInputFields();
             showAnswerText();
