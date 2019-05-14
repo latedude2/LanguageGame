@@ -1,5 +1,5 @@
 Hvad måtte du give for mælken og brødet?
-Det &3 ni for &5 og &1 for brødet
+Det &3 ni for &5 og &1 for brødet.
 halvfems
 femten
 mælket

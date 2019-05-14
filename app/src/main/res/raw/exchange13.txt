@@ -1,5 +1,5 @@
 Super, har du #kvitteringen?
-Jep, &2 ikke &5 bageren
+Jep, &2 ikke &5 bageren.
 også
 dog
 men

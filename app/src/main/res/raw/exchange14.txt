@@ -1,5 +1,5 @@
-Nå, lad os se at få noget morgenmad
-Ja, &4 er ved at &2 sulten
+Nå, lad os se at få noget morgenmad.
+Ja, &4 er ved at &2 sulten.
 vær
 var
 være
