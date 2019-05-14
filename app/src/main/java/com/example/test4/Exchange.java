@@ -213,6 +213,7 @@ class Exchange extends Instance {
         word = word.replaceAll("Æ", "Ae");
         word = word.replaceAll("Ø", "O");
         word = word.replaceAll("Å", "Aa");
+        word = word.toLowerCase();
         return word;
     }
     //-----------------
