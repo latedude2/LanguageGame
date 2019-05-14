@@ -98,7 +98,6 @@ public class ConversationController extends Instance{
         showConversationElements();
         hintImage.setVisibility(View.GONE);
         exchange = new Exchange(exchanges[0], mainActivity, this);
-
         if(name.equals("Niels"))
         {
             npcDialogueView.setImageResource(R.drawable.big_niels);

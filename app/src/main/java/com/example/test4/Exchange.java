@@ -97,6 +97,7 @@ class Exchange extends Instance {
         }
 
         resetSelectedAnswers();
+        prepareStringForAddingWords();
     }
 
     public SpannableString checkGap(){
@@ -296,7 +297,7 @@ class Exchange extends Instance {
             answerField.setText(spanString);
         }
     }
-    private void prepareStringForAddingWords()
+    public void prepareStringForAddingWords()
     //reseting the full answer to represent the original text, giving each slot its own number, counting the amount of slots
     {
         fullAnswer = getUsersAnswerUnchanged();        //reseting the full answer to represent the original text
@@ -347,6 +348,7 @@ class Exchange extends Instance {
             if(selectedAnswers[i].word.equals(answerToReset))
             {
                 selectedAnswers[i].word = "____";
+                selectedAnswers[i].IDForCheckingAnswer = -1;
             }
         }
     }
@@ -408,7 +410,6 @@ class Exchange extends Instance {
 
                         resetWordInputField(clickableSpanString);
                         showAnswerText();
-                        makeButtonActiveAgain();
                     }
                 };
                 spannableString.setSpan(clickableSpan, selectedAnswers[i].answerPositionIndex, selectedAnswers[i].answerPositionIndex + selectedAnswers[i].word.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
