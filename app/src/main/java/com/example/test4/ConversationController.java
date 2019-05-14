@@ -85,8 +85,11 @@ public class ConversationController extends Instance{
 
     public void startConversation()
     {
+        hintImage.setVisibility(View.GONE);
         currentExchangeID = 0;
+        exchangeCounter = 0;
         showConversationElements();
+        hintImage.setVisibility(View.GONE);
         exchange = new Exchange(exchanges[0], mainActivity, this);
 
         if(name.equals("Niels"))
@@ -110,10 +113,10 @@ public class ConversationController extends Instance{
     public void nextExchange()
     {
         hintImage.setVisibility(View.GONE);
-        currentExchangeID++;
-        if(exchanges.length > currentExchangeID)
+        exchangeCounter++;
+        if(exchanges.length > exchangeCounter)
         {
-            exchange = new Exchange(exchanges[currentExchangeID], mainActivity, this);
+            exchange = new Exchange(exchanges[exchangeCounter], mainActivity, this);
         }
         else
         {
@@ -272,7 +275,7 @@ public class ConversationController extends Instance{
     }
 
     public int getCurrentExchangeID() {
-        return currentExchangeID;
+        return exchanges[exchangeCounter];
     }
 
     public void setCurrentExchangeID(int currentExchangeID) {
