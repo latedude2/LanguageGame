@@ -265,6 +265,7 @@ class DPad {
             dPadImageView.setImageResource(R.drawable.dpad_convo_press_left);
         }
     }
+
     public void testCheat (){
         if(player.getXGrid() == 32 && player.getYGrid() == 15){
             mainActivity.gotBread = true;
