@@ -63,7 +63,7 @@ class DPad {
         int width = displayMetrics.widthPixels;
         moveDist = width/4;
 
-        startX = (int)Math.round(-80 -moveDist * 14.5);
+        startX = (int)Math.round(-80 -moveDist * 15.5);
         startY = (int)Math.round( -moveDist * 8);
         //startX = dpToPx(-1344 + xCorrection);
         //startY = dpToPx(-864 + yCorrection);
