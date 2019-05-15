@@ -8,26 +8,25 @@ import java.io.InputStreamReader;
 
 public class FileRead {
 
-    private StringBuffer[] allText; //all the text in the file
     private StringBuffer questionText; //normal text of other character
-    public StringBuffer answerText;
-    private StringBuffer[] allAnswers; //array of all 6 possible answers
+    private StringBuffer answerText;
+    private StringBuffer[] allAnswers; //array of all possible answers
 
-    private InputStream inputStream; //the text file which is taken
+    private InputStream inputStream; //the text file which is read from
 
-    public FileRead (InputStream inputStream){
+    FileRead (InputStream inputStream){
         this.inputStream = inputStream;
     }
 
-    public void read() {
-        allText = readAll();
-        questionText = readQuest(this.allText);
-        setAnswerText(readAnswer(this.allText));
-        allAnswers = readAllAnswers(this.allText);
+    void read() {
+        StringBuffer[] allText = readAll();     //all the text in the file
+        questionText = readQuestion(allText);
+        answerText = readAnswer(allText);
+        allAnswers = readAllAnswers(allText);
     }
 
     //reads all of the file and puts every line in the array of Strings
-    public StringBuffer[] readAll()
+    StringBuffer[] readAll()
     {
         String newLine;
         StringBuffer[] lines = new StringBuffer[8];
@@ -48,19 +47,19 @@ public class FileRead {
         return lines;
     }
 
-    public StringBuffer readQuest(StringBuffer[] text)
+    StringBuffer readQuestion(StringBuffer[] text)
     {
         StringBuffer question = text[0];
         return question;
     }
 
-    public StringBuffer readAnswer(StringBuffer[] text)
+    StringBuffer readAnswer(StringBuffer[] text)
     {
         StringBuffer answer = text[1];
         return answer;
     }
 
-    public StringBuffer[] readAllAnswers(StringBuffer[] text)
+    StringBuffer[] readAllAnswers(StringBuffer[] text)
     {
         StringBuffer[] answers = new StringBuffer[6];
         for (int i = 2; i < text.length; i++){ //starts from 2 because text of answers start from third line in txt file
@@ -69,26 +68,23 @@ public class FileRead {
         return answers;
     }
 
-    public StringBuffer getAnswerText() {
+    StringBuffer getAnswerText() {
         return answerText;
     }
 
-
-    public StringBuffer[] getAllAnswers() {
+    StringBuffer[] getAllAnswers() {
         return allAnswers;
     }
 
-    public StringBuffer getQuestionText() {
+    StringBuffer getQuestionText() {
         return questionText;
     }
 
-    public void setAnswerText(StringBuffer answerText) {
-        this.answerText = answerText;
-    }
-
-    public char[][] readStructureChars(){
+    char[][] readStructureChars()
+    //Reads the map file
+    {
         String newLine; //each new read line
-        StringBuffer oldLine = new StringBuffer(); //
+        StringBuffer oldLine = new StringBuffer();
         char[][] mapTiles = new char[21][40]; //the 2 dimensional array to be returned to the activity
         int lineIndex = 0; // lines starting from 0 to be read afterwards one by one
         try {

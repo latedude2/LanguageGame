@@ -3,9 +3,9 @@ package com.example.test4;
 import android.animation.ObjectAnimator;
 import android.widget.ImageView;
 
-class Portal extends WorldElement {
+class Portal extends GameObject {
 
-    ImageView map;
+    private ImageView map;
     private int offsetWorldX;
     private int offsetWorldY;
     private int destGridX;
@@ -40,22 +40,5 @@ class Portal extends WorldElement {
         ObjectAnimator animation2 = ObjectAnimator.ofFloat(map, "x", map.getX(), moveX);
         animation2.setDuration(0);
         animation2.start();
-        /*
-        map.setX(offsetWorldX);
-        map.setY(destY);
-        */
     }
-    /*
-    public int getGridX()
-    {
-        return gridX;
-    }
-    public int getGridY()
-    {
-        return gridY;
-    }
-    */
-
-
-
 }

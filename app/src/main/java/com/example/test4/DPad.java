@@ -11,13 +11,13 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 class DPad {
-    private int moveDist;
+    private int moveDist;                   //Travel distance of player in pixels, when a walk button is pressed
     private ImageView worldView;
-    private int animationLength = 500;       //should be 540
+    private int animationLength = 500;      //Length of the walk animation in milliseconds
     private float moveX;
     private float moveY;
-    private int startX;
-    private int startY;
+    private int startX;                     //Starting X coordinate of the map in pixels
+    private int startY;                     //Starting Y coordinate of the map in pixels
     private PlayerObject player;
 
     private Button upButton;
@@ -38,12 +38,7 @@ class DPad {
     private AnimationDrawable convo_pressing_left;
     private AnimationDrawable convo_pressing_right;
 
-
-    //the 32 is from the map border, and the 10 is from the image view placement
-    private int xCorrection = 28;
-    private int yCorrection = 32;
-
-    char[][] mapTiles; //2D array for the map
+    private char[][] mapTiles; //2D array for the map
 
     private MainActivity mainActivity;
 
@@ -56,21 +51,16 @@ class DPad {
         moveY =  worldView.getY();
         this.worldView = worldView;
 
-        //these numbers don't exactly match the calculations, but it is as close as i could get
+        //Moving distance is set to be a quarter of the screen width
         DisplayMetrics displayMetrics = new DisplayMetrics();
         mainActivity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        //int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
         moveDist = width/4;
 
-        startX = (int)Math.round(-80 -moveDist * 15.5);
-        startY = (int)Math.round( -moveDist * 8);
-        //startX = dpToPx(-1344 + xCorrection);
-        //startY = dpToPx(-864 + yCorrection);
-        //startX = -(32 + moveDist * 28);
-        //startY = -(32 + moveDist * 14);
+        startX = (int)Math.round(-80 -moveDist * 15.5);         //This value is set manually, to fit the testing device
+        startY = (int)Math.round( -moveDist * 8);               //This value is set manually, to fit the testing device
 
-        //Here we are setting a specific location for the character, this needs to be updated once we have a functional game world
+        //Here we are setting specific coordinates for the world map (So character is located at his starting position)
         ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), startY);
         animation.setDuration(0);
         animation.start();
@@ -78,8 +68,7 @@ class DPad {
         animation.setDuration(0);
         animation.start();
 
-        //All DPad elements declared and set to their ImageView/Button
-        //Buttons should be changed later to ImageViews
+        //All DPad elements assigned their ImageView/Button
         upButton = mainActivity.findViewById(R.id.up_button);
         downButton = mainActivity.findViewById(R.id.down_button);
         leftButton = mainActivity.findViewById(R.id.left_button);
@@ -87,10 +76,9 @@ class DPad {
         dPadBackground = mainActivity.findViewById(R.id.d_pad_background);
         dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
 
-        dPadImageView = mainActivity.findViewById(R.id.d_pad_imageview);
+        //the image of the dpad is set
         int idOfDpad = mainActivity.getResources().getIdentifier("dpad_base", "drawable", mainActivity.getPackageName());
         dPadImageView.setImageResource(idOfDpad);
-
     }
     public void hideDPad()
     {
@@ -111,13 +99,10 @@ class DPad {
         dPadBackground.setVisibility(View.VISIBLE);
     }
 
-    public static int dpToPx(int dp) {
-        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
-    }
-
     public void moveUp ()
+    //The move up button is pressed
     {
-        if(checkUp() == 'o') {
+        if(checkUp() == 'o') {         //If tile above is empty
             player.moveUp();
 
             dPadImageView.setImageResource(R.drawable.dpad_press_up);
@@ -129,7 +114,7 @@ class DPad {
             animation.setDuration(animationLength);
             animation.start();
         }
-        else if (checkUp() == '1')
+        else if (checkUp() == '1')          //If tile above has an NPC
         {
             convo_pressing_up = (AnimationDrawable) dPadImageView.getDrawable();
             convo_pressing_up.start();
@@ -139,7 +124,7 @@ class DPad {
             hideDPad();
             character.startConversation();
         }
-        else if(checkUp() == '2')
+        else if(checkUp() == '2')           //If the tile above is a portal
         {
                 Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() - 1);
                 p.teleport(player);
@@ -148,7 +133,8 @@ class DPad {
     }
 
     public void moveDown (){
-        if(checkDown() == 'o')
+    //The move down button is pressed
+        if(checkDown() == 'o')      //If tile below is empty
         {
             player.moveDown();
 
@@ -162,9 +148,9 @@ class DPad {
             animation.start();
 
         }
-        else if(checkDown() == '2')
+        else if(checkDown() == '2')     //If the tile above is a portal
         {
-            if(mainActivity.talkedToNiels)
+            if(mainActivity.isTalkedToNiels())      //And the player has finished the first conversation with Niels
             {
                 Portal p = mainActivity.getPortalAt(player.getXGrid(), player.getYGrid() + 1);
                 p.teleport(player);
@@ -173,7 +159,8 @@ class DPad {
     }
 
     public void moveLeft (){
-        if(checkLeft() == 'o') {
+    //The move left button is pressed
+        if(checkLeft() == 'o') {        //If tile on the left is empty
             player.moveLeft();
 
             dPadImageView.setImageResource(R.drawable.dpad_press_left);
@@ -184,7 +171,7 @@ class DPad {
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
-        }else if (checkLeft() == '1')
+        }else if (checkLeft() == '1')           //If tile to the left has an NPC
         {
             convo_pressing_left = (AnimationDrawable) dPadImageView.getDrawable();
             convo_pressing_left.start();
@@ -197,8 +184,9 @@ class DPad {
     }
 
     public void moveRight ()
+    //The move right button is pressed
     {
-        if(checkRight() == 'o')
+        if(checkRight() == 'o')     //If tile on the right is empty
         {
             player.moveRight();
 
@@ -210,7 +198,7 @@ class DPad {
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
             animation.setDuration(animationLength);
             animation.start();
-        }else if (checkRight() == '1')
+        }else if (checkRight() == '1') //If tile on the has an NPC
         {
             convo_pressing_right = (AnimationDrawable) dPadImageView.getDrawable();
             convo_pressing_right.start();
@@ -221,7 +209,6 @@ class DPad {
             character.startConversation();
         }
     }
-    //Create getters for ImageViews when we are done.
 
     //creates the 2D array mapTiles, which holds the structure of the map
     public void loadMapStructure(){
@@ -232,28 +219,14 @@ class DPad {
         mapTiles = fileStructure.readStructureChars(); //reads all of the chars in the structure and adds them to the 2D array
     }
 
-    private char checkLeft()
-    {
-        return mapTiles[player.getYGrid()][player.getXGrid() - 1];
-    }
-    private char checkUp()
-    {
-        return mapTiles[player.getYGrid() - 1][player.getXGrid()];
-    }
-    private char checkDown()
-    {
-        return mapTiles[player.getYGrid() + 1][player.getXGrid()];
-    }
-    private char checkRight()
-    {
-        return mapTiles[player.getYGrid()][player.getXGrid() + 1];
-    }
-    public int getAnimationLength()
-    {
-        return animationLength;
-    }
+    private char checkLeft() { return mapTiles[player.getYGrid()][player.getXGrid() - 1]; }         //Check what is to the left of the player character
+    private char checkUp() { return mapTiles[player.getYGrid() - 1][player.getXGrid()]; }           //Check what is up from the player character
+    private char checkDown() { return mapTiles[player.getYGrid() + 1][player.getXGrid()]; }         //Check what is down from the player character
+    private char checkRight() { return mapTiles[player.getYGrid()][player.getXGrid() + 1]; }        //Check what is to the right of the player character
 
-   public void switchDpadToConversation (){
+    public void switchDpadToConversation ()
+    //If there is an NPC next to the player character, set the appropriate image
+    {
         if(checkUp() == '1'){
             dPadImageView.setImageResource(R.drawable.dpad_convo_press_up);
         }
@@ -264,14 +237,20 @@ class DPad {
             dPadImageView.setImageResource(R.drawable.dpad_convo_press_left);
         }
     }
-
-    public void testCheat (){
+    public void testCheat ()
+    //Hidden cheat to make technical testing faster
+    {
         if(player.getXGrid() == 32 && player.getYGrid() == 15){
-            mainActivity.gotBread = true;
-            mainActivity.gotMilk = true;
-            mainActivity.talkedToNiels = true;
-            mainActivity.talkedToOld = true;
+            mainActivity.setGotBread(true);
+            mainActivity.setGotMilk(true);
+            mainActivity.setTalkedToNiels(true);
         }
+    }
+    //----------------------------------------------------------------------------------------------
+    //Getters
+    public int getAnimationLength()
+    {
+        return animationLength;
     }
 }
 

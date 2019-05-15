@@ -2,9 +2,7 @@ package com.example.test4;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,36 +10,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.io.InputStream;
-
-import static com.example.test4.DPad.dpToPx;
 
 public class MainActivity extends Activity {
-
-    //Name the variables (ImageViews, TextViews, Buttons) as their id to avoid confusion. Thank you.
     private ImageView worldView;        //Image view to show the map
-    private ImageView worldBackground;         //Image view to show the background of the workd part
     private DPad dPad;                      //Controls for walking
-    private ImageView hintImage;            //Image view to show the hint of a word
 
     private Character[] characters = new Character[4];
     private Portal[] portals = new Portal[6];
 
+    private int moveDist;
 
-    private int moveDist = 0;
+    //Variables used for tracking story progress
+    private boolean talkedToNiels = false;
+    private boolean gotBread = false;
+    private boolean gotMilk = false;
 
-    public boolean talkedToNiels = false;
-    public boolean talkedToOld = false;
-    public boolean gotBread = false;
-    public boolean gotMilk = false;
-    public boolean answer_scrollable = false;
-    public boolean dialogue_scrollable = false;
-
-    Character characterTalkingToYou;
+    Character characterTalkingToYou;        //The charecter that is talking to the player
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +36,7 @@ public class MainActivity extends Activity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-
         setupWorld();
-
-        dPad.showDPad();
     }
 
     public void setupWorld(){
@@ -66,58 +47,43 @@ public class MainActivity extends Activity {
         setSizeForAnswerScrollView();
         applyFonts();
 
-        dPad.switchDpadToConversation();
-
-        ImageView imageView = findViewById(R.id.world_view);
-        ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) imageView.getLayoutParams();
+        ViewGroup.LayoutParams params = worldView.getLayoutParams();
         params.width = 64 + moveDist * 38;
         params.height = 64 + moveDist * 20;
         // existing height is ok as is, no need to edit it
-        imageView.setLayoutParams(params);
+        worldView.setLayoutParams(params);
 
-        int idOfMap = getResources().getIdentifier("map", "drawable", getPackageName());
-        worldView.setImageResource(idOfMap);
-
-        worldBackground = findViewById(R.id.d_pad_background);
-        int idOfBackground = getResources().getIdentifier("background_world", "drawable", getPackageName());
-        worldBackground.setImageResource(idOfBackground);
-
-        dPad.hideDPad();
+        dPad.showDPad();
     }
 
     private void createCharacters()
     {
-        ConversationController[] conversations = new ConversationController[2];
-        int[] exchanges = {0, 1, 2};
-        conversations[0] = new ConversationController(exchanges , this, "Niels");
-        exchanges = new int[] {11, 12, 13, 14};
-        conversations[1] = new ConversationController(exchanges , this, "Niels");
-        int uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
-        characters[0] = new Character("Niels", uncleID, 30, 16, conversations, this);
+        ConversationController[] conversations = new ConversationController[2];         //We set the amount of conversations this character will have
+        int[] exchangeIndexes = {0, 1, 2};                                                    //We give the exhchange indexes for the first conversation
+        conversations[0] = new ConversationController(exchangeIndexes , this, "Niels");       //We create the first convresation
+        exchangeIndexes = new int[] {11, 12, 13, 14};                                                           //we give exhchange indexes for the second conversation
+        conversations[1] = new ConversationController(exchangeIndexes , this, "Niels");       //We create the second convresation
+        characters[0] = new Character("Niels", 30, 16, conversations, this);//We create the character
 
         conversations = new ConversationController[1];
-        exchanges = new int[] {3,4};
-        conversations[0] = new ConversationController(exchanges , this, "Old");
-        int oldManID = getResources().getIdentifier("big_old", "drawable", getPackageName());
-        characters[1] = new Character("Old", oldManID, 14, 14, conversations, this);
+        exchangeIndexes = new int[] {3,4};
+        conversations[0] = new ConversationController(exchangeIndexes , this, "Old");
+        characters[1] = new Character("Old", 14, 14, conversations, this);
 
         conversations = new ConversationController[1];
-        exchanges = new int[] {5, 6, 7};
-        conversations[0] = new ConversationController(exchanges , this, "Clerk");
-        int clerkID = getResources().getIdentifier("big_clerk", "drawable", getPackageName());
-        characters[2] = new Character("Clerk", clerkID, 27, 4, conversations, this);
+        exchangeIndexes = new int[] {5, 6, 7};
+        conversations[0] = new ConversationController(exchangeIndexes , this, "Clerk");
+        characters[2] = new Character("Clerk", 27, 4, conversations, this);
 
         conversations = new ConversationController[1];
-        exchanges = new int[] {8, 9, 10};
-        conversations[0] = new ConversationController(exchanges , this, "Baker");
-        int bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
-        characters[3] = new Character("Baker", bakerID, 33, 4, conversations, this);
-
-
+        exchangeIndexes = new int[] {8, 9, 10};
+        conversations[0] = new ConversationController(exchangeIndexes , this, "Baker");
+        characters[3] = new Character("Baker", 33, 4, conversations, this);
     }
 
     private void createPortals()
     {
+        //Find movement distance
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
@@ -209,7 +175,6 @@ public class MainActivity extends Activity {
         return dPad;
     }
 
-
     public void move_characterUp (final View v)
     {
         dPad.moveUp();
@@ -236,13 +201,10 @@ public class MainActivity extends Activity {
         dPad.moveRight();
         disableDpadFor();
         dPad.switchDpadToConversation();
-
-        //if you go in front of fridge, then you can get the last convo with niels
-        //dPad.testCheat();
     }
 
     public ImageView getHintImage() {
-        hintImage = findViewById(R.id.hint_img);
+        ImageView hintImage = findViewById(R.id.hint_img);
         return hintImage;
     }
 
@@ -256,9 +218,8 @@ public class MainActivity extends Activity {
 
     public void onSoundViewClick(View v) {
         String audioFileName = "sentence" + characterTalkingToYou.getCurrentConversationController().getCurrentExchangeID();
-        final int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
-        ImageView speaker_button = findViewById(R.id.speaker_button);
-        characterTalkingToYou.getCurrentConversationController().getCurrentExchange().sentencePlay(speaker_button, idOfAudioFile);
+        int idOfAudioFile = getResources().getIdentifier(audioFileName, "raw", getPackageName());
+        characterTalkingToYou.getCurrentConversationController().getCurrentExchange().playSound(idOfAudioFile);
     }
 
     public void exitConversation(View view) {
@@ -266,13 +227,6 @@ public class MainActivity extends Activity {
         dPad.showDPad();
     }
 
-    /*
-    public void loadConversation(){
-        for (int i = 0; i < characters.length; i++) {
-            characters[i].showConversation();
-        }
-    }
-    */
     public void disableDpadFor()
     {
         final View v = findViewById(R.id.up_button);
@@ -312,8 +266,6 @@ public class MainActivity extends Activity {
     private void setSizeForAnswerScrollView(){
         ImageView answer_text_field = findViewById(R.id.answer_text_field);
         ScrollView answer_scrollview = findViewById(R.id.answer_scrollview);
-        LinearLayout answer_LL = findViewById(R.id.answer_LL);
-
         answer_scrollview.getLayoutParams().height = answer_text_field.getHeight();
     }
 
@@ -333,4 +285,29 @@ public class MainActivity extends Activity {
             t.setTypeface(font);
         }
     }
+
+    public boolean isGotBread() {
+        return gotBread;
+    }
+
+    public boolean isGotMilk() {
+        return gotMilk;
+    }
+    public boolean isTalkedToNiels() {
+        return talkedToNiels;
+    }
+
+    public void setGotBread(boolean got)
+    {
+        gotBread = got;
+    }
+    public void setGotMilk(boolean got)
+    {
+        gotMilk = got;
+    }
+    public void setTalkedToNiels(boolean talked)
+    {
+        talkedToNiels = talked;
+    }
+
 }
