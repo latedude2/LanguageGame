@@ -22,8 +22,7 @@ import static com.example.test4.DPad.dpToPx;
 
 public class MainActivity extends Activity {
 
-    //Name the variables (ImageViews, TextViews, Buttons) as their id to avoid confusion. Thank you.
-    private ImageView worldView;        //Image view to show the map
+    private ImageView worldView;            //Image view to show the map
     private ImageView worldBackground;         //Image view to show the background of the workd part
     private DPad dPad;                      //Controls for walking
     private ImageView hintImage;            //Image view to show the hint of a word
@@ -31,15 +30,12 @@ public class MainActivity extends Activity {
     private Character[] characters = new Character[4];
     private Portal[] portals = new Portal[6];
 
-
     private int moveDist = 0;
 
     public boolean talkedToNiels = false;
     public boolean talkedToOld = false;
     public boolean gotBread = false;
     public boolean gotMilk = false;
-    public boolean answer_scrollable = false;
-    public boolean dialogue_scrollable = false;
 
     Character characterTalkingToYou;
 
@@ -55,7 +51,8 @@ public class MainActivity extends Activity {
 
         setupWorld();
 
-        dPad.showDPad();
+        characters[0].startConversation();
+        findViewById(R.id.exit_button).setVisibility(View.GONE);
     }
 
     public void setupWorld(){
@@ -87,14 +84,12 @@ public class MainActivity extends Activity {
 
     private void createCharacters()
     {
-        ConversationController[] conversations = new ConversationController[2];
-        int[] exchanges = {0, 1, 2};
+        ConversationController[] conversations = new ConversationController[1];
+        int[] exchanges = {9, 12, 2, 8, 10, 11, 3, 5, 6, 1, 4, 13, 14, 0, 7};
         conversations[0] = new ConversationController(exchanges , this, "Niels");
-        exchanges = new int[] {11, 12, 13, 14};
-        conversations[1] = new ConversationController(exchanges , this, "Niels");
         int uncleID = getResources().getIdentifier("big_niels", "drawable", getPackageName());
         characters[0] = new Character("Niels", uncleID, 30, 16, conversations, this);
-
+        /*
         conversations = new ConversationController[1];
         exchanges = new int[] {3,4};
         conversations[0] = new ConversationController(exchanges , this, "Old");
@@ -112,8 +107,7 @@ public class MainActivity extends Activity {
         conversations[0] = new ConversationController(exchanges , this, "Baker");
         int bakerID = getResources().getIdentifier("big_baker", "drawable", getPackageName());
         characters[3] = new Character("Baker", bakerID, 33, 4, conversations, this);
-
-
+        */
     }
 
     private void createPortals()

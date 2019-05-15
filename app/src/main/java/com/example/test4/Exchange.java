@@ -93,7 +93,7 @@ class Exchange extends Instance {
         }
 
         if(checkScrollable()){
-            answerTextView.setTextColor(Color.YELLOW);
+            //answerTextView.setTextColor(Color.YELLOW);
         }
 
         resetSelectedAnswers();
