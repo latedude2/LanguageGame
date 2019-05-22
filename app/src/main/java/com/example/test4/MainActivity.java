@@ -7,7 +7,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -170,43 +169,37 @@ public class MainActivity extends Activity {
         throw new Error("Character not found");
     }
 
-    public DPad getdPad()
-    {
-        return dPad;
-    }
 
-    public void move_characterUp (final View v)
+
+    public void moveCharacterUp(final View v)
     {
         dPad.moveUp();
-        disableDpadFor();
+        disableDPadFor();
         dPad.switchDpadToConversation();
     }
 
-    public void move_characterDown (final View v)
+    public void moveCharacterDown(final View v)
     {
         dPad.moveDown();
-        disableDpadFor();
+        disableDPadFor();
         dPad.switchDpadToConversation();
     }
 
-    public void movePlayerLeft(final View v)
+    public void moveCharacterLeft(final View v)
     {
         dPad.moveLeft();
-        disableDpadFor();
+        disableDPadFor();
         dPad.switchDpadToConversation();
     }
 
-    public void move_characterRight (final View v)
+    public void moveCharacterRight(final View v)
     {
         dPad.moveRight();
-        disableDpadFor();
+        disableDPadFor();
         dPad.switchDpadToConversation();
     }
 
-    public ImageView getHintImage() {
-        ImageView hintImage = findViewById(R.id.hint_img);
-        return hintImage;
-    }
+
 
     public void answerClick(View view) {
         characterTalkingToYou.getCurrentConversationController().getCurrentExchange().addAnswer(view);
@@ -227,7 +220,7 @@ public class MainActivity extends Activity {
         dPad.showDPad();
     }
 
-    public void disableDpadFor()
+    public void disableDPadFor()
     {
         final View v = findViewById(R.id.up_button);
         v.setEnabled(false);
@@ -310,4 +303,12 @@ public class MainActivity extends Activity {
         talkedToNiels = talked;
     }
 
+    public ImageView getHintImage() {
+        ImageView hintImage = findViewById(R.id.hint_img);
+        return hintImage;
+    }
+    public DPad getDPad()
+    {
+        return dPad;
+    }
 }

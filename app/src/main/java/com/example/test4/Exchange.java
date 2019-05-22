@@ -23,9 +23,9 @@ class Exchange  {
     private TextView answerTextView;            //Text view to hold the text of the user/player
     private TextView dialogueTextView;          //Text view to hold the text of the NPC
     private TextView[] answerButtonsTextView = new TextView[6];     //Text views of the possible answers
-    private ImageView answerbg;     //Background for the answer text
-    private ScrollView answer_SV;   //Answer scrollable view
-    private AnimationDrawable background_incorrect; //Changes the background to show that the answer is incorrect
+    private ImageView answerBackground;     //Background for the answer text
+    private ScrollView answerScrollableView;   //Answer scrollable view
+    private AnimationDrawable backgroundIncorrect; //Changes the background to show that the answer is incorrect
 
     //Utility variables
     //----------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ class Exchange  {
     private StringBuffer questionText; //Question text with clickable hint buttons
     private ArrayList<String> hintWordList = new ArrayList<>();             //Strings of hint words. Used when building clickable hints.
     private ArrayList<Integer> hintWordIndexList = new ArrayList<>();       //Indexes of these words
-    private int hintwordCount = 0;          //Current count of hint words added to the question text
+    private int hintWordCount = 0;          //Current count of hint words added to the question text
 
     //Player's answer variables
     //----------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ class Exchange  {
     private int answerIndex;            //Index used to know the index of the selected answer when putting it in as an answer
     //----------------------------------------------------------------------------------------------------------------
 
-    Exchange(int exchangeId, MainActivity mainActivity, ConversationController conversationController) {
+    Exchange(int exchangeID, MainActivity mainActivity, ConversationController conversationController) {
         this.mainActivity = mainActivity;
         this.parentConversationController = conversationController;
 
@@ -68,17 +68,17 @@ class Exchange  {
             int textViewId = mainActivity.getResources().getIdentifier(viewText, "id", mainActivity.getPackageName());
             this.answerButtonsTextView[i] = mainActivity.findViewById(textViewId);
         }
-        loadExchange(exchangeId);
+        loadExchange(exchangeID);
     }
 
     //Utility functions
     //----------------------------------------------------------------------------------------------
-    private void loadExchange(int exchangeId)
+    private void loadExchange(int exchangeID)
     //Loads the exchange from file
     //exchangeId - exchange to be loaded
     {
         //Finding the correct exchange file to read
-        String fileIndex = Integer.toString(exchangeId); //use if it complains about using integer in the String in the following line
+        String fileIndex = Integer.toString(exchangeID); //use if it complains about using integer in the String in the following line
         String IDToString = "exchange" + fileIndex; //creates a String name of the file to use in the following line
         int fileID = mainActivity.getResources().getIdentifier(IDToString,"raw", mainActivity.getPackageName());
         InputStream inputStream = (mainActivity.getResources().openRawResource(fileID));
@@ -173,13 +173,13 @@ class Exchange  {
     void submitAnswer(View view)
     //What happens when the submit button is clicked
     {
-        answerbg = mainActivity.findViewById(R.id.answer_text_field);
+        answerBackground = mainActivity.findViewById(R.id.answer_text_field);
         if (checkAnswer())      //If the answer is correct
         {
             //Animate that the answer is correct
-            answerbg.setImageResource(R.drawable.answer_correct);
-            background_incorrect = (AnimationDrawable) answerbg.getDrawable();
-            background_incorrect.start();
+            answerBackground.setImageResource(R.drawable.answer_correct);
+            backgroundIncorrect = (AnimationDrawable) answerBackground.getDrawable();
+            backgroundIncorrect.start();
 
             //Play sound signaling that answer was correct
             int idOfAudioFile = mainActivity.getResources().getIdentifier("correct", "raw", mainActivity.getPackageName());
@@ -190,9 +190,9 @@ class Exchange  {
         else
         {
             //Animate that the answer is incorrect
-            answerbg.setImageResource(R.drawable.answer_wrong);
-            background_incorrect = (AnimationDrawable) answerbg.getDrawable();
-            background_incorrect.start();
+            answerBackground.setImageResource(R.drawable.answer_wrong);
+            backgroundIncorrect = (AnimationDrawable) answerBackground.getDrawable();
+            backgroundIncorrect.start();
 
             //Play sound signaling that answer was incorrect
             int idOfAudioFile = mainActivity.getResources().getIdentifier("incorrect", "raw", mainActivity.getPackageName());
@@ -362,7 +362,7 @@ class Exchange  {
 
         //We go through each hint word an create a clickable span(button) with it
         for (int i = 0; i < hintWordIndexList.size(); i++){
-            hintwordCount = i;      //amount of hints currently added. We can't use i inside the definition of the onClick method override. Instead, we pass the required variable thorugh a getter.
+            hintWordCount = i;      //amount of hints currently added. We can't use i inside the definition of the onClick method override. Instead, we pass the required variable thorugh a getter.
 
             //Defiining the behaviour of the newly created clickable span(button); what happens when this span is clicked
             //-------------------------------------
@@ -380,7 +380,7 @@ class Exchange  {
 
                     int currentWord = 0;        //used for finding the right word to show image and play sound
                     //finding the correct image to show
-                    for(int j = 0; j < hintwordCount + 1; j++)
+                    for(int j = 0; j < hintWordCount + 1; j++)
                     {
                         if(hintWordList.get(j).equalsIgnoreCase(clickableSpanString))
                         {
@@ -422,8 +422,8 @@ class Exchange  {
     //Used for testing purposes
     //----------------------------------------------------------------------------------------------
     private boolean checkScrollable(){
-        answer_SV = mainActivity.findViewById(R.id.answer_scrollview);
-        if (answerTextView.getMeasuredHeight() >= answer_SV.getHeight() + 35) {
+        answerScrollableView = mainActivity.findViewById(R.id.answer_scrollview);
+        if (answerTextView.getMeasuredHeight() >= answerScrollableView.getHeight() + 35) {
             return true;
         } else {return false;}
     }

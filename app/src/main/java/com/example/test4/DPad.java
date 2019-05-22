@@ -1,7 +1,6 @@
 package com.example.test4;
 
 import android.animation.ObjectAnimator;
-import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -15,7 +14,7 @@ class DPad {
     private ImageView worldView;
     private int animationLength = 500;      //Length of the walk animation in milliseconds
     private float moveX;
-    private float moveY;
+    private float moveY;                    //Float for moveX/moveY for animation
     private int startX;                     //Starting X coordinate of the map in pixels
     private int startY;                     //Starting Y coordinate of the map in pixels
     private PlayerObject player;
@@ -28,15 +27,15 @@ class DPad {
     private ImageView dPadImageView;        //To be changed later will be divided by 4
 
     //for the dpad pressed animations
-    private AnimationDrawable pressing_up;
-    private AnimationDrawable pressing_down;
-    private AnimationDrawable pressing_left;
-    private AnimationDrawable pressing_right;
+    private AnimationDrawable pressingUp;
+    private AnimationDrawable pressingDown;
+    private AnimationDrawable pressingLeft;
+    private AnimationDrawable pressingRight;
 
     //for dpad animations when starting conversation
-    private AnimationDrawable convo_pressing_up;
-    private AnimationDrawable convo_pressing_left;
-    private AnimationDrawable convo_pressing_right;
+    private AnimationDrawable conversationPressingUp;
+    private AnimationDrawable conversationPressingLeft;
+    private AnimationDrawable conversationPressingRight;
 
     private char[][] mapTiles; //2D array for the map
 
@@ -106,8 +105,8 @@ class DPad {
             player.moveUp();
 
             dPadImageView.setImageResource(R.drawable.dpad_press_up);
-            pressing_up = (AnimationDrawable) dPadImageView.getDrawable();
-            pressing_up.start();
+            pressingUp = (AnimationDrawable) dPadImageView.getDrawable();
+            pressingUp.start();
 
             moveY = worldView.getY() + moveDist;
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
@@ -116,8 +115,8 @@ class DPad {
         }
         else if (checkUp() == '1')          //If tile above has an NPC
         {
-            convo_pressing_up = (AnimationDrawable) dPadImageView.getDrawable();
-            convo_pressing_up.start();
+            conversationPressingUp = (AnimationDrawable) dPadImageView.getDrawable();
+            conversationPressingUp.start();
 
             Character character = mainActivity.getCharacterAt(player.getXGrid(), player.getYGrid() - 1);
             mainActivity.characterTalkingToYou = character;
@@ -139,8 +138,8 @@ class DPad {
             player.moveDown();
 
             dPadImageView.setImageResource(R.drawable.dpad_press_down);
-            pressing_down = (AnimationDrawable) dPadImageView.getDrawable();
-            pressing_down.start();
+            pressingDown = (AnimationDrawable) dPadImageView.getDrawable();
+            pressingDown.start();
 
             moveY = worldView.getY() - moveDist;
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "y", worldView.getY(), moveY);
@@ -164,8 +163,8 @@ class DPad {
             player.moveLeft();
 
             dPadImageView.setImageResource(R.drawable.dpad_press_left);
-            pressing_left = (AnimationDrawable) dPadImageView.getDrawable();
-            pressing_left.start();
+            pressingLeft = (AnimationDrawable) dPadImageView.getDrawable();
+            pressingLeft.start();
 
             moveX = worldView.getX() + moveDist;
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
@@ -173,8 +172,8 @@ class DPad {
             animation.start();
         }else if (checkLeft() == '1')           //If tile to the left has an NPC
         {
-            convo_pressing_left = (AnimationDrawable) dPadImageView.getDrawable();
-            convo_pressing_left.start();
+            conversationPressingLeft = (AnimationDrawable) dPadImageView.getDrawable();
+            conversationPressingLeft.start();
 
             Character character = mainActivity.getCharacterAt(player.getXGrid() - 1, player.getYGrid());
             mainActivity.characterTalkingToYou = character;
@@ -191,8 +190,8 @@ class DPad {
             player.moveRight();
 
             dPadImageView.setImageResource(R.drawable.dpad_press_right);
-            pressing_right = (AnimationDrawable) dPadImageView.getDrawable();
-            pressing_right.start();
+            pressingRight = (AnimationDrawable) dPadImageView.getDrawable();
+            pressingRight.start();
 
             moveX = worldView.getX() - moveDist;
             ObjectAnimator animation = ObjectAnimator.ofFloat(worldView, "X", worldView.getX(), moveX);
@@ -200,8 +199,8 @@ class DPad {
             animation.start();
         }else if (checkRight() == '1') //If tile on the has an NPC
         {
-            convo_pressing_right = (AnimationDrawable) dPadImageView.getDrawable();
-            convo_pressing_right.start();
+            conversationPressingRight = (AnimationDrawable) dPadImageView.getDrawable();
+            conversationPressingRight.start();
 
             Character character = mainActivity.getCharacterAt(player.getXGrid() + 1, player.getYGrid());
             mainActivity.characterTalkingToYou = character;

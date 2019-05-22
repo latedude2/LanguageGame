@@ -117,7 +117,7 @@ public class ConversationController {
                 mainActivity.setGotMilk(true);
             }
             hideConversationElements();
-            mainActivity.getdPad().showDPad();
+            mainActivity.getDPad().showDPad();
         }
     }
 
